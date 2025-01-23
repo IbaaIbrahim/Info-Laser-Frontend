@@ -12,7 +12,7 @@ interface Props {
 
 export const Header: React.FC<Props> = ({className}) => {
   return (
-    <header className={cn('shadow-sm border-b border-gray-300', className)}>
+    <header className={cn('shadow-xs border-b border-gray-300', className)}>
       <Container className="flex items-center justify-between py-2">
 
         {/*  Лого + Поиск*/}

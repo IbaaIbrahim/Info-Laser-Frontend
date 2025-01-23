@@ -29,12 +29,10 @@ export const Categories: React.FC<Props> = ({className}) => {
             )}
             key={index}
           >
-            <button>
+            <button className="hover:cursor-pointer">
               {category.name}
             </button>
           </Link>
-
-          // <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         ))
       }
     </div>
