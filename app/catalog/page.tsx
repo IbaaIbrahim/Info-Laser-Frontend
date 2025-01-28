@@ -1,16 +1,16 @@
-import {Container} from "@/components/shared/container";
-import {Categories} from "@/components/shared/categories";
+import {Container} from "@/components/shared/Container";
+import {Categories} from "@/components/shared/Categories";
 
 const Catalog = () => {
   return (
     <>
       <Container className="pt-5">
 
-        <div>
-          <h2 className="text-2xl font-semibold mb-3">Категории</h2>
+        <section>
+          <h1 className="text-2xl font-semibold mb-3">Категории</h1>
           <Categories/>
-        </div>
-        
+        </section>
+
         <div className="mt-5">Ниже рандомный контент на странице каталога</div>
 
       </Container>

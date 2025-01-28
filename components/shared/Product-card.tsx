@@ -1,49 +1,24 @@
 import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Button";
 import {Plus} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {ptMono} from "@/app/fonts";
+import {Product} from "@/types/product";
 
-interface CategoryProps {
-  name: string;
-  slug: string;
-  id: number;
-}
-
-interface ImageProps {
-  url: string;
-  alt: string;
-  width: string;
-  height: string;
-}
-
-interface ProductCardProps {
-  id: number;
-  name: string;
-  slug: string;
-  orderPrice: number;
-  stockPrice: number;
-  className?: string;
-  image: ImageProps;
-  category: CategoryProps;
-}
-
-export const ProductCard: React.FC<ProductCardProps> = (
+export const ProductCard: React.FC<Product> = (
   {
-    id,
     name,
     image,
     orderPrice,
     stockPrice,
     slug,
-    className,
     category,
   }) => {
   return (
     <li
-      className={cn('flex flex-col border border-gray-200 p-8 rounded-xl shadow-md  hover:shadow-xl transition-shadow', className)}>
+      className={cn('flex flex-col border border-gray-200 p-8 rounded-xl shadow-md  hover:shadow-xl transition-shadow')}>
 
       <Link className="block mb-2" href={`/catalog/${category.slug}/${slug}`}>
         <Image className="hover:scale-110 transition-transform" src={image.url} alt={name} width={220} height={220}/>

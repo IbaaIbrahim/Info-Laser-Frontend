@@ -1,12 +1,12 @@
-import {Container} from "@/components/shared/container";
-import {Button} from "@/components/ui/button";
+import {Container} from "@/components/shared/Container";
+import {Button} from "@/components/ui/Button";
 import Link from "next/link";
 
 export default function Main() {
   return (
     <>
-      <Container>
 
+      <Container>
         <section className="mt-5">
 
           Контент главной страницы
@@ -19,8 +19,8 @@ export default function Main() {
           </div>
 
         </section>
-
       </Container>
+
     </>
   );
 }

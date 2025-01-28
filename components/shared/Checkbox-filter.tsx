@@ -1,16 +1,8 @@
 import React from 'react';
-import {Checkbox} from '../ui/checkbox';
+import {Checkbox} from '../ui/Checkbox';
+import {FilterCheckbox} from "@/types/filter";
 
-export interface FilterCheckboxProps {
-  text: string;
-  value: string;
-  endAdornment?: React.ReactNode;
-  onCheckedChange?: (checked: boolean) => void;
-  checked?: boolean;
-  name?: string;
-}
-
-export const CheckboxFilter: React.FC<FilterCheckboxProps> = (
+export const CheckboxFilter: React.FC<FilterCheckbox> = (
   {
     text,
     value,

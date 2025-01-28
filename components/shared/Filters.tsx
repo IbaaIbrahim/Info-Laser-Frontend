@@ -1,16 +1,11 @@
 import React from 'react';
 import {cn} from "@/lib/utils";
-import {Input} from "@/components/ui/input";
-import {RangeSlider} from "@/components/ui/range-slider";
-import {CheckboxFilterGroup} from "@/components/shared/checkbox-filter-group";
+import {Input} from "@/components/ui/Input";
+import {RangeSlider} from "@/components/ui/Range-slider";
+import {CheckboxFilterGroup} from "@/components/shared/Checkbox-filter-group";
+import {ClassName} from "@/types/types";
 
-// import {FilterCheckbox} from "@/components/shared/filter-checkbox";
-
-interface Props {
-  className?: string;
-}
-
-export const Filters: React.FC<Props> = ({className}) => {
+export const Filters: React.FC<ClassName> = ({className}) => {
   return (
     <form
       className={cn('w-[250px] shadow-md shadow-md p-5 rounded-xl border border-gray-200', className)}>
@@ -35,16 +30,6 @@ export const Filters: React.FC<Props> = ({className}) => {
         </div>
         <RangeSlider min={0} max={150000} step={10} value={[0, 150000]}/>
       </fieldset>
-
-      {/*<fieldset className="mb-3">*/}
-      {/*  <legend className="font-semibold mb-3">Этого не будет</legend>*/}
-      {/*  <ul className="flex flex-col gap-2">*/}
-      {/*    <FilterCheckbox text="Лазерный станок" value="1"/>*/}
-      {/*    <FilterCheckbox text="Лазерный гравер" value="2"/>*/}
-      {/*    <FilterCheckbox text="Листогибы" value="3"/>*/}
-      {/*    <FilterCheckbox text="Сварка и очистка" value="4"/>*/}
-      {/*  </ul>*/}
-      {/*</fieldset>*/}
 
       <CheckboxFilterGroup
         title="Материалы обработки"

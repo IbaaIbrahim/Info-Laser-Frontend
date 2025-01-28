@@ -1,17 +1,14 @@
 import React from 'react';
 import {cn} from "@/lib/utils";
-import {Container} from "@/components/shared/container";
+import {Container} from "@/components/shared/Container";
 import Image from "next/image";
 import Link from "next/link";
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Button";
 import {ArrowRight, ShoppingCart, User} from "lucide-react";
-import {Categories} from "@/components/shared/categories";
+import {Categories} from "@/components/shared/Categories";
+import {ClassName} from "@/types/types";
 
-interface Props {
-  className?: string,
-}
-
-export const Header: React.FC<Props> = ({className}) => {
+export const Header: React.FC<ClassName> = ({className}) => {
   return (
     <header className={cn('shadow-xs border-b border-gray-300', className)}>
       <Container className="flex items-center justify-between py-2">
