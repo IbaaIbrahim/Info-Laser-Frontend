@@ -15,7 +15,7 @@ export const Header: React.FC<ClassName> = ({className}) => {
 
         {/*  Лого + Поиск*/}
         <Link href={'/'}>
-          <Image src='/logo.svg' width={170} height={23} alt={'logo'}/>
+          <Image src='/logo.svg' width={170} height={23} alt={'logo'} priority={true}/>
         </Link>
 
         <Categories/>

@@ -1,16 +1,14 @@
 import {Container} from "@/components/shared/Container";
-import {Categories} from "@/components/shared/Categories";
 import {SortPopup} from "@/components/shared/Sort-popup";
 import {Filters} from "@/components/shared/Filters";
 import React from "react";
 import {ProductsGroupList} from "@/components/shared/Products-group-list";
 import {Product} from "@/types/product";
 import {notFound} from "next/navigation";
+import {Categories} from "@/components/shared/Categories";
 
 interface CategoryPageProps {
-  params: {
-    category: string;
-  };
+  params: Promise<{ category: string }>;
 }
 
 async function getProductsByCategory(categorySlug: string): Promise<Product[]> {
@@ -25,12 +23,11 @@ async function getProductsByCategory(categorySlug: string): Promise<Product[]> {
   return await res.json();
 }
 
-
 const CategoryPage = async ({params}: CategoryPageProps) => {
 
-  const {category} = params;
+  const {category} = await params;
   const products = await getProductsByCategory(category);
-
+  
   if (products.length === 0) {
     notFound();
   }

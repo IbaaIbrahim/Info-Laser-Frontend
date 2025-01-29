@@ -7,10 +7,8 @@ export default function MainPage() {
     <>
 
       <Container>
-        <section className="mt-5">
-
-          Контент главной страницы
-
+        <section className="my-5">
+          
           <div className="flex gap-20 items-center">
 
             <Link href="/catalog">
@@ -19,6 +17,8 @@ export default function MainPage() {
           </div>
 
         </section>
+
+        Контент главной страницы
       </Container>
 
     </>
