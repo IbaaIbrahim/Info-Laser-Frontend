@@ -6,8 +6,8 @@ import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {ArrowRight, ShoppingCart, User} from "lucide-react";
 import {ClassName} from "@/types/types";
-import {getCategories} from "@/lib/api";
 import {Categories} from "@/components/shared/Categories";
+import {getCategories} from "@/lib/api";
 
 export const Header: React.FC<ClassName> = async ({className}) => {
   const categories = await getCategories();

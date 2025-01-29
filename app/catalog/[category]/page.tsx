@@ -6,15 +6,12 @@ import {ProductsGroupList} from "@/components/shared/Products-group-list";
 import {notFound} from "next/navigation";
 import {getCategories, getProductsByCategory} from "@/lib/api";
 import {Categories} from "@/components/shared/Categories";
-
-interface CategoryPageProps {
-  params: Promise<{ category: string }>;
-}
+import {CategoryPageProps} from "@/types/category";
 
 const CategoryPage = async ({params}: CategoryPageProps) => {
 
   const {category} = await params;
-  
+
   const products = await getProductsByCategory(category);
   const categories = await getCategories();
 
