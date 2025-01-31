@@ -8,6 +8,7 @@ import {ArrowRight, ShoppingCart, User} from "lucide-react";
 import {ClassName} from "@/types/types";
 import {Categories} from "@/components/shared/Categories";
 import {getCategories} from "@/lib/api";
+import {Contacts} from "@/components/shared/Contacts";
 
 export const Header: React.FC<ClassName> = async ({className}) => {
   const categories = await getCategories();
@@ -20,6 +21,8 @@ export const Header: React.FC<ClassName> = async ({className}) => {
         <Link href={'/'}>
           <Image src='/logo.svg' width={170} height={23} alt={'logo'} priority={true}/>
         </Link>
+
+        <Contacts/>
 
         <Categories categories={categories}/>
 

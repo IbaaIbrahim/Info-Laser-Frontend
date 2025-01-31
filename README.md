@@ -1,10 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [
 `create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Технологии в проекте
+## Технологии в проекте:
 
-- [Shadcn](https://ui.shadcn.com/) - Стили компонентов
+- [TailwindCSS](https://tailwindcss.com/) - Стили
+- [ShadСn/ui](https://ui.shadcn.com/) - Стилизованные компоненты
 - [Lucide](https://lucide.dev/) - Иконки
+- [Embla Carouse](https://www.embla-carousel.com/examples/predefined/) - Слайдер
+- [Framer-Motion](https://motion.dev/docs/react-motion-component) - Плавная анимации
 
 ## Getting Started
 
