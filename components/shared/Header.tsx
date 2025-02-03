@@ -9,6 +9,7 @@ import {ClassName} from "@/types/types";
 import {Categories} from "@/components/shared/Categories";
 import {getCategories} from "@/lib/api";
 import {Contacts} from "@/components/shared/Contacts";
+import {SearchInput} from "@/components/shared/Search-input";
 
 export const Header: React.FC<ClassName> = async ({className}) => {
   const categories = await getCategories();
@@ -17,16 +18,16 @@ export const Header: React.FC<ClassName> = async ({className}) => {
     <header className={cn('shadow-xs border-b border-gray-300', className)}>
       <Container className="flex items-center justify-between py-2">
 
-        {/*  Лого + Поиск*/}
         <Link href={'/'}>
           <Image src='/logo.svg' width={170} height={23} alt={'logo'} priority={true}/>
         </Link>
+
+        <SearchInput/>
 
         <Contacts/>
 
         <Categories categories={categories}/>
 
-        {/*  Авторизация + Корзина*/}
         <div className="flex items-center gap-3">
           <Button variant={'outline'} className="flex items-center gap-1 text-[16px]">
             <User size={18}/>

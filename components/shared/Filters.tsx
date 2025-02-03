@@ -18,9 +18,9 @@ export const Filters: React.FC = () => {
   ];
 
   const manufacturer = [
-    {name: 'Wattsan', value: '1'},
-    {name: 'Rabbit 15', value: '2'},
-    {name: 'Zerder', value: '3'}
+    {name: 'Wattsan', value: '9'},
+    {name: 'Rabbit 15', value: '10'},
+    {name: 'Zerder', value: '11'}
   ];
 
   return (

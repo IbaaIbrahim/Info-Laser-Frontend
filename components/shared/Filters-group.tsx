@@ -2,9 +2,9 @@
 
 import React, {useState} from 'react';
 import {ChevronDown, X} from 'lucide-react';
-import {motion, AnimatePresence} from 'framer-motion';
 import {Checkbox} from '@/components/ui/Checkbox';
 import {FilterGroup} from '@/types/filter';
+import {cn} from "@/lib/utils";
 
 export const FiltersGroup: React.FC<FilterGroup> = ({title, items, defaultOpen = false}) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -25,28 +25,25 @@ export const FiltersGroup: React.FC<FilterGroup> = ({title, items, defaultOpen =
         {isOpen ? <X size={15}/> : <ChevronDown size={18}/>}
       </legend>
 
-      <AnimatePresence>
-        <motion.ul
-          initial={{height: 0, opacity: 0}}
-          animate={isOpen ? {height: 'auto', opacity: 1} : {}}
-          exit={{height: 0, opacity: 0}}
-          transition={{duration: 0.3, ease: 'easeInOut'}}
-          className="flex flex-col gap-3 overflow-hidden"
-        >
-          {items.map((item) => (
-            <li key={item.value} className="flex items-center space-x-2">
-              <Checkbox
-                value={String(item.value)}
-                className="rounded-[8px] w-6 h-6 cursor-pointer"
-                id={`item-${item.value}`}
-              />
-              <label htmlFor={`item-${item.value}`} className="leading-none cursor-pointer flex-1">
-                {item.name}
-              </label>
-            </li>
-          ))}
-        </motion.ul>
-      </AnimatePresence>
+      <ul className={cn(
+        'flex flex-col gap-3 overflow-hidden transition-all duration-300 ease-in-out',
+        isOpen ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0',
+      )
+      }>
+        {items.map((item) => (
+          <li key={item.value} className="flex items-center space-x-2">
+            <Checkbox
+              value={String(item.value)}
+              className="rounded-[8px] w-6 h-6 cursor-pointer"
+              id={`item-${item.value}`}
+            />
+            <label htmlFor={`item-${item.value}`} className="leading-none cursor-pointer flex-1">
+              {item.name}
+            </label>
+          </li>
+        ))}
+      </ul>
+
     </fieldset>
   );
 };
