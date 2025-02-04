@@ -15,18 +15,22 @@ export const ProductCard: React.FC<Product> = (
     stockPrice,
     categorySlug,
     categoryName,
-    imageUrl,
-    imageAlt,
-    imageWidth,
-    imageHeight,
+    image
   }) => {
   return (
     <li
-      className={cn('flex flex-col border border-gray-200 p-8 rounded-xl shadow-md  hover:shadow-xl transition-shadow')}>
+      className={cn('flex flex-col border border-gray-200 p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow')}>
 
       <Link className="block mb-2" href={`/catalog/${categorySlug}/${slug}`}>
-        <Image className="hover:scale-110 transition-transform" src={imageUrl} alt={imageAlt} width={imageWidth}
-               height={imageHeight}/>
+        {image && (
+          <Image
+            className="hover:scale-110 transition-transform"
+            src={image.url}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+          />
+        )}
       </Link>
 
       <p className="text-sm text-gray-400 mb-1 leading-none">{categoryName}</p>
@@ -48,7 +52,6 @@ export const ProductCard: React.FC<Product> = (
           <span className="text-gray-400 text-sm">Под заказ</span>
         </li>
       </ul>
-
 
       <div className="flex flex-col items-center gap-2">
         <Button className="w-full">Обратный звонок</Button>

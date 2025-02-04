@@ -1,6 +1,9 @@
 import {Container} from "@/components/shared/Container";
+import {getAllProducts, getProductsByCategory} from "@/lib/api";
 
-const ProductPage = () => {
+const ProductPage = async () => {
+
+  const products = await getAllProducts();
 
   return (
     <>

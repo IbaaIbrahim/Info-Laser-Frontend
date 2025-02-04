@@ -94,12 +94,15 @@ export const SearchInput = () => {
                 key={product.id}
                 onClick={onItemClick}
               >
-                <Image
-                  className="h-8 w-8" src={product.imageUrl}
-                  alt={product.imageAlt}
-                  width={product.imageWidth}
-                  height={product.imageHeight}
-                />
+                {product.images?.length ? (
+                  <Image
+                    className="h-8 w-8"
+                    src={product.images[0].url}
+                    alt={product.images[0].alt}
+                    width={product.images[0].width}
+                    height={product.images[0].height}
+                  />
+                ) : null}
                 <span className="leading-4">
                   {product.name}
                 </span>

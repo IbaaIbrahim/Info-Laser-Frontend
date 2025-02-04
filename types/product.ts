@@ -1,17 +1,22 @@
+export interface ProductImage {
+  url: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 export interface Product {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  orderPrice: number;
-  stockPrice: number;
-  newPrice: number;
-  categorySlug: string;
-  categoryName: string;
-  imageUrl: string;
-  imageAlt: string;
-  imageWidth: number;
-  imageHeight: number;
+  id: number,
+  name: string,
+  slug: string,
+  description: string,
+  orderPrice: number,
+  stockPrice: number,
+  newPrice: number,
+  categorySlug: string,
+  categoryName: string,
+  images?: ProductImage[],
+  image?: ProductImage
 }
 
 export interface ProductsGroupListProps {

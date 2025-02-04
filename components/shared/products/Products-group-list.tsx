@@ -20,12 +20,10 @@ export const ProductsGroupList: React.FC<ProductsGroupListProps> = ({products}) 
             orderPrice={product.orderPrice}
             categorySlug={product.categorySlug}
             categoryName={product.categoryName}
-            imageUrl={product.imageUrl}
-            imageAlt={product.imageAlt}
-            imageWidth={product.imageWidth}
-            imageHeight={product.imageHeight}
             description={product.description}
-            newPrice={0}/>
+            newPrice={0}
+            image={product.images?.[0]}
+          />
         ))}
       </ul>
     </section>
