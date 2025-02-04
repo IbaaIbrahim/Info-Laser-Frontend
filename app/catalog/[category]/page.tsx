@@ -1,11 +1,11 @@
 import {Container} from "@/components/shared/Container";
 import {SortPopup} from "@/components/shared/Sort-popup";
-import {Filters} from "@/components/shared/Filters";
+import {Filters} from "@/components/shared/filters/Filters";
 import React from "react";
-import {ProductsGroupList} from "@/components/shared/Products-group-list";
+import {ProductsGroupList} from "@/components/shared/products/Products-group-list";
 import {notFound} from "next/navigation";
 import {getCategories, getProductsByCategory} from "@/lib/api";
-import {Categories} from "@/components/shared/Categories";
+import {CategoriesMain} from "@/components/shared/categories/Categories-main";
 import {CategoryPageProps} from "@/types/category";
 
 const CategoryPage = async ({params}: CategoryPageProps) => {
@@ -25,7 +25,7 @@ const CategoryPage = async ({params}: CategoryPageProps) => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-semibold mb-3">Все категории</h2>
-            <Categories categories={categories}/>
+            <CategoriesMain categories={categories}/>
           </div>
 
           <SortPopup/>

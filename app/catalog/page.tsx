@@ -1,5 +1,5 @@
 import {Container} from "@/components/shared/Container";
-import {Categories} from "@/components/shared/Categories";
+import {CategoriesMain} from "@/components/shared/categories/Categories-main";
 import {getCategories} from "@/lib/api";
 
 const CatalogPage = async () => {
@@ -10,7 +10,7 @@ const CatalogPage = async () => {
       <Container className="pt-5">
 
         <h1 className="text-2xl font-semibold mb-3">Категории</h1>
-        <Categories categories={categories}/>
+        <CategoriesMain categories={categories}/>
 
         <div className="mt-5">Ниже рандомный контент на странице каталога</div>
 

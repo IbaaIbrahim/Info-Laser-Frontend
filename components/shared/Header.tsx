@@ -6,9 +6,9 @@ import Link from "next/link";
 import {Button} from "@/components/ui/Button";
 import {ArrowRight, ShoppingCart, User} from "lucide-react";
 import {ClassName} from "@/types/types";
-import {Categories} from "@/components/shared/Categories";
+import {CategoriesMain} from "@/components/shared/categories/Categories-main";
 import {getCategories} from "@/lib/api";
-import {Contacts} from "@/components/shared/Contacts";
+import {ContactsHeader} from "@/components/shared/Contacts-header";
 import {SearchInput} from "@/components/shared/Search-input";
 
 export const Header: React.FC<ClassName> = async ({className}) => {
@@ -24,9 +24,9 @@ export const Header: React.FC<ClassName> = async ({className}) => {
 
         <SearchInput/>
 
-        <Contacts/>
+        <ContactsHeader/>
 
-        <Categories categories={categories}/>
+        <CategoriesMain categories={categories}/>
 
         <div className="flex items-center gap-3">
           <Button variant={'outline'} className="flex items-center gap-1 text-[16px]">

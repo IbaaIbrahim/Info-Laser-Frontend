@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Contacts = () => {
+export const ContactsHeader = () => {
   return (
     <dl className="leading-4">
       <div>

@@ -3,7 +3,7 @@ import React from 'react';
 import Link from "next/link";
 import {CategoriesProps} from "@/types/category";
 
-export const Categories: React.FC<CategoriesProps> = async ({categories, className}) => {
+export const CategoriesMain: React.FC<CategoriesProps> = async ({categories, className}) => {
 
   return (
     <ul className={cn('inline-flex gap-1 bg-gray-50 p-2 rounded-2xl', className)}>

@@ -4,7 +4,7 @@ import React from 'react';
 import {cn} from '@/lib/utils';
 import {Input} from '@/components/ui/Input';
 import {RangeSlider} from '@/components/ui/Range-slider';
-import {FiltersGroup} from "@/components/shared/Filters-group";
+import {FiltersGroup} from "@/components/shared/filters/Filters-group";
 import {useSet} from "react-use";
 import {PriceProps} from "@/types/filter";
 import qs from 'qs';
@@ -122,7 +122,7 @@ export const Filters: React.FC = () => {
 
       <button
         type="button"
-        className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition hover:cursor-pointer"
+        className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors duration-300 hover:cursor-pointer"
         onClick={() => {
           setPrice({priceFrom: undefined, priceTo: undefined});
           selectedMaterials.clear();

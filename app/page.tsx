@@ -1,6 +1,6 @@
 import {Container} from "@/components/shared/Container";
 import {Button} from "@/components/ui/Button";
-import {MainBanner} from "@/components/shared/Main-banner";
+import {BannerMain} from "@/components/shared/banners/Banner-main";
 import Link from "next/link";
 
 export default function MainPage() {
@@ -16,7 +16,7 @@ export default function MainPage() {
 
       <section>
         <h2 className="hidden">Основные акции и новости компании</h2>
-        <MainBanner/>
+        <BannerMain/>
       </section>
     </>
   );

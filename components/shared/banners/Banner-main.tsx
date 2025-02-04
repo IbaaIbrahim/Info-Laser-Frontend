@@ -3,11 +3,11 @@
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,} from "@/components/ui/Carousel"
 import Link from "next/link";
 import Image from "next/image";
-import {CarouselDots} from "@/components/shared/Carousel-dots";
+import {CarouselDots} from "@/components/shared/banners/Carousel-dots";
 import React from "react";
 
 
-export const MainBanner = () => {
+export const BannerMain = () => {
 
   return (
     <Carousel
