@@ -9,6 +9,7 @@ import {getAllProducts} from "@/lib/api";
 import {Product} from "@/types/product";
 import {Container} from "@/components/shared/Container";
 import {ptMono} from "@/app/fonts";
+import {Overlay} from "@/components/shared/Overlay";
 
 export const HeaderSearch = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -88,13 +89,12 @@ export const HeaderSearch = () => {
 
   return (
     <>
-      {/* Оверлей */}
-      {isOpen && <div className="fixed top-0 left-0 right-0 bottom-0 bg-black/50 z-30"></div>}
 
+      <Overlay isOpen={isOpen}/>
 
       {/* Триггер для спойлера */}
       <button
-        className="relative hover:text-[#6941f9] hover:cursor-pointer p-1 rounded-md transition-colors duration-300 z-30"
+        className="relative hover:text-[#6941f9] hover:cursor-pointer hover:bg-gray-200 p-1 rounded-md transition-colors duration-300 z-30"
         type="button"
         onClick={() => setIsOpen(true)}
       >

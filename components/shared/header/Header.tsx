@@ -10,10 +10,10 @@ import {HeaderNav} from "@/components/shared/header/Header-nav";
 export const Header: React.FC<ClassName> = async ({className}) => {
 
   return (
-    <header className={cn('', className)}>
+    <header className={cn('relative z-50', className)}>
 
       {/* Header-TOP */}
-      <div className="bg-gray-300/20 py-2">
+      <div className=" bg-gray-100 py-1">
         <Container className="flex items-center justify-between">
           <span>Санкт Петербург</span>
           <HeaderContacts/>
@@ -21,7 +21,7 @@ export const Header: React.FC<ClassName> = async ({className}) => {
       </div>
 
       {/* Header-BOT */}
-      <div className="">
+      <div className="relative bg-white border-b border-b-gray-300">
         <Container className="flex items-center justify-between ">
 
           <Logo className="mr-7"/>

@@ -30,8 +30,9 @@ export const BannerMain = () => {
             <Image
               src='/img/main-banner/main-banner-1.webp'
               width={1920}
-              height={450}
-              alt={'logo'}
+              height={600}
+              alt={'banner-1'}
+              className="min-h-[600px]"
             />
           </Link>
         </CarouselItem>
@@ -41,8 +42,9 @@ export const BannerMain = () => {
             <Image
               src='/img/main-banner/main-banner-2.webp'
               width={1920}
-              height={450}
-              alt={'logo'}
+              height={600}
+              alt={'banner-2'}
+              className="min-h-[600px]"
             />
           </Link>
         </CarouselItem>

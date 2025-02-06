@@ -1,29 +1,22 @@
 import React from 'react';
 import Link from "next/link";
-import {getAllProducts} from "@/lib/api";
+// import {getAllProducts} from "@/lib/api";
+import {HeaderProductItem} from "@/components/shared/header/nav-items/Header-product-item";
 
 export const HeaderNav: React.FC = async () => {
 
-  const products = await getAllProducts();
+  // const products = await getAllProducts();
 
   return (
     <nav className="mr-auto bg-white">
-      <ul className="flex items-center">
-        <li className="relative">
-          <button
-            className="hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
-            type='button'
-          >
-            Товары
-          </button>
 
-          <div className="absolute top-12 left-0 right-0 bg-red-400 z-20">
-            tetetete
-          </div>
-        </li>
+      <ul className="flex items-center">
+
+        <HeaderProductItem/>
+
         <li>
           <Link
-            className="block hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
+            className="relative block bg-white hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
             href={"/clients"}
           >
             Клиенты
@@ -31,7 +24,7 @@ export const HeaderNav: React.FC = async () => {
         </li>
         <li>
           <Link
-            className="block hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
+            className="relative block bg-white hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
             href={"/articles"}
           >
             Статьи
@@ -39,7 +32,7 @@ export const HeaderNav: React.FC = async () => {
         </li>
         <li>
           <Link
-            className="block hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
+            className="relative block bg-white hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
             href={"/delivery"}
           >
             Доставка и оплата
@@ -47,7 +40,7 @@ export const HeaderNav: React.FC = async () => {
         </li>
         <li>
           <Link
-            className="block hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
+            className="relative block bg-white hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
             href={"/about"}
           >
             О компании
@@ -55,7 +48,7 @@ export const HeaderNav: React.FC = async () => {
         </li>
         <li>
           <Link
-            className="block hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
+            className="relative block bg-white hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
             href={"/contacts"}
           >
             Контакты
@@ -63,7 +56,7 @@ export const HeaderNav: React.FC = async () => {
         </li>
         <li>
           <Link
-            className="block hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
+            className="relative block bg-white hover:cursor-pointer hover:text-[#6941f9] transition-colors duration-300 py-3 px-3"
             href={"/service"}
           >
             Сервис
