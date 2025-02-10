@@ -5,13 +5,16 @@ import {Container} from "@/components/shared/Container";
 import {cn} from "@/lib/utils";
 import Link from "next/link";
 import {Overlay} from "@/components/shared/Overlay";
-import {Product} from "@/types/product";
 import {ChevronDown} from "lucide-react";
 import {getAllProducts, getCategories} from "@/lib/api";
 import {Category} from "@/types/category";
+import {useMedia} from "react-use";
+import {Product} from "@/types/product";
 
 export const HeaderProductItem: React.FC = () => {
-  
+
+  const isMobile = useMedia("(max-width: 1280px)");
+
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isSpoilerOpen, setIsSpoilerOpen] = useState(false);
@@ -29,31 +32,36 @@ export const HeaderProductItem: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isSpoilerOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    if (!isMobile) {
+      document.body.style.overflow = isSpoilerOpen ? "hidden" : "";
     }
 
     return () => {
-      document.body.style.overflow = "";
+      if (!isMobile) {
+        document.body.style.overflow = "";
+      }
     };
-  }, [isSpoilerOpen]);
+  }, [isSpoilerOpen, isMobile]);
+
 
   return (
     <>
-      <Overlay isOpen={isSpoilerOpen}/>
+      <Overlay isOpen={!isMobile && isSpoilerOpen}/>
 
-      <li onMouseLeave={() => setIsSpoilerOpen(false)}>
+      <li
+        onMouseLeave={() => setIsSpoilerOpen(false)}
+        className={cn('max-xl:w-full')}
+      >
         <button
           type="button"
           className={cn(
-            "relative flex items-center gap-x-1 rounded-md bg-gray-400/30 hover:text-[#6941f9] transition-colors duration-300 px-3 py-1",
-            isSpoilerOpen
-              ? "text-[#6941f9] bg-gray-400/50 before:content-[] before:absolute before:left-0 before:bottom-[-40px] before:h-[40px] before:w-full"
-              : ""
+            "relative flex items-center gap-x-1 rounded-md xl:bg-gray-400/30 hover:text-[#6941f9] transition-colors duration-300 px-3 lg:py-1",
+            "lg:before:content-[] lg:before:absolute lg:before:left-0 lg:before:bottom-[-40px] lg:before:h-[40px] lg:before:w-full",
+            "max-xl:w-full max-xl:justify-between max-xl:font-bold max-xl:px-2",
+            isSpoilerOpen ? "text-[#6941f9] xl:bg-gray-400/50 " : "",
           )}
-          onMouseEnter={() => setIsSpoilerOpen(true)}
+          onMouseEnter={() => !isMobile && setIsSpoilerOpen(true)}
+          onClick={() => isMobile && setIsSpoilerOpen(!isSpoilerOpen)}
         >
           Каталог
           <ChevronDown
@@ -67,13 +75,16 @@ export const HeaderProductItem: React.FC = () => {
 
         <div
           className={cn(
-            "absolute top-[64px] left-0 right-0 bg-white border-t border-t-gray-300  transition-all duration-300 ease-in-out z-30",
+            "absolute top-[64px] left-0 right-0 bg-white xl:border-t xl:border-t-gray-300  transition-all duration-300 ease-in-out z-30",
+            "max-xl:static max-xl:overflow-hidden",
+            isSpoilerOpen ? "max-xl:max-h-full" : "max-xl:max-h-0",
             isSpoilerOpen ? "visible opacity-100" : "invisible opacity-0"
           )}
         >
           <Container
             className={cn(
-              "relative py-5 transition-all duration-300 ease-in-out",
+              "relative xl:py-5 transition-all duration-300 ease-in-out",
+              "max-lg: px-4",
               isSpoilerOpen ? "top-0 " : "-top-3"
             )}
           >
