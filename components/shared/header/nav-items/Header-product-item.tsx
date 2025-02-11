@@ -92,7 +92,7 @@ export const HeaderProductItem: React.FC = () => {
               {categories.length > 0 ? (
                 categories.map((category) => (
                   <li key={category.id}>
-                    <Link href={`/${category.slug}`}>{category.name}</Link>
+                    <Link href={`/catalog/${category.slug}`}>{category.name}</Link>
                   </li>
                 ))
               ) : (

@@ -50,9 +50,9 @@ export const BannerMain = () => {
 
       </CarouselContent>
 
-      <CarouselPrevious className="left-3 bg-white border-gray-600 shadow-sm shadow-black"/>
+      <CarouselPrevious className="left-3"/>
 
-      <CarouselNext className="right-3 bg-white border-gray-600 shadow-sm shadow-black"/>
+      <CarouselNext className="right-3"/>
 
       <CarouselDots className="absolute bottom-4 left-0 right-0"/>
 

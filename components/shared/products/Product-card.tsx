@@ -1,27 +1,30 @@
 import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import {Button} from "@/components/ui/Button";
-import {Plus} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {ptMono} from "@/app/fonts";
 import {Product} from "@/types/product";
+import {Check, X} from "lucide-react";
+import {CallbackBtnProduct} from "@/components/shared/btns/Callback-btn-product";
 
 export const ProductCard: React.FC<Product> = (
   {
     name,
     slug,
     orderPrice,
+    inStock,
     stockPrice,
     categorySlug,
     categoryName,
-    image
+    image,
+    className
   }) => {
-  return (
-    <li
-      className={cn('flex flex-col border border-gray-200 p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow')}>
 
-      <Link className="block mb-2" href={`/catalog/${categorySlug}/${slug}`}>
+  return (
+    <div
+      className={cn('flex flex-col h-full overflow-hidden border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-shadow', className)}>
+
+      <Link className="flex justify-center bg-gray-400/20 rounded-xl mb-2" href={`/catalog/${categorySlug}/${slug}`}>
         {image && (
           <Image
             className="hover:scale-110 transition-transform"
@@ -33,36 +36,44 @@ export const ProductCard: React.FC<Product> = (
         )}
       </Link>
 
-      <p className="text-sm text-gray-400 mb-1 leading-none">{categoryName}</p>
+      <div className="flex flex-col h-full p-3">
 
-      <Link className="text-[#6941f9] transition-colors hover:text-[#b82c2c] leading-5 mb-3 block"
-            href={`/catalog/${categorySlug}/${slug}}`}>
-        <h3 className={ptMono.className}>{name}</h3>
-      </Link>
+        <span
+          className="flex items-center gap-x-1 text-sm text-gray-400 mb-1 leading-none"
+        >
+          {String(inStock).toLowerCase() === "true" ? <Check className="text-green-400" size={12}/> :
+            <X className='text-red-500' size={12}/>}
 
-      <ul className="flex items-center justify-between mb-3 mt-auto">
-        <li className="leading-4">
-          <b className="mr-1">{orderPrice}</b>
-          <span>₽</span><br/>
-          <span className="text-gray-400 text-sm">Со склада</span>
-        </li>
-        <li className="leading-4">
-          <b className="mr-1">{stockPrice}</b>
-          <span>₽</span><br/>
-          <span className="text-gray-400 text-sm">Под заказ</span>
-        </li>
-      </ul>
+          {String(inStock).toLowerCase() === "true" ? 'В наличии' : 'Нет в наличии'}
+        </span>
 
-      <div className="flex flex-col items-center gap-2">
-        <Button className="w-full">Обратный звонок</Button>
-        <Button className="w-full">
-          <Plus size={16}/>
-          В корзину
-        </Button>
         <Link
-          className="text-[16px] text-center text-[#6941f9] border-b border-gray-300 hover:text-[#b82c2c] transition-colors"
-          href={`/catalog/${categorySlug}/${slug}`}>Подробнее</Link>
+          className="flex-auto text-[#6941f9] transition-colors hover:text-[#b82c2c] leading-5 mb-3 block"
+          href={`/catalog/${categorySlug}/${slug}`}>
+          <h3 className={ptMono.className}>{name}</h3>
+        </Link>
+
+        <ul className="flex items-center justify-between mb-3">
+          <li className="leading-4">
+            <span className="block text-gray-400 text-sm">Цена без НДС</span>
+            <b className="mr-1">{orderPrice}</b>
+            <span>₽</span>
+          </li>
+          <li className="leading-4">
+            <span className="block text-gray-400 text-sm">Под заказ без НДС</span>
+            <b className="mr-1">{stockPrice}</b>
+            <span>₽</span>
+          </li>
+        </ul>
+
+        <CallbackBtnProduct className="w-full mb-2 rounded-2xl"/>
+
+        <span className="flex items-center justify-center gap-x-1 text-sm text-center text-gray-400 leading-none">
+          <Check className="text-green-400" size={12}/>
+          Гарантия 1 год
+        </span>
+
       </div>
-    </li>
+    </div>
   )
 };

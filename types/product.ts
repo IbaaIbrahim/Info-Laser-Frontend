@@ -13,14 +13,17 @@ export interface Product {
   orderPrice: number,
   stockPrice: number,
   newPrice: number,
+  inStock: boolean,
   categorySlug: string,
   categoryName: string,
   images?: ProductImage[],
-  image?: ProductImage
+  image?: ProductImage,
+  className?: string
 }
 
 export interface ProductsGroupListProps {
   products: Product[];
+  className?: string
 }
 
 export interface ProductPageProps {

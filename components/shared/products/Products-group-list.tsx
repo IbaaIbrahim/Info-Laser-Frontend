@@ -9,15 +9,17 @@ export const ProductsGroupList: React.FC<ProductsGroupListProps> = ({products}) 
     <section>
       <h1 className="text-2xl font-semibold mb-3">Вы выбрали: {products[0].categoryName} </h1>
 
-      <ul className={cn('grid grid-cols-5 gap-[20px]')}>
+      <ul className={cn('grid grid-cols-3 gap-[20px]')}>
         {products.map((product) => (
           <ProductCard
+            className={cn('')}
             key={product.id}
             id={product.id}
             name={product.name}
             slug={product.slug}
             stockPrice={product.stockPrice}
             orderPrice={product.orderPrice}
+            inStock={product.inStock}
             categorySlug={product.categorySlug}
             categoryName={product.categoryName}
             description={product.description}

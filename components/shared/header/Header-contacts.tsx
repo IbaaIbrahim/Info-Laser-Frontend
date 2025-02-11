@@ -1,13 +1,9 @@
-'use client';
-
-import React, {useState} from "react";
+import React from "react";
 import Link from "next/link";
 import {Phone} from "lucide-react";
-import {Button} from "@/components/ui/Button";
-import {CallbackModal} from "@/components/shared/modals/Callback-modal";
+import {CallbackBtnHeader} from "@/components/shared/btns/Callback-btn-header";
 
 export const HeaderContacts = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -25,11 +21,8 @@ export const HeaderContacts = () => {
           </dd>
         </div>
 
-        <Button onClick={() => setIsModalOpen(true)} type="button">
-          Заказать обратный звонок
-        </Button>
+        <CallbackBtnHeader/>
 
-        <CallbackModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
       </dl>
     </>
   );
