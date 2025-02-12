@@ -5,7 +5,9 @@ import {HeaderSearch} from "@/components/shared/header/Header-search";
 import {Logo} from "@/components/shared/Logo";
 import {HeaderNav} from "@/components/shared/header/Header-nav";
 import {HeaderCity} from "@/components/shared/header/Header-city";
-
+import {ShoppingCart} from "lucide-react";
+import Link from "next/link";
+import {HeaderCart} from "@/components/shared/header/Header-cart";
 
 export const Header: React.FC = () => {
 
@@ -20,6 +22,8 @@ export const Header: React.FC = () => {
         <HeaderNav/>
 
         <HeaderSearch/>
+        
+        <HeaderCart/>
 
         <HeaderContacts/>
 

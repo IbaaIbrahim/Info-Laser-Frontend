@@ -19,11 +19,11 @@ export const NewProductsSlider: React.FC<ClassName> = async ({className}) => {
             loop: true,
           }}
         >
-          <CarouselContent className="py-5 -ml-10">
+          <CarouselContent className="py-5 -ml-10 max-sm:-ml-2">
             {products.map((product) => (
               <CarouselItem
                 key={product.id}
-                className="basis-1/1 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-10"
+                className="basis-1/4 max-2xl:basis-1/3 max-lg:basis-1/2 max-sm:basis-1/1 max-sm:pl-2 pl-10"
               >
                 <ProductCard
                   id={product.id}
@@ -37,13 +37,14 @@ export const NewProductsSlider: React.FC<ClassName> = async ({className}) => {
                   newPrice={0}
                   image={product.images?.[0]}
                   inStock={product.inStock}
+                  isHit={product.isHit}
                 />
               </CarouselItem>
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className={cn('-left-[40px]', className)}/>
-          <CarouselNext className={cn('-right-[40px]', className)}/>
+          <CarouselPrevious className={cn('-left-[40px] max-2xl:-left-[20px]', className)}/>
+          <CarouselNext className={cn('-right-[40px] max-2xl:-right-[20px]', className)}/>
         </Carousel>
       </Container>
     </section>

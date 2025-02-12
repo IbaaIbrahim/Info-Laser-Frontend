@@ -13,6 +13,7 @@ export const ProductCard: React.FC<Product> = (
     slug,
     orderPrice,
     inStock,
+    isHit,
     stockPrice,
     categorySlug,
     categoryName,
@@ -24,10 +25,19 @@ export const ProductCard: React.FC<Product> = (
     <div
       className={cn('flex flex-col h-full overflow-hidden border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-shadow', className)}>
 
-      <Link className="flex justify-center bg-gray-400/20 rounded-xl mb-2" href={`/catalog/${categorySlug}/${slug}`}>
+      <Link
+        className="relative flex justify-center bg-gray-400/20 rounded-xl mb-2"
+        href={`/catalog/${categorySlug}/${slug}`}
+      >
+
+        {String(isHit).toLowerCase() === "true" ?
+          <span
+            className="flex items-center justify-center absolute top-2 left-2 uppercase py-1 px-3 rounded-2xl bg-red-500 text-white z-20">хит</span>
+          : ''}
+
         {image && (
           <Image
-            className="hover:scale-110 transition-transform"
+            className="hover:scale-110 transition-transform z-10"
             src={image.url}
             alt={image.alt}
             width={image.width}
@@ -49,7 +59,8 @@ export const ProductCard: React.FC<Product> = (
 
         <Link
           className="flex-auto text-[#6941f9] transition-colors hover:text-[#b82c2c] leading-5 mb-3 block"
-          href={`/catalog/${categorySlug}/${slug}`}>
+          href={`/catalog/${categorySlug}/${slug}`}
+        >
           <h3 className={ptMono.className}>{name}</h3>
         </Link>
 

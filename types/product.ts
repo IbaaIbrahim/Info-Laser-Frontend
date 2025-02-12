@@ -14,6 +14,7 @@ export interface Product {
   stockPrice: number,
   newPrice: number,
   inStock: boolean,
+  isHit: boolean,
   categorySlug: string,
   categoryName: string,
   images?: ProductImage[],

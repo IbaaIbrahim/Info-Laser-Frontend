@@ -4,7 +4,7 @@ import React from "react";
 import {ProductsGroupListProps} from "@/types/product";
 
 export const ProductsGroupList: React.FC<ProductsGroupListProps> = ({products}) => {
-
+  
   return (
     <section>
       <h1 className="text-2xl font-semibold mb-3">Вы выбрали: {products[0].categoryName} </h1>
@@ -20,6 +20,7 @@ export const ProductsGroupList: React.FC<ProductsGroupListProps> = ({products}) 
             stockPrice={product.stockPrice}
             orderPrice={product.orderPrice}
             inStock={product.inStock}
+            isHit={product.isHit}
             categorySlug={product.categorySlug}
             categoryName={product.categoryName}
             description={product.description}

@@ -42,8 +42,8 @@ const ProductPage = async ({params}: ProductPageProps) => {
 
             </CarouselContent>
 
-            <CarouselPrevious className="-left-[40px] bg-white border-gray-600 shadow-sm shadow-black"/>
-            <CarouselNext className="-right-[40px] bg-white border-gray-600 shadow-sm shadow-black"/>
+            <CarouselPrevious className="-left-[40px]"/>
+            <CarouselNext className="-right-[40px]"/>
           </Carousel>
 
           <div>
