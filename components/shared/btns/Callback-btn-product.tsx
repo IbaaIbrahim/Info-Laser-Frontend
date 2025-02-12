@@ -1,21 +1,41 @@
-'use client';
-
-import React, {useState} from "react";
+import React from "react";
 import {Button} from "@/components/ui/Button";
-import {CallbackModal} from "@/components/shared/modals/Callback-modal";
-import {cn} from "@/lib/utils";
-import {ClassName} from "@/types/types";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/Dialog"
 
-export const CallbackBtnProduct: React.FC<ClassName> = ({className}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export const CallbackBtnProduct = () => {
 
   return (
-    <>
-      <Button onClick={() => setIsModalOpen(true)} type="button" className={cn('', className)}>
-        Заказать
-      </Button>
+    <Dialog>
 
-      <CallbackModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
-    </>
+      <DialogTrigger className="mb-2" asChild>
+        <Button>Заказать</Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <DialogTitle>Заказать обратный звонок</DialogTitle>
+
+        <form>
+          <input
+            type="text"
+            placeholder="Ваше имя"
+            className="w-full border p-2 rounded mb-3"
+          />
+          <input
+            type="tel"
+            placeholder="Ваш телефон"
+            className="w-full border p-2 rounded mb-3"
+          />
+          <Button type="submit" className="w-full">
+            Отправить
+          </Button>
+        </form>
+      </DialogContent>
+
+    </Dialog>
   );
 };

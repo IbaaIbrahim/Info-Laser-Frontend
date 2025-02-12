@@ -1,14 +1,8 @@
-import type {Metadata} from "next";
 import "./globals.css";
-import {Header} from "@/components/shared/header/Header";
 import {ptSans} from './fonts'
+import React from "react";
 
-export const metadata: Metadata = {
-  title: "InfoLaser",
-  description: "Тут заполняется СЕО",
-};
-
-export default function RootLayout(
+export default function GlobalLayout(
   {
     children,
   }:
@@ -24,12 +18,7 @@ export default function RootLayout(
     </head>
 
     <body className={ptSans.className}>
-
-    <Header/>
-
-    <main className="min-h-screen">
-      {children}
-    </main>
+    {children}
     </body>
     </html>
   );

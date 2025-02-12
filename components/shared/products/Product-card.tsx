@@ -4,8 +4,9 @@ import Image from "next/image";
 import {cn} from "@/lib/utils";
 import {ptMono} from "@/app/fonts";
 import {Product} from "@/types/product";
-import {Check, X} from "lucide-react";
+import {Check, Plus, X} from "lucide-react";
 import {CallbackBtnProduct} from "@/components/shared/btns/Callback-btn-product";
+import {Button} from "@/components/ui/Button";
 
 export const ProductCard: React.FC<Product> = (
   {
@@ -77,7 +78,12 @@ export const ProductCard: React.FC<Product> = (
           </li>
         </ul>
 
-        <CallbackBtnProduct className="w-full mb-2 rounded-2xl"/>
+        <CallbackBtnProduct/>
+
+        <Button variant="outline" className="text-base font-bold mb-2">
+          <Plus className="w-5 h-5 mr-1"/>
+          В корзину
+        </Button>
 
         <span className="flex items-center justify-center gap-x-1 text-sm text-center text-gray-400 leading-none">
           <Check className="text-green-400" size={12}/>
