@@ -1,11 +1,12 @@
 import {Container} from "@/components/shared/Container";
-import {getProductsBySlug} from "@/lib/api";
+
 import Image from "next/image";
 import {ProductPageProps} from "@/types/product";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/Carousel";
 import React from "react";
 import {ptMono} from "@/app/fonts";
 import {cn} from "@/lib/utils";
+import {getProductsBySlug} from "@/api/products";
 
 const ProductPage = async ({params}: ProductPageProps) => {
   const {product} = await params;

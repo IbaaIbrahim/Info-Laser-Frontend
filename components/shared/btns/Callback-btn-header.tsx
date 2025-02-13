@@ -2,7 +2,7 @@ import React from "react";
 import {Button} from "@/components/ui/Button";
 import {
   Dialog,
-  DialogContent,
+  DialogContent, DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/Dialog"
@@ -18,6 +18,7 @@ export const CallbackBtnHeader = () => {
 
       <DialogContent>
         <DialogTitle>Заказать звонок</DialogTitle>
+        <DialogDescription className="hidden"></DialogDescription>
 
         <form>
           <input

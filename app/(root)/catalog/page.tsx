@@ -1,6 +1,7 @@
 import {Container} from "@/components/shared/Container";
 import {CategoriesMain} from "@/components/shared/categories/Categories-main";
-import {getCategories} from "@/lib/api";
+import {getCategories} from "@/api/categories";
+
 
 const CatalogPage = async () => {
   const categories = await getCategories();

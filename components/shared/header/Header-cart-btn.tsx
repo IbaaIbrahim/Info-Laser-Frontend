@@ -2,7 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import {ShoppingCart} from "lucide-react";
 
-export const HeaderCart: React.FC = () => {
+export const HeaderCartBtn: React.FC = () => {
 
   return (
     <>

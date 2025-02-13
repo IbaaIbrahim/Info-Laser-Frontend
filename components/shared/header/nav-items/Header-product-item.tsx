@@ -6,10 +6,12 @@ import {cn} from "@/lib/utils";
 import Link from "next/link";
 import {Overlay} from "@/components/shared/Overlay";
 import {ChevronDown} from "lucide-react";
-import {getAllProducts, getCategories} from "@/lib/api";
+
 import {Category} from "@/types/category";
 import {useMedia} from "react-use";
 import {Product} from "@/types/product";
+import {getAllProducts} from "@/api/products";
+import {getCategories} from "@/api/categories";
 
 export const HeaderProductItem: React.FC = () => {
 

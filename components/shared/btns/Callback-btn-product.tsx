@@ -2,7 +2,7 @@ import React from "react";
 import {Button} from "@/components/ui/Button";
 import {
   Dialog,
-  DialogContent,
+  DialogContent, DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/Dialog"
@@ -15,6 +15,8 @@ export const CallbackBtnProduct = () => {
       <DialogTrigger className="mb-2" asChild>
         <Button>Заказать</Button>
       </DialogTrigger>
+
+      <DialogDescription className="hidden"></DialogDescription>
 
       <DialogContent>
         <DialogTitle>Заказать обратный звонок</DialogTitle>

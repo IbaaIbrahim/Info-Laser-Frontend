@@ -4,9 +4,11 @@ import {Filters} from "@/components/shared/filters/Filters";
 import React from "react";
 import {ProductsGroupList} from "@/components/shared/products/Products-group-list";
 import {notFound} from "next/navigation";
-import {getCategories, getProductsByCategory} from "@/lib/api";
+
 import {CategoriesMain} from "@/components/shared/categories/Categories-main";
 import {CategoryPageProps} from "@/types/category";
+import {getProductsByCategory} from "@/api/products";
+import {getCategories} from "@/api/categories";
 
 const CategoryPage = async ({params}: CategoryPageProps) => {
 

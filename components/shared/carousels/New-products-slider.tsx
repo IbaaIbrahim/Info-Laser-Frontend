@@ -1,10 +1,11 @@
 import {Container} from "@/components/shared/Container";
-import {getAllProducts} from "@/lib/api";
+
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/Carousel";
 import React from "react";
 import {cn} from "@/lib/utils";
 import {ProductCard} from "@/components/shared/products/Product-card";
 import {ClassName} from "@/types/types";
+import {getAllProducts} from "@/api/products";
 
 export const NewProductsSlider: React.FC<ClassName> = async ({className}) => {
   const products = await getAllProducts();
