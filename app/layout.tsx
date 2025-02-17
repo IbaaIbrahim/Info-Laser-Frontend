@@ -1,6 +1,7 @@
 import "./globals.css";
 import {ptSans} from './fonts'
 import React from "react";
+import {CartProvider} from "@/context/Cart-context";
 
 export default function GlobalLayout(
   {
@@ -18,8 +19,13 @@ export default function GlobalLayout(
     </head>
 
     <body className={ptSans.className}>
-    {children}
+
+    <CartProvider>
+      {children}
+    </CartProvider>
     </body>
     </html>
   );
 }
+
+

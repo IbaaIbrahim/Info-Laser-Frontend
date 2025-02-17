@@ -17,14 +17,15 @@ export const NewProductsSlider: React.FC<ClassName> = async ({className}) => {
 
         <Carousel
           opts={{
-            loop: true,
+            // loop: true,
+            align: "start",
           }}
         >
-          <CarouselContent className="py-5 -ml-10 max-sm:-ml-2">
+          <CarouselContent className=" py-5 -ml-10 max-sm:-ml-2">
             {products.map((product) => (
               <CarouselItem
                 key={product.id}
-                className="basis-1/4 max-2xl:basis-1/3 max-lg:basis-1/2 max-sm:basis-1/1 max-sm:pl-2 pl-10"
+                className="basis-1/4 pl-10 max-2xl:basis-1/3 max-lg:basis-1/2 max-sm:basis-1/1 max-sm:pl-2 "
               >
                 <ProductCard
                   id={product.id}

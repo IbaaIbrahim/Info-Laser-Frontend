@@ -6,27 +6,28 @@ export interface ProductImage {
 }
 
 export interface Product {
-  id: number,
-  name: string,
-  slug: string,
-  description: string,
-  orderPrice: number,
-  stockPrice: number,
-  newPrice: number,
-  inStock: boolean,
-  isHit: boolean,
-  categorySlug: string,
-  categoryName: string,
-  images?: ProductImage[],
-  image?: ProductImage,
-  className?: string
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  orderPrice: number;
+  stockPrice: number;
+  newPrice: number;
+  inStock: boolean;
+  isHit: boolean;
+  categorySlug: string;
+  categoryName: string;
+  images?: ProductImage[];
+  image?: ProductImage;
+  className?: string;
+  quantity?: number;
 }
 
 export interface ProductsGroupListProps {
   products: Product[];
-  className?: string
+  className?: string;
 }
 
 export interface ProductPageProps {
-  params: Promise<{ product: string }>;
+  params: { product: string };
 }
