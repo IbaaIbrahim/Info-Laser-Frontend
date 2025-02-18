@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import {Header} from "@/components/shared/header/Header";
 import React from "react";
+import {Footer} from "@/components/shared/footer/Footer";
 
 export const metadata: Metadata = {
   title: "InfoLaser",
@@ -21,6 +22,7 @@ export default function RootLayout(
       <main className="min-h-screen">
         {children}
       </main>
+      <Footer/>
     </>
 
   );

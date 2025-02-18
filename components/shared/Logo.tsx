@@ -7,7 +7,7 @@ import {ClassName} from "@/types/types";
 export const Logo: React.FC<ClassName> = ({className}) => {
 
   return (
-    <Link className={cn('mr-7', className)} href={'/'}>
+    <Link className={cn('block', className)} href={'/'}>
       <Image src='/logo.svg' width={150} height={23} alt={'logo'} priority={true}/>
     </Link>
   );
