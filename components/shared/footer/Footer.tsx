@@ -6,11 +6,12 @@ import {Clock, Mail, Phone} from "lucide-react";
 import Link from "next/link";
 import {Logo} from "@/components/shared/Logo";
 import {CallbackBtn} from "@/components/shared/btns/Callback-btn";
+import Image from "next/image";
 
 export const Footer: React.FC<ClassName> = ({className}) => {
 
   return (
-    <footer className={cn('bg-[#3d3d3d]/60 py-10 mt-10', className)}>
+    <footer className={cn('bg-[#3d3d3d]/90 py-10 mt-10', className)}>
       <Container>
         <div className={cn(
           'grid grid-cols-5 gap-10 text-sm',
@@ -21,18 +22,49 @@ export const Footer: React.FC<ClassName> = ({className}) => {
           <div className="text-white">
             <Logo className="mb-2"/>
             <p className="">Лазерные и фрезерные станки</p>
-            <p className=" mt-4">Наши соцсети:</p>
+            <p className="mt-4">Наши соцсети:</p>
             <ul className="flex gap-3 mt-2">
               <li>
-                <Link className="" href="#">
-                  YouTube
+                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
+                  <Image
+                    className={"transition-transform duration-300"}
+                    alt={"icon"}
+                    src={"/img/icons/social/icon-youtube.svg"}
+                    height={28} width={28}
+                  />
                 </Link>
               </li>
               <li>
-                <Link className="" href="#">
-                  Vk
+                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
+                  <Image
+                    className={"transition-transform duration-300"}
+                    alt={"icon"}
+                    src={"/img/icons/social/icon-tg.svg"}
+                    height={28} width={28}
+                  />
                 </Link>
               </li>
+              <li>
+                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
+                  <Image
+                    className={"transition-transform duration-300"}
+                    alt={"icon"}
+                    src={"/img/icons/social/icon-whatsapp.svg"}
+                    height={28} width={28}
+                  />
+                </Link>
+              </li>
+              <li>
+                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
+                  <Image
+                    className={"transition-transform duration-300"}
+                    alt={"icon"}
+                    src={"/img/icons/social/icon-vk.svg"}
+                    height={28} width={28}
+                  />
+                </Link>
+              </li>
+
             </ul>
             <p className="mt-4">
               Товары, представленные на сайте, не являются публичной офертой

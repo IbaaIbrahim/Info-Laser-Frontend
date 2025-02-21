@@ -68,7 +68,7 @@ export const PartnersSlider: React.FC<ClassName> = ({className}) => {
   ];
 
   return (
-    <section className={cn('py-16', className)}>
+    <section className={cn('py-7', className)}>
       <Container>
         <h2
           className={cn("text-2xl font-bold text-center mb-5")}

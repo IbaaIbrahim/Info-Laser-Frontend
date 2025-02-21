@@ -8,7 +8,7 @@ export const Logo: React.FC<ClassName> = ({className}) => {
 
   return (
     <Link className={cn('block', className)} href={'/'}>
-      <Image src='/logo.svg' width={150} height={23} alt={'logo'} priority={true}/>
+      <Image src='/img/icons/logo.svg' width={150} height={23} alt={'logo'} priority={true}/>
     </Link>
   );
 };
