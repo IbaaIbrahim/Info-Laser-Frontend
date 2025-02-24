@@ -5,7 +5,7 @@ import React from "react";
 import {ProductsGroupList} from "@/components/shared/products/Products-group-list";
 import {notFound} from "next/navigation";
 
-import {CategoriesMain} from "@/components/shared/categories/Categories-main";
+import {CategoriesCatalog} from "@/components/shared/categories/Categories-catalog";
 import {CategoryPageProps} from "@/types/category";
 import {getProductsByCategory} from "@/api/products";
 import {getCategories} from "@/api/categories";
@@ -27,7 +27,7 @@ const CategoryPage = async ({params}: CategoryPageProps) => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-semibold mb-3">Все категории</h2>
-            <CategoriesMain categories={categories}/>
+            <CategoriesCatalog categories={categories}/>
           </div>
 
           <SortPopup/>

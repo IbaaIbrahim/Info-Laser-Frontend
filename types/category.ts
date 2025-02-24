@@ -12,6 +12,7 @@ export interface Category {
 
 export interface CategoriesProps extends ClassName {
   categories: Category[];
+  title?: string;
 }
 
 export interface CategoryPageProps {

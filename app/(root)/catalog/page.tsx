@@ -1,22 +1,22 @@
-import {Container} from "@/components/shared/Container";
-import {CategoriesMain} from "@/components/shared/categories/Categories-main";
+import {CategoriesCatalog} from "@/components/shared/categories/Categories-catalog";
 import {getCategories} from "@/api/categories";
+import {OfflineOrOnline} from "@/components/shared/OfflineOrOnline";
+import {PartnersSlider} from "@/components/shared/carousels/Partners-slider";
 
 
 const CatalogPage = async () => {
   const categories = await getCategories();
 
   return (
-    <section>
-      <Container className="pt-5">
+    <>
 
-        <h1 className="text-2xl font-semibold mb-3">Категории</h1>
-        <CategoriesMain categories={categories}/>
+      <CategoriesCatalog title={"Каталог"} categories={categories}/>
 
-        <div className="mt-5">Ниже рандомный контент на странице каталога</div>
+      <OfflineOrOnline/>
 
-      </Container>
-    </section>
+      <PartnersSlider/>
+
+    </>
 
   );
 };
