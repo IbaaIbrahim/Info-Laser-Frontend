@@ -6,7 +6,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [
 - [TailwindCSS](https://tailwindcss.com/) - Стили
 - [ShadСn/ui](https://ui.shadcn.com/) - Стилизованные компоненты
 - [Lucide](https://lucide.dev/) - Иконки
-- [Embla Carouse](https://www.embla-carousel.com/examples/predefined/) - Слайдер
+- [Embla Carousel](https://www.embla-carousel.com/examples/predefined/) - Слайдер
 - [React-use](https://streamich.github.io/react-use/?path=/story/components-usekey--demo) - Полезные кастомные хуки (
   например, useClickAway, useSet, useMedia)
 - [qs](https://www.npmjs.com/package/qs) - Библиотека анализа и преобразования строк запросов

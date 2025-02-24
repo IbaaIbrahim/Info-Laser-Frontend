@@ -153,7 +153,7 @@ export const HeaderProductItem: React.FC = () => {
             )}
           />
         </Link>
-
+        
         <div
           className={cn(
             "absolute top-[80px] h-[85dvh] left-0 right-0 bg-gray-200 xl:border-t xl:border-t-gray-300  transition-all duration-300 ease-in-out overflow-hidden z-30",
@@ -180,27 +180,28 @@ export const HeaderProductItem: React.FC = () => {
                     >
                       <div>
                         <p className={"text-black uppercase font-semibold mb-2"}>Лазерные станки</p>
-                        <ul className="flex flex-col w-full space-y-2 mb-3">
+                        <ul className="flex flex-col w-full mb-3">
                           {categories.map((category) => (
-                            <TabsTrigger
-                              asChild
-                              key={category.id}
-                              value={category.id}
-                              onMouseEnter={() => setActiveCategory(category.id)}
-                            >
-                              <Link
-                                className={cn(
-                                  "flex items-center justify-start gap-x-3 font-semibold bg-white rounded-lg px-3 py-2 mb-0",
-                                  activeCategory && 'bg-inherit',
-                                )}
-                                href={`/catalog/${category.slug}`}
-                                onClick={() => setIsSpoilerOpen(false)}
+                            <li key={category.id}>
+                              <TabsTrigger
+                                asChild
+                                value={category.id}
+                                onMouseEnter={() => setActiveCategory(category.id)}
                               >
-                                <Image src={category.imageUrl} alt={"#"} width={45} height={45}></Image>
-                                {category.name}
 
-                              </Link>
-                            </TabsTrigger>
+                                <Link
+                                  className={cn(
+                                    "flex items-center justify-start w-full gap-x-3 font-semibold bg-white rounded-lg px-3 py-2 mb-0",
+                                    activeCategory && 'bg-inherit',
+                                  )}
+                                  href={`/catalog/${category.slug}`}
+                                  onClick={() => setIsSpoilerOpen(false)}
+                                >
+                                  <Image src={category.imageUrl} alt={"#"} width={45} height={45}/>
+                                  {category.name}
+                                </Link>
+                              </TabsTrigger>
+                            </li>
                           ))}
                         </ul>
 
@@ -213,25 +214,26 @@ export const HeaderProductItem: React.FC = () => {
                     >
                       <div>
                         <p className={"text-black uppercase font-semibold mb-2"}>Комплектующие</p>
-                        <ul className="flex flex-col w-full space-y-2 mb-3">
+                        <ul className="flex flex-col w-full mb-3">
                           {accessories.map((accessory) => (
-                            <TabsTrigger
-                              asChild
-                              key={accessory.id}
-                              value={accessory.id}
-                              onMouseEnter={() => setActiveCategory(accessory.id)}
-                            >
-                              <Link
-                                className={cn(
-                                  "flex items-center justify-start gap-x-3 font-semibold bg-white rounded-lg px-3 py-2 mb-0",
-                                  activeCategory && 'bg-inherit',
-                                )}
-                                href={`/acessories/${accessory.slug}`}
-                                onClick={() => setIsSpoilerOpen(false)}
+                            <li key={accessory.id}>
+                              <TabsTrigger
+                                asChild
+                                value={accessory.id}
+                                onMouseEnter={() => setActiveCategory(accessory.id)}
                               >
-                                {accessory.name}
-                              </Link>
-                            </TabsTrigger>
+                                <Link
+                                  className={cn(
+                                    "flex items-center justify-start w-full gap-x-3 font-semibold bg-white rounded-lg px-3 py-2 mb-0",
+                                    activeCategory && 'bg-inherit',
+                                  )}
+                                  href={`/accessories/${accessory.slug}`}
+                                  onClick={() => setIsSpoilerOpen(false)}
+                                >
+                                  {accessory.name}
+                                </Link>
+                              </TabsTrigger>
+                            </li>
                           ))}
                         </ul>
                       </div>
