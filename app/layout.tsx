@@ -3,6 +3,7 @@ import {ptSans} from "./fonts";
 import React from "react";
 import {CartProvider} from "@/context/Cart-context";
 import {cn} from "@/lib/utils";
+import {Toaster} from "react-hot-toast";
 
 export default function GlobalLayout(
   {
@@ -17,6 +18,7 @@ export default function GlobalLayout(
       <title>InfoLaser</title>
     </head>
     <body className={cn("min-h-screen", ptSans.className)}>
+    <Toaster position="top-right"/>
     <CartProvider>
       {children}
     </CartProvider>

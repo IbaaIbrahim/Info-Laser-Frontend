@@ -2,6 +2,7 @@
 
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {Product} from "@/types/product";
+import toast from "react-hot-toast";
 
 // Тип корзины (массив товаров с количеством)
 interface CartItem extends Product {
@@ -45,17 +46,29 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({children}
 
   // Добавить товар в корзину
   const addToCart = (product: Product) => {
+    let message = "";
+
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
+      let updatedCart;
 
       if (existingItem) {
-        return prevCart.map((item) =>
+        updatedCart = prevCart.map((item) =>
           item.id === product.id ? {...item, quantity: item.quantity + 1} : item
         );
+        message = `Количество ${product.name} увеличено в корзине`;
       } else {
-        return [...prevCart, {...product, quantity: 1}];
+        updatedCart = [...prevCart, {...product, quantity: 1}];
+        message = `${product.name} добавлен в корзину`;
       }
+
+      return updatedCart;
     });
+
+    // Вызываем toast один раз после обновления состояния
+    setTimeout(() => {
+      toast.success(message);
+    }, 0);
   };
 
   // Удалить товар из корзины
