@@ -7,6 +7,8 @@ import {cn} from "@/lib/utils";
 import {Menu, X} from "lucide-react";
 import {Overlay} from "@/components/shared/Overlay";
 import {useClickAway} from "react-use";
+import {HeaderAboutCompanyItem} from "@/components/shared/header/nav-items/Header-about-company-item";
+import {HeaderServiceItem} from "@/components/shared/header/nav-items/Header-service-item";
 
 export const HeaderNav: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,7 +25,6 @@ export const HeaderNav: React.FC = () => {
     setIsMenuOpen(false);
   });
 
-
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -39,7 +40,6 @@ export const HeaderNav: React.FC = () => {
   return (
     <>
 
-      {/* Оверлей */}
       <Overlay isOpen={isMenuOpen}/>
 
       <nav
@@ -52,68 +52,39 @@ export const HeaderNav: React.FC = () => {
       >
         <ul className={cn(
           "flex flex-row items-center",
-          "max-xl:max-xl:flex-col max-xl:items-start"
+          "max-xl:flex-col max-xl:items-start"
         )}>
 
           <HeaderProductItem/>
+
+          <HeaderAboutCompanyItem/>
 
           <li>
             <Link
               className={cn(
                 'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-                'block px-2 hover:text-[#6941f9] transition-colors'
+                "block px-2 hover:text-[#6941f9] transition-colors",
+                "xl:py-1 xl:px-2",
               )}
+              href={"/delivery"}>
+              Оплата и доставка
+            </Link>
+          </li>
 
-              href={"/about"}
-            >
-              О компании
-            </Link>
-          </li>
+          <HeaderServiceItem/>
+
           <li>
-            <Link className={cn(
-              'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-              "block px-2 hover:text-[#6941f9] transition-colors"
-            )}
-                  href={"/clients"}>
-              Клиенты
-            </Link>
-          </li>
-          <li>
-            <Link className={cn(
-              'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-              "block px-2 hover:text-[#6941f9] transition-colors"
-            )}
-                  href={"/articles"}>
-              Статьи
-            </Link>
-          </li>
-          <li>
-            <Link className={cn(
-              'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-              "block px-2 hover:text-[#6941f9] transition-colors"
-            )}
-                  href={"/delivery"}>
-              Доставка и оплата
-            </Link>
-          </li>
-          <li>
-            <Link className={cn(
-              'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-              "block px-2 hover:text-[#6941f9] transition-colors"
-            )}
-                  href={"/contacts"}>
+            <Link
+              className={cn(
+                'max-xl:w-full max-xl:justify-between max-xl:font-bold',
+                "block px-2 hover:text-[#6941f9] transition-colors",
+                "xl:py-1 xl:px-2",
+              )}
+              href={"/contacts"}>
               Контакты
             </Link>
           </li>
-          <li>
-            <Link className={cn(
-              'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-              "block px-2 hover:text-[#6941f9] transition-colors"
-            )}
-                  href={"/service"}>
-              Сервис
-            </Link>
-          </li>
+
         </ul>
       </nav>
 
