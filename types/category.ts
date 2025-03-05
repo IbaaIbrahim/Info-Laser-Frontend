@@ -14,7 +14,3 @@ export interface CategoriesProps extends ClassName {
   categories: Category[];
   title?: string;
 }
-
-export interface CategoryPageProps {
-  params: Promise<{ category: string }>;
-}

@@ -1,13 +1,16 @@
 import React from "react";
 import {Container} from "@/components/shared/Container";
-import {ProductPageProps} from "@/types/product";
 import {getProductBySlug} from "@/api/api";
 import {ptMono} from "@/app/fonts";
 import {cn} from "@/lib/utils";
 import {ProductGallerySlider} from "@/components/shared/carousels/Product/Product-gallery-slider";
 import {AllCharacteristicsBtn} from "@/components/shared/btns/All-characteristics-btn-product";
 
-const ProductPage = async ({params}: ProductPageProps) => {
+interface PageProps {
+  params: Promise<{ product: string; category: string }>;
+}
+
+const ProductPage: React.FC<PageProps> = async ({params}) => {
   const {product: productSlug} = await params;
   const product = await getProductBySlug(productSlug);
 
@@ -33,10 +36,7 @@ const ProductPage = async ({params}: ProductPageProps) => {
   return (
     <Container>
       <section className="flex gap-8 mt-10">
-        {/* Галерея товара */}
         <ProductGallerySlider images={product.images ?? []}/>
-
-        {/* Информация о товаре */}
         <div className="flex-1">
           <div className={"mb-5"}>
             <h1 className={cn(ptMono.className, "text-3xl font-bold")}>
@@ -69,14 +69,11 @@ const ProductPage = async ({params}: ProductPageProps) => {
                 </div>
               ))}
             </dl>
-
             <AllCharacteristicsBtn/>
-
           </div>
         </div>
       </section>
 
-      {/* Секция характеристик */}
       <section id="specifications" className={"mt-52"}>
         <h2 className={"text-3xl mb-3"}>Характеристики</h2>
         <p>

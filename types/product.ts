@@ -27,7 +27,3 @@ export interface ProductsGroupListProps {
   products: Product[];
   className?: string;
 }
-
-export interface ProductPageProps {
-  params: { product: string };
-}
