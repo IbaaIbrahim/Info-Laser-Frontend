@@ -36,19 +36,21 @@ export const CarouselDots = React.forwardRef<
         className={cn("flex justify-center", className)}
         {...props}
       >
-        {Array.from({length: numberOfSlides}, (_, i) => (
-          <Button
-            key={i}
-            className={cn(
-              "mx-1 h-1.5 w-1.5 rounded-full p-0",
-              i === currentSlide
-                ? "scale-125 transform bg-[#6941f9] hover:bg-[#6941f9]"
-                : "bg-gray-300 hover:bg-gray-300"
-            )}
-            aria-label={`Перейти к слайду ${i + 1}`}
-            onClick={() => api?.scrollTo(i)}
-          />
-        ))}
+        <div className={" inline-flex items-center rounded-full p-1 bg-[#3E1EB5]/8"}>
+          {Array.from({length: numberOfSlides}, (_, i) => (
+            <Button
+              key={i}
+              className={cn(
+                "mx-1 h-2 w-2 rounded-full p-0",
+                i === currentSlide
+                  ? "w-6 transform bg-[#6941f9]"
+                  : "bg-white hover:bg-[#6941f9]"
+              )}
+              aria-label={`Перейти к слайду ${i + 1}`}
+              onClick={() => api?.scrollTo(i)}
+            />
+          ))}
+        </div>
       </div>
     );
   } else {

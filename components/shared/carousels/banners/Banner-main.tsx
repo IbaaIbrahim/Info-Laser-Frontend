@@ -1,11 +1,11 @@
 'use client'
 
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,} from "@/components/ui/Carousel"
-import Link from "next/link";
 import Image from "next/image";
 import {CarouselDots} from "@/components/shared/carousels/Carousel-dots";
 import React from "react";
-// import Autoplay from "embla-carousel-autoplay";
+import {DemoBtn} from "@/components/shared/btns/Demo-btn";
+import Autoplay from "embla-carousel-autoplay";
 
 export const BannerMain = () => {
 
@@ -17,37 +17,36 @@ export const BannerMain = () => {
         opts={{
           loop: true,
         }}
-        // plugins={[
-        //   Autoplay({
-        //     delay: 7000,
-        //   }),
-        // ]}
+        plugins={[
+          Autoplay({
+            delay: 3000,
+          }),
+        ]}
       >
 
         <CarouselContent>
 
           <CarouselItem>
-            <Link href="#">
-              <Image
-                src='/img/main-banner/main-banner-1.webp'
-                width={1920}
-                height={600}
-                alt={'banner-1'}
-                className="min-h-[600px]"
-              />
-            </Link>
+            <DemoBtn title={""} className={"absolute w-full h-full bg-inherit/0 hover:bg-inherit/0"}/>
+            <Image
+              src='/img/main-banner/main-banner-1.jpg'
+              width={1920}
+              height={600}
+              alt={'banner-2'}
+              className="max-h-[600px]"
+            />
           </CarouselItem>
 
           <CarouselItem>
-            <Link href="#">
-              <Image
-                src='/img/main-banner/main-banner-2.webp'
-                width={1920}
-                height={600}
-                alt={'banner-2'}
-                className="min-h-[600px]"
-              />
-            </Link>
+            <DemoBtn title={""} className={"absolute w-full h-full bg-inherit/0 hover:bg-inherit/0"}/>
+            <Image
+              src='/img/main-banner/main-banner-1.jpg'
+              width={1920}
+              height={600}
+              alt={'banner-2'}
+              className="max-h-[600px]"
+            />
+
           </CarouselItem>
 
         </CarouselContent>

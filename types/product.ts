@@ -6,21 +6,22 @@ export interface ProductImage {
 }
 
 export interface Product {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  orderPrice: number;
-  stockPrice: number;
-  newPrice: number;
-  inStock: boolean;
-  isHit: boolean;
-  categorySlug: string;
-  categoryName: string;
-  images?: ProductImage[];
-  image?: ProductImage;
-  className?: string;
-  quantity?: number;
+  id: number,
+  name: string,
+  slug: string,
+  description: string,
+  orderPrice: number,
+  stockPrice: number,
+  newPrice: number,
+  inStock: boolean,
+  isHit: boolean,
+  categorySlug: string,
+  categoryName: string,
+  images?: ProductImage[],
+  image?: ProductImage,
+  className?: string,
+  quantity?: number,
+  onClick?: () => void
 }
 
 export interface ProductsGroupListProps {
