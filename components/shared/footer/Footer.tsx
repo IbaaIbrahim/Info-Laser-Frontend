@@ -11,7 +11,7 @@ import Image from "next/image";
 export const Footer: React.FC<ClassName> = ({className}) => {
 
   return (
-    <footer className={cn('bg-[#3d3d3d]/90 py-10 mt-10', className)}>
+    <footer className={cn('bg-[#1B0C54] py-10 mt-10', className)}>
       <Container>
         <div className={cn(
           'grid grid-cols-5 gap-10 text-sm',
