@@ -135,7 +135,7 @@ export const HeaderProductItem: React.FC = () => {
         <button
           type="button"
           className={cn(
-            "relative flex items-center gap-x-1 rounded-2xl xl:bg-gray-400/30 hover:text-[#6941f9] transition-colors duration-300 px-3 lg:py-1",
+            "relative flex items-center gap-x-1 rounded-2xl xl:bg-[#4F26E9] xl:text-white  transition-colors duration-300 px-3 lg:py-1",
             "max-xl:w-full max-xl:justify-between max-xl:font-bold max-xl:px-2",
             isSpoilerOpen ? "lg:before:content-[] lg:before:absolute lg:before:left-0 lg:before:bottom-[-40px] lg:before:h-[40px] lg:before:w-full" : "",
             isSpoilerOpen ? "text-[#6941f9] xl:bg-gray-400/50 " : "",
