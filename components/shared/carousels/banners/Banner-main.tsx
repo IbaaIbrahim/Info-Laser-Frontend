@@ -5,7 +5,7 @@ import Image from "next/image";
 import {CarouselDots} from "@/components/shared/carousels/Carousel-dots";
 import React from "react";
 import {DemoBtn} from "@/components/shared/btns/Demo-btn";
-import Autoplay from "embla-carousel-autoplay";
+// import Autoplay from "embla-carousel-autoplay";
 
 export const BannerMain = () => {
 
@@ -17,11 +17,11 @@ export const BannerMain = () => {
         opts={{
           loop: true,
         }}
-        plugins={[
-          Autoplay({
-            delay: 3000,
-          }),
-        ]}
+        // plugins={[
+        //   Autoplay({
+        //     delay: 3000,
+        //   }),
+        // ]}
       >
 
         <CarouselContent>

@@ -256,6 +256,7 @@ export const HeaderProductItem: React.FC = () => {
                           <ul className="grid grid-cols-3 gap-2">
                             {category.products.map((product) => (
                               <li key={product.id}>
+
                                 <ProductCard
                                   onClick={() => setIsSpoilerOpen(false)}
                                   {...product}

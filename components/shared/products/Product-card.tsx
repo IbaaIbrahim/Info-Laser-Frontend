@@ -2,9 +2,8 @@ import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import {cn} from "@/lib/utils";
-import {ptMono} from "@/app/fonts";
 import {Product} from "@/types/product";
-import {Check, X} from "lucide-react";
+import {Check, Clock3, Star} from "lucide-react";
 import {AddToCartButton} from "@/components/shared/btns/Add-to-cart-btn-product";
 import {CallbackBtn} from "@/components/shared/btns/Callback-btn";
 
@@ -23,18 +22,20 @@ export const ProductCard: React.FC<Product> = (
     categoryName,
     image,
     className,
+    onClick,
   }) => {
   return (
     <div
-      className={cn('flex flex-col h-full overflow-hidden bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-shadow p-2', className)}>
+      className={cn('flex flex-col h-full overflow-hidden bg-[#F8F9FD] border border-gray-200 rounded-3xl p-2', className)}>
 
       <Link
-        className="relative flex justify-center bg-gray-400/20 rounded-xl mb-2 overflow-hidden min-h-[220px]"
+        className="relative flex justify-center mb-2 overflow-hidden min-h-[220px]"
         href={`/catalog/${categorySlug}/${slug}`}
+        onClick={onClick}
       >
         {String(isHit).toLowerCase() === "true" && (
           <span
-            className="flex items-center justify-center absolute top-2 left-2 uppercase py-1 px-3 rounded-2xl bg-red-500 text-white z-20">
+            className="flex items-center justify-center text-[15px] absolute top-2 left-2 py-1 px-3 rounded-2xl bg-[#A12EFA] text-white z-20">
             хит
           </span>
         )}
@@ -50,30 +51,40 @@ export const ProductCard: React.FC<Product> = (
       </Link>
 
       <div className="flex flex-col h-full p-3">
-        <span className="flex items-center gap-x-1 text-sm text-gray-400 mb-1 leading-none">
-          {String(inStock).toLowerCase() === "true" ? <Check className="text-green-400" size={12}/> :
-            <X className='text-red-500' size={12}/>}
 
-          {String(inStock).toLowerCase() === "true" ? 'В наличии' : 'Нет в наличии'}
+        {String(inStock).toLowerCase() === "true" ?
+          (
+            <span
+              className="inline-flex items-center gap-x-1 place-self-start text-sm text-[#4F26E9] bg-[#3E1EB5]/10 rounded-2xl px-2 py-2 mb-3 leading-none">
+            <Check className="text-[#4F26E9]" size={12}/>
+            В наличии
         </span>
+          ) :
+          (
+            <span
+              className="inline-flex items-center gap-x-1 place-self-start text-sm text-[#00A94C] bg-[#00A94C]/10 rounded-2xl px-2 py-2 mb-3 leading-none">
+            <Clock3 className='text-[#00A94C]' size={12}/>
+            Под заказ
+          </span>
+          )
+        }
 
         <Link
-          className="flex-auto text-[#6941f9] transition-colors hover:text-[#b82c2c] leading-5 mb-3 block"
+          className="flex-auto hover:text-[#6941f9] focus:text-[#6941f9] text-[18px] font-semibold transition-colors leading-5 mb-3 block"
           href={`/catalog/${categorySlug}/${slug}`}
+          onClick={onClick}
         >
-          <h3 className={ptMono.className}>{name}</h3>
+          <h3>{name}</h3>
         </Link>
 
         <ul className="flex items-center justify-between mb-3">
           <li className="leading-4">
-            <span className="block text-gray-400 text-sm">Цена без НДС</span>
-            <b className="mr-1">{orderPrice}</b>
-            <span>₽</span>
+            <span className="block mb-2">Цена без НДС</span>
+            <b className={"text-[18px] font-normal"}>{orderPrice}<span className="ml-1">₽</span></b>
           </li>
           <li className="leading-4">
-            <span className="block text-gray-400 text-sm">Под заказ без НДС</span>
-            <b className="mr-1">{stockPrice}</b>
-            <span>₽</span>
+            <span className="block mb-2">Под заказ без НДС</span>
+            <b className={"text-[18px] font-normal"}>{stockPrice}<span className="ml-1">₽</span></b>
           </li>
         </ul>
 
@@ -93,11 +104,19 @@ export const ProductCard: React.FC<Product> = (
             categorySlug,
             categoryName,
             image
-          }}/>
+          }}
+        />
 
-        <span className="flex items-center justify-center gap-x-1 text-sm text-center text-gray-400 leading-none">
-          <Check className="text-green-400" size={12}/> Гарантия 1 год
+        <div className={"flex items-center gap-x-5"}>
+          <span className="flex items-center justify-center gap-x-1 text-sm text-center leading-none">
+            <Star fill="#E99826" strokeWidth={0} size={12}/>
+            4.9
         </span>
+          <span className="flex items-center justify-center gap-x-1 text-sm text-center leading-none">
+          <Check className="text-[#6941f9]" size={12}/>
+          Обязательная гарантия 1 год
+        </span>
+        </div>
       </div>
     </div>
   );
