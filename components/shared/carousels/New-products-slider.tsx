@@ -12,7 +12,7 @@ export const NewProductsSlider: React.FC<ClassName> = async ({className}) => {
   return (
     <section className={cn("py-7", className)}>
       <Container>
-        <h2 className={cn("text-2xl font-bold text-center mb-5")}>Новинки оборудования InfoLaser</h2>
+        <h2 className={cn("text-4xl font-bold text-center mb-5")}>Новинки оборудования InfoLaser</h2>
 
         <Carousel opts={{align: "start"}}>
           <CarouselContent className="py-5 -ml-5 max-sm:-ml-2">

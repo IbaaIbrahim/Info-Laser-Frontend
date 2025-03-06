@@ -21,7 +21,7 @@ export const OfflineOrOnline: React.FC<ClassName> = ({className}) => {
         >
 
           <Image
-            src="/img/demo-laptop.png"
+            src="/img/demo-bg/demo-laptop.png"
             width={670}
             height={485}
             alt="Demo"
