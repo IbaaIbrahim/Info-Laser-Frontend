@@ -129,7 +129,7 @@ export const HeaderProductItem: React.FC = () => {
       <Overlay isOpen={!isMobile && isSpoilerOpen}/>
 
       <li
-        onMouseLeave={() => setIsSpoilerOpen(false)}
+        onMouseLeave={() => setIsSpoilerOpen(true)}
         className={cn('max-xl:w-full')}
       >
         <button
@@ -244,7 +244,7 @@ export const HeaderProductItem: React.FC = () => {
                   <div className={"flex-1"}>
                     {categories.map((category) => (
                       <TabsContent asChild key={category.id} value={category.id}>
-                        <div className={'flex-1 overflow-y-scroll'}>
+                        <div className={'flex-1 max-h-[85dvh] overflow-y-auto pr-3 pb-10'}>
                           <p className={"text-2xl"}>{category.name}</p>
                           <div className={"flex justify-between mb-3"}>
                             <p>{category.description}</p>
@@ -272,7 +272,7 @@ export const HeaderProductItem: React.FC = () => {
 
                     {accessories.map((accessory) => (
                       <TabsContent asChild key={accessory.id} value={accessory.id}>
-                        <div className={'flex-1 overflow-y-scroll'}>
+                        <div className={'flex-1 max-h-[85dvh] overflow-y-auto pr-3 pb-10'}>
                           <p className={"text-2xl"}>{accessory.name}</p>
                           <div className={"flex justify-between mb-3"}>
                             <p>{accessory.description}</p>
