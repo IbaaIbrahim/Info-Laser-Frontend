@@ -5,7 +5,7 @@ import React from "react";
 import Link from "next/link";
 import {Container} from "@/components/shared/Container";
 
-export default function OfflineOrOnlineMainPage() {
+export default function OfflineOrOnlineMain() {
   return (
     <div className={"py-7"}>
       <Container
@@ -16,10 +16,10 @@ export default function OfflineOrOnlineMainPage() {
           alt="Laser Machine"
           width={430}
           height={300}
-          className={""}
+          className={"self-end"}
         />
 
-        <div className="text-center">
+        <div className="text-center py-5">
           <p className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Online или Offline?</p>
           <p className="text-gray-700 text-lg leading-6 mb-6">
             Продемонстрируем работу оборудования любым удобным способом: в более
@@ -65,7 +65,7 @@ export default function OfflineOrOnlineMainPage() {
           alt="Laser Machine"
           width={430}
           height={300}
-          className={"scale-x-[-1]"}
+          className={"scale-x-[-1] self-end"}
         />
       </Container>
     </div>
