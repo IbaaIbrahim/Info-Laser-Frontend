@@ -4,10 +4,11 @@ import {cn} from "@/lib/utils";
 import React from "react";
 import Link from "next/link";
 import {Container} from "@/components/shared/Container";
+import {ClassName} from "@/types/types";
 
-export default function OfflineOrOnlineMain() {
+export const OfflineOrOnlineMain: React.FC<ClassName> = ({className}) => {
   return (
-    <div className={"py-7"}>
+    <div className={cn("py-7", className)}>
       <Container>
         <div
           className="flex items-center bg-[url('/img/demo-bg/demo-bg.jpg')] bg-no-repeat bg-cover rounded-4xl px-5 overflow-hidden">
