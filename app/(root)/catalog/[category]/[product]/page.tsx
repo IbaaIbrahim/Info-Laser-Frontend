@@ -1,7 +1,6 @@
 import React from "react";
 import {Container} from "@/components/shared/Container";
 import {getOneProductBySlug} from "@/api/api";
-import {ptMono} from "@/app/fonts";
 import {cn} from "@/lib/utils";
 import {ProductGallerySlider} from "@/components/shared/carousels/Product/Product-gallery-slider";
 import {AllCharacteristicsBtn} from "@/components/shared/btns/All-characteristics-btn-product";
@@ -40,7 +39,7 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
           <ProductGallerySlider images={product.product_attachments ?? []}/>
           <div className="flex-1">
             <div className={"mb-5"}>
-              <h1 className={cn(ptMono.className, "text-3xl font-bold")}>
+              <h1 className={cn("text-3xl font-bold")}>
                 {product.name}
               </h1>
               <p>{product.description}</p>

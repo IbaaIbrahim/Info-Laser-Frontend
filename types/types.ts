@@ -93,3 +93,26 @@ export interface CategoriesProps extends ClassName {
   activeCategory?: string;
   title?: string;
 }
+
+export interface ArticleCategoriesProps {
+  id: number;
+  title: string;
+  slug: string;
+  articles: Article[];
+}
+
+export interface Article {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  date: string;
+  image: string;
+  articleCategory: articleCategory[];
+}
+
+export interface articleCategory {
+  id: number;
+  title: string;
+  slug: string;
+}

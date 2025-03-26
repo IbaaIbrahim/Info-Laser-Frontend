@@ -1,5 +1,5 @@
 import "./globals.css";
-import {ptSans} from "./fonts";
+import {manrope} from "./fonts";
 import React from "react";
 import {CartProvider} from "@/context/Cart-context";
 import {cn} from "@/lib/utils";
@@ -16,8 +16,9 @@ export default function GlobalLayout(
     <head>
       <link data-rh="true" rel="icon" href="/favicon.ico"/>
       <title>InfoLaser</title>
+      <meta name="robots" content="noindex, nofollow"/>
     </head>
-    <body className={cn("min-h-screen", ptSans.className)}>
+    <body className={cn("min-h-screen", manrope.className)}>
     <Toaster position="top-right"/>
     <CartProvider>
       {children}

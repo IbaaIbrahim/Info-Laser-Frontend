@@ -5,6 +5,7 @@ import {UniqMachinesSlider} from "@/components/shared/carousels/Uniq-machines-sl
 import {OfflineOrOnlineMain} from "@/components/shared/OfflineOrOnlineMain";
 import {SimplerTabsMain} from "@/components/shared/SimplerTabsMain";
 import {AboutMain} from "@/components/shared/about/AboutMain";
+import {ArticlesOnMain} from "@/components/shared/articles/ArticlesOnMain";
 
 export default function MainPage() {
   return (
@@ -22,6 +23,8 @@ export default function MainPage() {
       <SimplerTabsMain/>
 
       <AboutMain/>
+
+      <ArticlesOnMain/>
     </>
   );
 }

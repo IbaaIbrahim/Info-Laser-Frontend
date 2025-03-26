@@ -6,7 +6,6 @@ import {cn} from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import {Container} from "@/components/shared/Container";
-import {ptMono} from "@/app/fonts";
 import {Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTrigger} from "@/components/ui/Sheet";
 import {getProducts} from "@/api/api";
 import {Product} from "@/types/types";
@@ -86,7 +85,7 @@ export const HeaderSearchBtn = () => {
 
           {/* Заголовок + Кнопка закрытия */}
           <div className="flex justify-between items-center mb-5">
-            <span className={cn('text-xl', ptMono.className)}>Что вы ищите?</span>
+            <span className={cn("text-xl")}>Что вы ищите?</span>
 
             <SheetClose asChild>
               <button
@@ -139,16 +138,16 @@ export const HeaderSearchBtn = () => {
                   onClick={onItemClick}
                 >
                   {product.product_attachments && product.product_attachments.map((item) =>
-                    item.is_main ? (
-                      <Image
-                        key={item.id}
-                        className="size-8"
-                        src={item.external_url}
-                        alt={item.name}
-                        width={32}
-                        height={32}
-                      />
-                    ) : null
+                      Boolean(item && item.is_main) && (
+                        <Image
+                          key={item.id}
+                          className="size-8"
+                          src={item.external_url}
+                          alt={item.name}
+                          width={32}
+                          height={32}
+                        />
+                      )
                   )}
                   <span className="leading-4">
                     {product.name}
