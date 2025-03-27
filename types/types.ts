@@ -24,7 +24,7 @@ export interface Product {
   stockPrice: number;
   newPrice: number;
   inStock: boolean;
-  rating?: number;
+  rating: number;
   guarantee?: number;
   guaranteeContent?: string;
   created_at?: string;

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {useCart} from "@/context/Cart-context";
+import {useCart} from "@/context/CartContext";
 import {Container} from "@/components/shared/Container";
 import {Minus, Plus, Trash2} from "lucide-react";
 import {cn} from "@/lib/utils";

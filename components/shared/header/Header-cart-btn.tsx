@@ -3,7 +3,7 @@
 import {ShoppingCart} from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import {useCart} from "@/context/Cart-context";
+import {useCart} from "@/context/CartContext";
 
 export const HeaderCartBtn: React.FC = () => {
   const {cart} = useCart();

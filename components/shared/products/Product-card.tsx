@@ -153,6 +153,7 @@ export const ProductCard: React.FC<Product> = (
               stockPrice,
               newPrice,
               labels,
+              rating
             }}
           />
         </div>

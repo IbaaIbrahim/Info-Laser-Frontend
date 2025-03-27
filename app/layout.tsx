@@ -1,7 +1,7 @@
 import "./globals.css";
 import {manrope} from "./fonts";
 import React from "react";
-import {CartProvider} from "@/context/Cart-context";
+import {CartProvider} from "@/context/CartContext";
 import {cn} from "@/lib/utils";
 import {Toaster} from "react-hot-toast";
 
