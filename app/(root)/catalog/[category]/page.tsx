@@ -2,7 +2,7 @@ import React from "react";
 import {Container} from "@/components/shared/Container";
 import {Filters} from "@/components/shared/filters/Filters";
 import {ProductsGroupList} from "@/components/shared/products/ProductsGroupList";
-import {getCategories} from "@/api/api";
+import {getProducts} from "@/api/api"; // Убрали getCategories
 import {CategoriesGoods} from "@/components/shared/categories/CategoriesGoods";
 import {Sorting} from "@/components/shared/Sorting";
 import {SortingProvider} from "@/context/SortingContext";
@@ -15,15 +15,33 @@ interface CategoryProps {
 }
 
 const CategoryPage: React.FC<CategoryProps> = async ({params}) => {
-  const categories = await getCategories();
+  const allProducts = await getProducts();
   const {category} = await params;
-  const currentCategory = categories.find((cat) => cat.slug === category);
+
+  // Получаем все уникальные категории из продуктов
+  const uniqueCategories = Array.from(
+    new Map(
+      allProducts.flatMap((product) =>
+        product.categories.map((cat) => [cat.id, cat])
+      )
+    ).values()
+  );
+
+  // Определяем текущую категорию по slug
+  const currentCategory = uniqueCategories.find((cat) => cat.slug === category);
+
+  // Отфильтрованные продукты по category_ids
+  const filteredProducts = currentCategory?.id
+    ? allProducts.filter((product) =>
+      product.category_ids.includes(currentCategory.id!)
+    )
+    : [];
 
   return (
     <SortingProvider>
-      <section className={cn(
-        "bg-[url('/img/category/bg.jpg')] bg-no-repeat bg-cover py-3 mb-3",
-      )}>
+      <section
+        className={cn("bg-[url('/img/category/bg.jpg')] bg-no-repeat bg-cover py-3 mb-3")}
+      >
         <Container className={"flex justify-between items-center"}>
           <div>
             <h1 className="text-5xl mb-1">{currentCategory?.name}</h1>
@@ -45,7 +63,7 @@ const CategoryPage: React.FC<CategoryProps> = async ({params}) => {
         <Container>
           <CategoriesGoods
             className="py-5"
-            categories={categories}
+            categories={uniqueCategories}
             activeCategory={currentCategory?.slug}
           />
 
@@ -58,10 +76,12 @@ const CategoryPage: React.FC<CategoryProps> = async ({params}) => {
             </aside>
 
             <div className="flex-1">
-              <ProductsGroupList className="mb-3" products={currentCategory?.products || []}/>
+              <ProductsGroupList
+                className="mb-3"
+                products={filteredProducts}
+              />
             </div>
           </div>
-
         </Container>
       </section>
     </SortingProvider>

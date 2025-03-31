@@ -1,10 +1,17 @@
 import React from 'react';
-import {CategoriesProps} from "@/types/types";
+import {OneProductCategory} from "@/types/types";
 import {cn} from '@/lib/utils';
 import Link from "next/link";
 import Image from "next/image";
 
-export const CategoriesGoods: React.FC<CategoriesProps> = async ({categories, className, activeCategory}) => {
+interface CategoriesGoodsProps {
+  categories: OneProductCategory[];
+  activeCategory?: string;
+  className?: string;
+  title?: string;
+}
+
+export const CategoriesGoods: React.FC<CategoriesGoodsProps> = async ({categories, className, activeCategory}) => {
   return (
     <section>
       <h2 className="hidden">Популярные категории</h2>
@@ -12,7 +19,7 @@ export const CategoriesGoods: React.FC<CategoriesProps> = async ({categories, cl
       <ul className={cn('flex flex-wrap gap-3', className)}>
         {categories.map((category) => {
           const isActive = activeCategory === category.slug;
-          
+
           return (
             <li key={category.id}>
               {isActive ? (

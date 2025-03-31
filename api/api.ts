@@ -35,7 +35,7 @@ export async function getCategories(): Promise<Category[]> {
 // Api получения массива продуктов с вложенными категориями
 export async function getProducts(): Promise<Product[]> {
   const res = await fetch(GET_PRODUCTS, {next: {revalidate: 60}});
-
+  
   if (!res.ok) {
     throw new Error("Ошибка загрузки продуктов");
   }
@@ -44,7 +44,7 @@ export async function getProducts(): Promise<Product[]> {
   return json.data.list;
 }
 
-// Api получения одного продукта по slug
+// Получение одного продукта по slug
 export async function getOneProductBySlug(slug: string): Promise<Product | undefined> {
   const products = await getProducts();
   return products.find((product) => product.slug === slug);
