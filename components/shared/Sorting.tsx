@@ -2,7 +2,7 @@
 
 import {useRouter, useSearchParams} from "next/navigation";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/Select";
-import React from "react";
+import React, {useEffect} from "react";
 import qs from "qs";
 
 interface SortingProps {
@@ -14,10 +14,27 @@ export const Sorting: React.FC<SortingProps> = ({className, currentSort}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  useEffect(() => {
+    const savedSort = localStorage.getItem("sortingParams");
+    if (savedSort) {
+      const parsedSort = JSON.parse(savedSort);
+      const currentQuery = Object.fromEntries(searchParams.entries());
+
+      // Сравниваем параметры сортировки в URL с сохранёнными в localStorage
+      if (
+        parsedSort.order_column !== currentQuery.order_column ||
+        parsedSort.order_dir !== currentQuery.order_dir
+      ) {
+        router.replace(`?${qs.stringify(parsedSort)}`, {scroll: false});
+      }
+    }
+  }, [router, searchParams]);
+
   const updateSorting = (value: string) => {
     let orderColumn: string | null = null;
     let orderDir: "asc" | "desc" | null = null;
 
+    // Определяем параметры сортировки на основе выбранного значения
     if (value === "rating") {
       orderColumn = "rating";
       orderDir = "desc";
@@ -29,12 +46,17 @@ export const Sorting: React.FC<SortingProps> = ({className, currentSort}) => {
       orderDir = "asc";
     }
 
+    // Создаём новые параметры сортировки, включая параметры из текущего URL
     const newParams = {
       ...Object.fromEntries(searchParams.entries()),
       ...(orderColumn ? {order_column: orderColumn} : {}),
       ...(orderDir ? {order_dir: orderDir} : {}),
     };
 
+    // Сохраняем новые параметры в localStorage
+    localStorage.setItem("sortingParams", JSON.stringify(newParams));
+
+    // Обновляем URL с новыми параметрами
     router.push(`?${qs.stringify(newParams)}`, {scroll: false});
   };
 
