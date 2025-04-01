@@ -1,62 +1,69 @@
 "use client";
 
-import {useSearchParams, useRouter} from "next/navigation";
-import {useSorting} from "@/context/SortingContext";
-import {cn} from "@/lib/utils";
-import {ClassName} from "@/types/types";
+import {useRouter, useSearchParams} from "next/navigation";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/Select";
 import React from "react";
+import qs from "qs";
 
-export const Sorting: React.FC<ClassName> = ({className}) => {
-  const {sortBy, sortDirection, setSortBy} = useSorting();
+interface SortingProps {
+  className?: string;
+  currentSort: { order_column?: string; order_dir?: "asc" | "desc" | "" };
+}
+
+export const Sorting: React.FC<SortingProps> = ({className, currentSort}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const updateSorting = (newSortBy: "price" | "popularity" | "sale") => {
-    setSortBy(newSortBy);
+  const updateSorting = (value: string) => {
+    let orderColumn: string | null = null;
+    let orderDir: "asc" | "desc" | null = null;
 
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (newSortBy === "sale") {
-      params.set("sortBy", "sale");
-      params.delete("sortDirection");
-    } else {
-      params.set("sortBy", newSortBy);
-      params.set("sortDirection", sortBy === newSortBy ? (sortDirection === "desc" ? "asc" : "desc") : "desc");
+    if (value === "rating") {
+      orderColumn = "rating";
+      orderDir = "desc";
+    } else if (value === "price_desc") {
+      orderColumn = "orderPrice";
+      orderDir = "desc";
+    } else if (value === "price_asc") {
+      orderColumn = "orderPrice";
+      orderDir = "asc";
     }
 
-    router.push(`?${params.toString()}`, {scroll: false});
+    const newParams = {
+      ...Object.fromEntries(searchParams.entries()),
+      ...(orderColumn ? {order_column: orderColumn} : {}),
+      ...(orderDir ? {order_dir: orderDir} : {}),
+    };
+
+    router.push(`?${qs.stringify(newParams)}`, {scroll: false});
   };
 
   return (
-    <div className={cn("flex items-center text-sm gap-3 mb-5", className)}>
-      <p className="text-gray-400">Сортировать:</p>
-      <p
-        className={cn(
-          "hover:text-[var(--violet)] cursor-pointer p-3 bg-[var(--gray)] rounded-3xl border transition-colors",
-          sortBy === "price" && "text-[var(--violet)] !border-[var(--violet)]",
-        )}
-        onClick={() => updateSorting("price")}
-      >
-        По цене {sortBy === "price" ? (sortDirection === "desc" ? "↓" : "↑") : ""}
-      </p>
-      <p
-        className={cn(
-          "hover:text-[var(--violet)] cursor-pointer p-3 bg-[var(--gray)] rounded-3xl border transition-colors",
-          sortBy === "popularity" && "text-[var(--violet)] !border-[var(--violet)]"
-        )}
-        onClick={() => updateSorting("popularity")}
-      >
-        По популярности {sortBy === "popularity" ? (sortDirection === "desc" ? "↓" : "↑") : ""}
-      </p>
-      <p
-        className={cn(
-          "hover:text-[var(--violet)] cursor-pointer p-3 bg-[var(--gray)] rounded-3xl border transition-colors",
-          sortBy === "sale" && "text-[var(--violet)] !border-[var(--violet)]"
-        )}
-        onClick={() => updateSorting("sale")}
-      >
-        Действует акция
-      </p>
+    <div className={`flex items-center gap-5 ${className}`}>
+      <div className="flex items-center gap-3">
+        <label className="block text-sm font-semibold" htmlFor="sorting">Сортировка:</label>
+        <Select
+          onValueChange={updateSorting}
+          value={
+            currentSort.order_column === "rating"
+              ? "rating"
+              : currentSort.order_column === "orderPrice" && currentSort.order_dir === "desc"
+                ? "price_desc"
+                : currentSort.order_column === "orderPrice" && currentSort.order_dir === "asc"
+                  ? "price_asc"
+                  : ""
+          }
+        >
+          <SelectTrigger className="rounded-3xl" id="sorting">
+            <SelectValue placeholder="Выберите сортировку"/>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="rating">По популярности</SelectItem>
+            <SelectItem value="price_desc">Сначала дорогие</SelectItem>
+            <SelectItem value="price_asc">Сначала дешевые</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 };

@@ -22,6 +22,7 @@ export const ProductCard: React.FC<Product> = (
     categories,
     labels,
     product_attachments,
+    category_ids,
     className,
     onClick
   }) => {
@@ -151,7 +152,8 @@ export const ProductCard: React.FC<Product> = (
               stockPrice,
               newPrice,
               labels,
-              rating
+              rating,
+              category_ids,
             }}
           />
         </div>

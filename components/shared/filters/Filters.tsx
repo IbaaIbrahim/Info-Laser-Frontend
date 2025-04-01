@@ -9,6 +9,7 @@ import {useSet} from "react-use";
 import {PriceProps} from "@/types/filter";
 import qs from 'qs';
 import {useRouter, useSearchParams} from "next/navigation";
+import {Switch} from "@/components/ui/Switch";
 
 interface FiltersProps {
   className?: string
@@ -75,7 +76,7 @@ export const Filters: React.FC<FiltersProps> = ({className}) => {
     <div className={className}>
       <form className={cn('text-sm bg-[var(--gray)] p-5 rounded-3xl border border-gray-200')}>
 
-        <fieldset className="mb-3">
+        <fieldset className="border-b border-b-gray-200 mb-3 pb-3">
           <legend className="font-semibold mb-3">Цена от и до:</legend>
 
           <div className="flex gap-3 mb-5">
@@ -109,6 +110,14 @@ export const Filters: React.FC<FiltersProps> = ({className}) => {
             onValueChange={([priceFrom, priceTo]) => setPrice({priceFrom, priceTo})}
           />
 
+        </fieldset>
+
+        <fieldset className="flex items-center gap-3 border-b border-b-gray-200 mb-3 pb-3">
+          <legend className={"contents"}>
+            <label className="block text-sm font-semibold" htmlFor="promo">Действует акция:</label>
+          </legend>
+
+          <Switch id="promo"/>
         </fieldset>
 
         <FiltersGroup
