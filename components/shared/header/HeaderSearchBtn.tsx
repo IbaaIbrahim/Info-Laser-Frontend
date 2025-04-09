@@ -31,7 +31,7 @@ export const HeaderSearchBtn = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const allProducts = await getProducts();
-      setProducts(allProducts);
+      setProducts(allProducts.products);
     };
 
     fetchProducts();

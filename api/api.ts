@@ -1,4 +1,4 @@
-import {Category, Product} from "@/types/types";
+import {Category, Pagination, Product} from "@/types/types";
 
 const GET_CATALOG_DATA = `https://api.infolasers.ru/api/catalog`;
 const GET_CATEGORIES = `https://api.infolasers.ru/api/category/getall`;
@@ -33,19 +33,22 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 // Api получения массива продуктов с вложенными категориями
-export async function getProducts(): Promise<Product[]> {
+export async function getProducts(): Promise<{ products: Product[]; pagination: Pagination }> {
   const res = await fetch(GET_PRODUCTS, {next: {revalidate: 60}});
-  
+
   if (!res.ok) {
     throw new Error("Ошибка загрузки продуктов");
   }
 
   const json = await res.json();
-  return json.data.list;
+  return {
+    products: json.data.list ?? [],
+    pagination: json.data.pagination ?? [],
+  }
 }
 
 // Получение одного продукта по slug
 export async function getOneProductBySlug(slug: string): Promise<Product | undefined> {
   const products = await getProducts();
-  return products.find((product) => product.slug === slug);
+  return products.products.find((product) => product.slug === slug);
 }

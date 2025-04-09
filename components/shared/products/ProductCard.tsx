@@ -34,21 +34,25 @@ export const ProductCard: React.FC<Product> = (
       className={cn('relative flex flex-col h-full overflow-hidden bg-[var(--gray)] border border-gray-200 rounded-3xl p-2', className)}>
 
       {labels && labels.map((label) => (
-        (label.slug === 'hit' || label.slug === 'in_sale') && (
+        (label.slug === 'hit' || label.slug === 'in_sale' || label.slug === 'new') && (
           <p
             key={label.id}
             className={cn(
               "absolute block w-[73px] h-[73px] text-[15px] top-[-28px] left-[-28px] rounded-full text-white uppercase z-20",
-              label.slug === 'hit' ? "bg-[var(--green)] -rotate-45" : "bg-[var(--pink)] rotate-0"
+              label.slug === 'hit' ? "bg-[var(--green)] -rotate-45" : "bg-[var(--pink)] rotate-0",
+              label.slug === 'new' ? "bg-[var(--green)]" : ""
             )}
           >
           <span
             className={cn(
               "absolute ",
-              label.slug === 'hit' ? "right-[21px] bottom-[6px]" : "right-[16px] bottom-[11px] font-semibold"
+              label.slug === 'hit' ? "right-[21px] bottom-[6px]" : "right-[16px] bottom-[11px] font-semibold",
+              label.slug === 'new' ? "-rotate-45 right-[3px]" : "",
             )}
           >
-            {label.slug === 'hit' ? "new" : "%"}
+            {label.slug === 'hit' ? "хит" : ""}
+            {label.slug === 'new' ? "new" : ""}
+            {label.slug === 'in_sale' ? "%" : ""}
           </span>
           </p>
         )

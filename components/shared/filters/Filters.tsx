@@ -14,12 +14,10 @@ export const Filters: React.FC<FiltersProps> = ({className}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Инициализируем состояние свитча, если в URL есть filter[label_id]==="2"
   const [promoChecked, setPromoChecked] = useState(
     Object.fromEntries(searchParams.entries())["filter[label_id]"] === "2"
   );
 
-  // Обновляем состояние при изменении searchParams
   useEffect(() => {
     const params = Object.fromEntries(searchParams.entries());
     setPromoChecked(params["filter[label_id]"] === "2");
@@ -32,18 +30,18 @@ export const Filters: React.FC<FiltersProps> = ({className}) => {
     } else {
       delete currentParams["filter[label_id]"];
     }
+    // При изменении фильтра, сбрасываем страницу на 1
+    currentParams["page"] = "1";
+
     localStorage.setItem("sortingAndFiltersParams", JSON.stringify(currentParams));
-    router.push(`?${qs.stringify(currentParams)}`, {scroll: false});
+    router.replace(`?${qs.stringify(currentParams)}`, {scroll: false});
     setPromoChecked(checked);
   };
 
   const resetAllFiltersAndSorting = () => {
-    // Удаляем все параметры из localStorage
     localStorage.removeItem("sortingAndFiltersParams");
-    // Обновляем URL до базового пути без query-параметров
     const basePath = window.location.pathname;
     router.replace(basePath, {scroll: false});
-    // Сбрасываем локальное состояние
     setPromoChecked(false);
   };
 

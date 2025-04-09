@@ -20,9 +20,11 @@ export const Sorting: React.FC<SortingProps> = ({className, currentSort}) => {
     if (savedSort) {
       const parsedSort = JSON.parse(savedSort);
       const currentQuery = Object.fromEntries(searchParams.entries());
-
-      // Если в URL нет сортировки, но есть в localStorage — подставляем её
       if (!currentQuery.order_column || !currentQuery.order_dir) {
+        // Если в текущем URL уже есть page, сохраняем его
+        if (currentQuery.page) {
+          parsedSort.page = currentQuery.page;
+        }
         router.replace(`?${qs.stringify(parsedSort)}`, {scroll: false});
       }
     }
@@ -47,10 +49,11 @@ export const Sorting: React.FC<SortingProps> = ({className, currentSort}) => {
       ...Object.fromEntries(searchParams.entries()),
       ...(orderColumn ? {order_column: orderColumn} : {}),
       ...(orderDir ? {order_dir: orderDir} : {}),
+      page: "1", // сбрасываем страницу при смене сортировки
     };
 
     localStorage.setItem("sortingAndFiltersParams", JSON.stringify(newParams));
-    router.push(`?${qs.stringify(newParams)}`, {scroll: false});
+    router.replace(`?${qs.stringify(newParams)}`, {scroll: false});
   };
 
   return (

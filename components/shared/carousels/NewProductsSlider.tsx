@@ -9,7 +9,7 @@ import {getProducts} from "@/api/api";
 export const NewProductsSlider: React.FC<ClassName> = async ({className}) => {
   const products = await getProducts() ?? [];
 
-  const newProducts = products.filter(product =>
+  const newProducts = products.products.filter(product =>
     product.labels?.some(label => label.slug === "new")
   );
 
