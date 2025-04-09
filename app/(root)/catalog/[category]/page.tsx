@@ -25,7 +25,7 @@ const CategoryPage: React.FC<CategoryProps> = async ({params, searchParams}) => 
 
   const uniqueCategories = Array.from(
     new Map(
-      allProducts.flatMap((product) =>
+      allProducts.products.flatMap((product) =>
         product.categories.map((cat) => [cat.id, cat])
       )
     ).values()
@@ -34,14 +34,13 @@ const CategoryPage: React.FC<CategoryProps> = async ({params, searchParams}) => 
   const currentCategory = uniqueCategories.find((cat) => cat.slug === category);
 
   let filteredProducts = currentCategory?.id
-    ? allProducts.filter((product) =>
+    ? allProducts.products.filter((product) =>
       product.category_ids.includes(currentCategory.id!)
     )
     : [];
 
   const {order_column, order_dir, "filter[label_id]": filterLabelId} = await searchParams;
 
-  // Применяем фильтрацию (если filter[label_id]==="2" – отбираем акционные товары)
   filteredProducts = sortProducts(filteredProducts, order_column, order_dir, filterLabelId);
 
   return (
