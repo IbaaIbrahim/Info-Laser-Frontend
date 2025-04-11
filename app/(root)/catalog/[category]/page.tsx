@@ -3,7 +3,7 @@ import {Filters} from "@/components/shared/filters/Filters";
 import {ProductsGroupList} from "@/components/shared/products/ProductsGroupList";
 import {getProducts} from "@/api/api";
 import {CategoriesGoods} from "@/components/shared/categories/CategoriesGoods";
-import {Sorting} from "@/components/shared/Sorting";
+import {Sorting} from "@/components/shared/sorting/Sorting";
 import Image from "next/image";
 import {cn} from "@/lib/utils";
 import {BannerCategory} from "@/components/shared/carousels/banners/BannerCategory";

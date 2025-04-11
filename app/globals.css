@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import 'react-phone-input-2/lib/style.css';
+
 
 @plugin 'tailwindcss-animate';
 
@@ -203,6 +205,7 @@
     --pink: #CF26E9;
     --green: #00A94C;
     --gray: #F8F9FD;
+    --gray-text: #9298AF;
     --gold: #E99826;
 }
 
