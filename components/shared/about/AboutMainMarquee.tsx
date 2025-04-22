@@ -100,7 +100,7 @@ export const AboutMainMarquee: React.FC<ClassName> = ({className}) => {
 
   return (
     <section className={cn("relative pt-15 pb-30", className)}>
-      <Container className={"max-w-[700px] mb-5"}>
+      <Container className={"max-w-[760px] mb-10"}>
         <h3 className={"text-center text-3xl"}>
           Машины + Передовое программное обеспечение =
           <span className={"text-[var(--violet)] ml-1"}>Творения, воплощенные в жизнь</span>

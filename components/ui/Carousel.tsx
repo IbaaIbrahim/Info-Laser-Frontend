@@ -155,7 +155,7 @@ const CarouselContent = React.forwardRef<
   const {carouselRef, orientation} = useCarousel()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={carouselRef} className={cn("overflow-hidden")}>
       <ul
         ref={ref}
         className={cn(
@@ -215,7 +215,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ChevronLeft className={cn('text-black size-5', className)}/>
+      <ChevronLeft className={cn('text-black size-5 !m-0', className)}/>
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -245,7 +245,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ChevronRight className={cn('text-black size-5', className)}/>
+      <ChevronRight className={cn('text-black size-5 !m-0', className)}/>
       <span className="sr-only">Next slide</span>
     </Button>
   )

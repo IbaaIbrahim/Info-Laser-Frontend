@@ -11,15 +11,8 @@ export const OfflineOrOnlineMain: React.FC<ClassName> = ({className}) => {
     <div className={cn("py-7", className)}>
       <Container>
         <div
-          className="flex items-center bg-[url('/img/demo-bg/demo-bg.jpg')] bg-no-repeat bg-cover rounded-4xl px-5 overflow-hidden">
-          <Image
-            src="/img/demo-bg/demo-lap-1.png"
-            alt="Laser Machine"
-            width={430}
-            height={300}
-            className={"self-end"}
-          />
-          <div className="text-center">
+          className="flex items-center justify-center bg-[url('/img/demo-bg/online-or-offline.jpg')] bg-no-repeat bg-cover rounded-4xl overflow-hidden py-13 px-5">
+          <div className="text-center max-w-[600px]">
             <p className="text-3xl md:text-4xl font-bold mb-4">Online или Offline?</p>
             <p className="text-lg leading-6 mb-6">
               Продемонстрируем работу оборудования любым удобным способом: в более
@@ -59,13 +52,6 @@ export const OfflineOrOnlineMain: React.FC<ClassName> = ({className}) => {
             </ul>
             <DemoBtn className={cn("rounded-3xl")} title={"Записаться на демонстрацию"}/>
           </div>
-          <Image
-            src="/img/demo-bg/demo-lap-2.png"
-            alt="Laser Machine"
-            width={430}
-            height={300}
-            className={"relative right-[-100px] bottom-[-85px] self-end"}
-          />
         </div>
       </Container>
     </div>

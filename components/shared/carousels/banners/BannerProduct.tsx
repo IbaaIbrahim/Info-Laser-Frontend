@@ -7,63 +7,61 @@ import React from "react";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 
-interface BannerCategoryProps {
+interface BannerProductProps {
   className?: string
 }
 
-export const BannerCategory: React.FC<BannerCategoryProps> = ({className}) => {
+export const BannerProduct: React.FC<BannerProductProps> = ({className}) => {
 
   const data = [
     {
       id: 1,
       name: 'banner-1',
-      img_url: '/img/banners/goods-list-banner/1.jpg',
-      width: 420,
-      height: 450
+      img_url: '/img/banners/product-banner/1.jpg',
+      width: 695,
+      height: 330
     },
     {
       id: 2,
       name: 'banner-2',
-      img_url: '/img/banners/goods-list-banner/1.jpg',
-      width: 420,
-      height: 450
+      img_url: '/img/banners/product-banner/1.jpg',
+      width: 695,
+      height: 330
     },
     {
       id: 3,
       name: 'banner-2',
-      img_url: '/img/banners/goods-list-banner/1.jpg',
-      width: 420,
-      height: 450
+      img_url: '/img/banners/product-banner/1.jpg',
+      width: 695,
+      height: 330
     }
   ]
 
   return (
     <section className={className}>
       <h2 className="hidden">Основные акции и новости компании</h2>
+
       <div className="group relative">
         <Carousel
-          className={""}
+          className=""
           opts={{
             loop: true,
           }}
         >
-
           <CarouselContent>
-            {data.map((item) => {
-              return (
-                <CarouselItem key={item.id}>
-                  <Link className={"block overflow-hidden rounded-3xl"} href={"#"}>
-                    <Image
-                      src={item.img_url}
-                      width={item.width}
-                      height={item.height}
-                      alt={item.name}
-                      className=""
-                    />
-                  </Link>
-                </CarouselItem>
-              )
-            })}
+            {data.map((item) => (
+              <CarouselItem key={item.id}>
+                <Link className="block overflow-hidden rounded-3xl" href="#">
+                  <Image
+                    src={item.img_url}
+                    width={item.width}
+                    height={item.height}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </Link>
+              </CarouselItem>
+            ))}
           </CarouselContent>
 
           <CarouselPrevious
@@ -78,10 +76,8 @@ export const BannerCategory: React.FC<BannerCategoryProps> = ({className}) => {
           />
 
           <CarouselDots className="absolute bottom-4 left-0 right-0"/>
-
         </Carousel>
       </div>
-
     </section>
   );
 };
