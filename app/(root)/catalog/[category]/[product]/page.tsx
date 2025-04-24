@@ -1,21 +1,25 @@
 import React from "react";
 import {Container} from "@/components/shared/Container";
 import {getOneProductBySlug} from "@/api/api";
-import {cn, formatPrice} from "@/lib/utils";
+import {cn} from "@/lib/utils";
 import {ProductGallerySlider} from "@/components/shared/carousels/product/ProductGallerySlider";
 import {AllCharacteristicsBtn} from "@/components/shared/btns/AllCharacteristicsBtnProduct";
 import {Star} from "lucide-react";
-import {AddToCartBtnProduct} from "@/components/shared/btns/AddToCartBtnProduct";
-import Link from "next/link";
-import {PrePurchaseBtn} from "@/components/shared/btns/PrePurchaseBtn";
 import {ProductBenefitSpoilers} from "@/components/shared/product/ProductBenefitSpoilers";
 import {OfflineOrOnlineMain} from "@/components/shared/OfflineOrOnlineMain";
 import {BannerProduct} from "@/components/shared/carousels/banners/BannerProduct";
 import {ChooseLaserMachineSlider} from "@/components/shared/carousels/product/ChooseLaserMachineSlider";
-import {AboutMainMarquee} from "@/components/shared/about/AboutMainMarquee";
 import {PurchaseOrder} from "@/components/shared/PurchaseOrder";
 import {ProductGeneralAccessoriesBanner} from "@/components/shared/product/ProductGeneralAccessoriesBanner";
 import {ProductSystemBanner} from "@/components/shared/product/ProductSystemBanner";
+import {ProductMarquee} from "@/components/shared/product/ProductMarquee";
+import {ProductBenefitBanner} from "@/components/shared/product/ProductBenefitBanner";
+import {ProductMaterialsTabs} from "@/components/shared/product/ProductMaterialsTabs";
+import {ShortCharacteristics} from "@/components/shared/product/characteristics/ShortCharacteristics";
+import {ProductPrices} from "@/components/shared/product/ProductPrices";
+import {FullCharacteristics} from "@/components/shared/product/characteristics/FullCharacteristics";
+import {ImportantCharacteristics} from "@/components/shared/product/characteristics/ImportantCharacteristics";
+import {NecessaryProductsList} from "@/components/shared/product/NecessaryProductsList";
 
 interface PageProps {
   params: Promise<{ product: string; category: string }>;
@@ -38,10 +42,10 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
       {/* Главная информация */}
       <section className={"mt-10 mb-15"}>
         <Container className="relative grid grid-cols-12 gap-10">
-          {/* Галерея продукта */}
+
           <div className="col-start-1 col-end-7 auto-rows-max">
             <ProductGallerySlider
-              className={cn("sticky top-3")}
+              className={"sticky top-3"}
               images={product.product_attachments ?? []}
               labels={product.labels}
             />
@@ -70,125 +74,16 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
               </div>
             </div>
 
-            {/* Краткие характеристики */}
-            {product.characteristics && (() => {
-              // Сортируем: сначала is_featured, затем по order
-              const sorted = [...product.characteristics].sort(
-                (a, b) =>
-                  Number(b.is_featured ?? 0) - Number(a.is_featured ?? 0) ||
-                  Number(a.order ?? 0) - Number(b.order ?? 0)
-              );
+            <ShortCharacteristics characteristics={product.characteristics ?? []}/>
 
-              // Берём только первые 8 характеристик
-              const limited = sorted.slice(0, 8);
+            <AllCharacteristicsBtn className={"mb-7"}/>
 
-              // Делим на 2 колонки: 4 слева, 4 справа
-              const midpoint = Math.ceil(limited.length / 2);
-              const firstColumn = limited.slice(0, midpoint);
-              const secondColumn = limited.slice(midpoint);
+            <ProductPrices product={product}/>
 
-              return (
-                <dl className="flex gap-x-10 text-sm mb-3">
-                  {[firstColumn, secondColumn].map((column, i) => (
-                    <div key={i} className="flex-1 space-y-1">
-                      {column.map((spec, index) => (
-                        <div key={index} className="flex items-end">
-                          <dt
-                            className={cn(
-                              "flex-1 relative overflow-hidden text-[var(--gray-text)] z-30",
-                              "after:content-[''] after:absolute after:bottom-1 after:w-[80%] after:h-px after:border-b after:border-dotted after:border-gray-400 after:z-20",
-                              spec.is_featured ? "font-bold" : ""
-                            )}
-                          >
-                            {spec.name}
-                          </dt>
-                          <dd
-                            className={cn(
-                              "relative bg-white text-right z-30",
-                              spec.is_featured ? "font-bold" : ""
-                            )}
-                          >
-                            {spec.value} {spec.unit}
-                          </dd>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </dl>
-              );
-            })()}
+            <NecessaryProductsList className={"mb-7"}/>
 
-            <AllCharacteristicsBtn className={cn("mb-7")}/>
-
-            {/* Цены товара */}
-            <div className={cn("flex gap-2 justify-around mb-5")}>
-
-              {Boolean(product.inStock) && (
-                <>
-                  <div className={cn("p-5 bg-[var(--gray)] rounded-3xl")}>
-                    <span className={"text-sm"}>Цена без НДС</span>
-                    <div className={cn("mb-5")}>
-                      <b className="text-2xl">
-                        {formatPrice(product.stockPrice)} ₽
-                      </b>
-                    </div>
-                    <div className={cn("flex gap-2")}>
-                      <AddToCartBtnProduct
-                        product={product}
-                      />
-
-                      <Link
-                        className={cn(
-                          "text-[var(--violet)] bg-[var(--violet-dark)] rounded-3xl py-3 px-5 transition-colors",
-                          "hover:text-white hover:bg-[var(--violet)]"
-                        )}
-                        href={"#"}
-                      >
-                        Рассрочка
-                      </Link>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              <div className={cn("p-5 bg-[var(--gray)] rounded-3xl")}>
-                <span className={"block text-sm mb-1"}>Под заказ без НДС</span>
-                <div className={cn("flex items-center gap-3 mb-5")}>
-                  <b className="text-2xl">
-                    {formatPrice(product.orderPrice)} ₽
-                  </b>
-                  {product.labels?.some((label) => label.slug === "in_sale") && (
-                    <div className={""}>
-                      <span className="hidden">Акционная цена</span>
-                      <div className="inline-block bg-black/7 px-2 py-1 rounded-3xl">
-                        <b className="text-[15px] font-normal line-through">
-                          {formatPrice(product.newPrice)} ₽
-                        </b>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className={cn("flex gap-2")}>
-                  <PrePurchaseBtn title={"Предзаказ"}/>
-
-                  <Link
-                    className={cn(
-                      "text-[var(--violet)] bg-[var(--violet-dark)] rounded-3xl py-3 px-5 transition-colors",
-                      "hover:text-white hover:bg-[var(--violet)]"
-                    )}
-                    href={"#"}
-                  >
-                    Рассрочка
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Баннер рассрочки */}
             <ProductSystemBanner className={"mb-7"}/>
 
-            {/* Спойлеры */}
             <ProductBenefitSpoilers/>
           </div>
         </Container>
@@ -225,61 +120,24 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
             <BannerProduct/>
           </section>
 
-          {/* Полные характеристики */}
-          <section
-            id="specifications"
-            className={cn("col-start-5 col-end-13 bg-[var(--gray)] rounded-3xl p-8")}
-          >
-            <h2 className={"text-2xl font-semibold mb-5"}>Характеристики</h2>
-            {product.characteristics && (() => {
-              // Сортируем: сначала is_featured, затем по order
-              const sorted = [...product.characteristics].sort(
-                (a, b) =>
-                  Number(b.is_featured ?? 0) - Number(a.is_featured ?? 0) ||
-                  Number(a.order ?? 0) - Number(b.order ?? 0)
-              );
-
-              // Делим на 2 колонки
-              const midpoint = Math.ceil(sorted.length / 2);
-              const firstColumn = sorted.slice(0, midpoint);
-              const secondColumn = sorted.slice(midpoint);
-
-              return (
-                <dl className="flex gap-x-10 text-sm mb-3">
-                  {[firstColumn, secondColumn].map((column, i) => (
-                    <div key={i} className="flex-1 space-y-3">
-                      {column.map((spec, index) => (
-                        <div key={index} className="flex items-end">
-                          <dt
-                            className={cn(
-                              "flex-1 relative overflow-hidden text-[var(--gray-text)] z-30",
-                              "after:content-[''] after:absolute after:bottom-1 after:w-[80%] after:h-px after:border-b after:border-dotted after:border-gray-400 after:z-20",
-                            )}
-                          >
-                            {spec.name}
-                          </dt>
-                          <dd className={cn("relative text-right z-30",)}>
-                            {spec.value} {spec.unit}
-                          </dd>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </dl>
-              );
-            })()}
-          </section>
+          <FullCharacteristics characteristics={product.characteristics ?? []}/>
 
         </Container>
       </div>
+
+      <ImportantCharacteristics className={"mb-15"} characteristics={product.characteristics ?? []}/>
+
+      <ProductMaterialsTabs className={"mb-15"} materials={product.materials ?? []}/>
 
       <ChooseLaserMachineSlider className={"mb-15"}/>
 
       <ProductGeneralAccessoriesBanner className={"mb-15"}/>
 
-      <AboutMainMarquee className={cn("mb-25")}/>
+      <ProductMarquee className={"mb-25"} images={product.product_attachments ?? []}/>
 
-      <PurchaseOrder className={"mb-15"}/>
+      <PurchaseOrder className={"mb-25"}/>
+
+      <ProductBenefitBanner className={"mb-15"}/>
     </>
   );
 };

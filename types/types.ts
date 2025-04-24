@@ -29,9 +29,11 @@ export interface Product {
   guaranteeContent?: string;
   created_at?: string;
   updated_at?: string;
+  laser_suppliers?: Supplier;
   order?: number;
   pivot?: Pivot;
   categories: OneProductCategory[];
+  materials?: Material[];
   labels?: Label[];
   product_attachments?: Attachments[];
   characteristics?: Characteristics[];
@@ -57,6 +59,23 @@ export interface Characteristics {
 export interface Pivot {
   category_id?: number;
   product_id?: number;
+}
+
+export interface Material {
+  id: number;
+  name: string;
+  slug: string;
+  image_url: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface Supplier {
+  id: number;
+  name: string;
+  slug: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface OneProductCategory {

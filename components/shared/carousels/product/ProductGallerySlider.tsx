@@ -25,6 +25,8 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
       alt: img.name || "Изображение товара",
       type: img.type,
       isMain: img.is_main ?? false,
+      width: img.width,
+      height: img.height
     }))
     .sort((a, b) => (b.isMain ? 1 : -1));
 
@@ -144,8 +146,8 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
                       className="w-full h-full object-contain cursor-zoom-in"
                       src={image.url}
                       alt={image.alt}
-                      width={450}
-                      height={350}
+                      width={image.width}
+                      height={image.height}
                     />
                   </PhotoView>
                 </div>
