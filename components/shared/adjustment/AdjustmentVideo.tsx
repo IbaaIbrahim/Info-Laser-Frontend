@@ -38,16 +38,16 @@ export const AdjustmentVideo: React.FC<ClassName> = ({className}) => {
 
         <div
           className={cn(
-            `bg-[url('https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp')]`,
             "group relative bg-contain bg-no-repeat aspect-video cursor-pointer rounded-3xl mb-3",
           )}
+          style={{backgroundImage: `url(https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp)`}}
           onClick={() => setIsVideoOpen(true)}
         >
-          <div
-            className={"absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-3 z-20"}>
-            <Play className={"fill-black"}/>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-3 z-20">
+            <Play className="fill-black group-hover:fill-[var(--violet)] transition-colors"/>
           </div>
         </div>
+
 
         <Button
           asChild

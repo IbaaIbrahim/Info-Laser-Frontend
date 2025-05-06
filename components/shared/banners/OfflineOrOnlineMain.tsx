@@ -1,10 +1,9 @@
-import Image from "next/image";
 import {DemoBtn} from "@/components/shared/btns/DemoBtn";
 import {cn} from "@/lib/utils";
 import React from "react";
-import Link from "next/link";
 import {Container} from "@/components/shared/Container";
 import {ClassName} from "@/types/types";
+import {SocialList} from "@/components/shared/social/SocialList";
 
 export const OfflineOrOnlineMain: React.FC<ClassName> = ({className}) => {
   return (
@@ -18,38 +17,7 @@ export const OfflineOrOnlineMain: React.FC<ClassName> = ({className}) => {
               Продемонстрируем работу оборудования любым удобным способом: в более
               50 городах России или по видеосвязи.
             </p>
-            <ul className="flex justify-center gap-4 mb-6">
-              <li>
-                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href={"#"}>
-                  <Image
-                    className={"transition-transform duration-300"}
-                    alt={"icon"}
-                    src={"/img/icons/social/icon-tg.svg"}
-                    height={28} width={28}
-                  />
-                </Link>
-              </li>
-              <li>
-                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href={"#"}>
-                  <Image
-                    className={"transition-transform duration-300"}
-                    alt={"icon"}
-                    src={"/img/icons/social/icon-whatsapp.svg"}
-                    height={28} width={28}
-                  />
-                </Link>
-              </li>
-              <li>
-                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href={"#"}>
-                  <Image
-                    className={"transition-transform duration-300"}
-                    alt={"icon"}
-                    src={"/img/icons/social/icon-vk.svg"}
-                    height={28} width={28}
-                  />
-                </Link>
-              </li>
-            </ul>
+            <SocialList className={"justify-center mb-6"}/>
             <DemoBtn className={cn("rounded-3xl")} title={"Записаться на демонстрацию"}/>
           </div>
         </div>

@@ -18,7 +18,7 @@ export const HeaderContacts = () => {
         </Link>
 
         <CallbackBtn
-          className={"bg-inherit text-[var(--violet)] h-auto p-0 hover:bg-inherit  hover:text-[var(--red)] focus:text-[var(--red)]"}
+          className={"bg-inherit text-[var(--violet)] h-auto p-0  hover:text-[var(--red)] focus:text-[var(--red)]"}
           title={'Обратный звонок'}
         />
 

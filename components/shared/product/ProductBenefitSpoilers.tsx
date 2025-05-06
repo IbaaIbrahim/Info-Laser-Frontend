@@ -87,7 +87,7 @@ export const ProductBenefitSpoilers: React.FC<ClassName> = ({className}) => {
             </button>
             <div className={cn(
               'flex flex-col gap-2 text-sm overflow-hidden text-[var(--gray-text)] transition-all duration-300 ease-in-out',
-              isOpen ? 'max-h-[5000px] opacity-100 mt-2' : 'max-h-0 opacity-0',
+              isOpen && item.content ? 'max-h-[5000px] opacity-100 mt-2' : 'max-h-0 opacity-0',
             )}>
               {item.content && <p>{item.content}</p>}
               {item.content2 && <p>{item.content2}</p>}

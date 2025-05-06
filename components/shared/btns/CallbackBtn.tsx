@@ -19,7 +19,7 @@ export const CallbackBtn: React.FC<CallbackBtnProps> = ({title, className}) => {
     <Dialog>
 
       <DialogTrigger asChild>
-        <Button className={cn("", className)}>
+        <Button className={cn("hover:bg-inherit focus:bg-inherit", className)}>
           {title}
         </Button>
       </DialogTrigger>

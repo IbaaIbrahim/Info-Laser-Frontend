@@ -99,7 +99,7 @@ export const HeaderSearchBtn = ({products}: SearchProps) => {
               type="text"
               value={query}
               placeholder="Например, лазерный станок..."
-              className="w-full bg-gray-100 border border-gray-300 px-3 pr-16 py-2 rounded-3xl outline-none focus:border-[var(--violet)]"
+              className="w-full bg-gray-100 border border-gray-300 px-3 pr-16 py-2 rounded-3xl outline-none focus:!border-[var(--violet)]"
               onChange={(e) => setQuery(e.target.value)}
             />
 

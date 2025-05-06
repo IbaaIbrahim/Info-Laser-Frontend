@@ -7,6 +7,7 @@ import Link from "next/link";
 import {Logo} from "@/components/shared/Logo";
 import {CallbackBtn} from "@/components/shared/btns/CallbackBtn";
 import Image from "next/image";
+import {SocialList} from "@/components/shared/social/SocialList";
 
 export const Footer: React.FC<ClassName> = ({className}) => {
 
@@ -23,49 +24,7 @@ export const Footer: React.FC<ClassName> = ({className}) => {
             <Logo name={"logo-white"} className="mb-2"/>
             <p className="text-[#9298AF]">Лазерные и фрезерные станки</p>
             <p className="mt-4">Наши соцсети:</p>
-            <ul className="flex gap-3 mt-2">
-              <li>
-                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
-                  <Image
-                    className={"transition-transform duration-300"}
-                    alt={"icon"}
-                    src={"/img/icons/social/icon-youtube.svg"}
-                    height={28} width={28}
-                  />
-                </Link>
-              </li>
-              <li>
-                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
-                  <Image
-                    className={"transition-transform duration-300"}
-                    alt={"icon"}
-                    src={"/img/icons/social/icon-tg.svg"}
-                    height={28} width={28}
-                  />
-                </Link>
-              </li>
-              <li>
-                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
-                  <Image
-                    className={"transition-transform duration-300"}
-                    alt={"icon"}
-                    src={"/img/icons/social/icon-whatsapp.svg"}
-                    height={28} width={28}
-                  />
-                </Link>
-              </li>
-              <li>
-                <Link className={"hover:[&>img]:scale-[1.1] focus:[&>img]:scale-[1.1]"} href="#">
-                  <Image
-                    className={"transition-transform duration-300"}
-                    alt={"icon"}
-                    src={"/img/icons/social/icon-vk.svg"}
-                    height={28} width={28}
-                  />
-                </Link>
-              </li>
-
-            </ul>
+            <SocialList className={"mt-2"}/>
             <p className="mt-4 text-[#9298AF]">
               Товары, представленные на сайте, не являются публичной офертой
             </p>

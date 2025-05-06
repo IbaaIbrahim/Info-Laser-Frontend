@@ -15,6 +15,7 @@ import {Checkbox} from "@/components/ui/Checkbox";
 import {Input} from "@/components/ui/Input";
 import {Textarea} from "@/components/ui/Textarea";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/Select";
+import PhoneInput from "react-phone-input-2";
 
 type CallbackBtnProps = {
   title: string;
@@ -78,11 +79,19 @@ export const DemoBtn: React.FC<CallbackBtnProps> = ({title, className}) => {
             >
               Телефон:
             </label>
-            <Input
-              className={"rounded-3xl"}
-              id={"tel"} required type="tel" placeholder="+7 (___) ___ - __ - ___"
+            <PhoneInput
+              country={'ru'}
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(val) => setPhone(val)}
+              inputProps={{
+                name: 'tel',
+                required: true,
+                id: 'tel',
+              }}
+              inputClass="!rounded-3xl !bg-white !p-3 !w-full !px-12 focus:!border-[var(--violet)] focus:!ring-0 focus:!outline-none"
+              containerClass=""
+              masks={{ru: '(...) ...-..-..'}}
+              placeholder="+7 (___) ___-__-__"
             />
           </div>
 
