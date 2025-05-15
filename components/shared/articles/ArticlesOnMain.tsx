@@ -14,6 +14,7 @@ export const ArticlesOnMain: React.FC<ClassName> = ({className}) => {
         name: "Как работает лазерный маркиратор",
         slug: "kak-rabotaet-lazernyy-markirator",
         description: "Сегодня лазерный маркер является самым производительным скоростным типом оборудования",
+        isMain: Boolean(0),
         date: "14.05.2025",
         image: "/img/articles/articles-main/1.jpg",
         articleCategory: [
@@ -29,6 +30,7 @@ export const ArticlesOnMain: React.FC<ClassName> = ({className}) => {
         name: "Как работает лазерная очистка",
         slug: "kak-rabotaet-lazernaya-ochistka",
         description: "Описание как работает лазерная очистка",
+        isMain: Boolean(0),
         date: "08.05.2025",
         image: "/img/articles/articles-main/2.jpg",
         articleCategory: [
@@ -51,6 +53,7 @@ export const ArticlesOnMain: React.FC<ClassName> = ({className}) => {
             name: "Как работает лазерный маркиратор",
             slug: "kak-rabotaet-lazernyy-markirator",
             description: "Сегодня лазерный маркер является самым производительным скоростным типом оборудования",
+            isMain: Boolean(0),
             date: "14.05.2025",
             image: "/img/articles/articles-main/1.jpg",
             articleCategory: [
@@ -73,6 +76,7 @@ export const ArticlesOnMain: React.FC<ClassName> = ({className}) => {
             name: "Как работает лазерная очистка",
             slug: "kak-rabotaet-lazernaya-ochistka",
             description: "Описание как работает лазерная очистка",
+            isMain: Boolean(0),
             date: "08.05.2025",
             image: "/img/articles/articles-main/2.jpg",
             articleCategory: [

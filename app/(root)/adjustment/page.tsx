@@ -1,4 +1,3 @@
-import {ClassName} from "@/types/types";
 import React from "react";
 import {AdjustmentHeader} from "@/components/shared/adjustment/AdjustmentHeader";
 import {AdjustmentForClients} from "@/components/shared/adjustment/AdjustmentForClients";
@@ -6,7 +5,7 @@ import {AdjustmentStages} from "@/components/shared/adjustment/AdjustmentStages"
 import {ArticlesOnMain} from "@/components/shared/articles/ArticlesOnMain";
 import {SocialBanner} from "@/components/shared/banners/SocialBanner";
 
-const AdjustmentPage: React.FC<ClassName> = () => {
+const AdjustmentPage: React.FC = () => {
 
   const data_clients = [
     {
