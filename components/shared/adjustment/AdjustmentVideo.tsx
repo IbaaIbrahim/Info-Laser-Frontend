@@ -6,7 +6,7 @@ import {ClassName} from "@/types/types";
 import {Play, X} from "lucide-react";
 import Link from "next/link";
 import {Button} from "@/components/ui/Button";
-import {YoutubeIcon} from "@/components/shared/icons/YoutubeIcon";
+import {YoutubeIcon} from "@/components/shared/icons/social/YoutubeIcon";
 
 export const AdjustmentVideo: React.FC<ClassName> = ({className}) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);

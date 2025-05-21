@@ -32,6 +32,7 @@ export const HeaderCity: React.FC<{ className?: string }> = ({className}) => {
           )}
           onMouseEnter={() => setIsSpoilerOpen(true)}
         >
+          {/* todo По дефолту указывать текущий город */}
           Выбрать город
           <ChevronDown
             size={14}

@@ -3,13 +3,13 @@ import React from "react";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/Button";
-import {VkIcon} from "@/components/shared/icons/VkIcon";
-import {YoutubeIcon} from "@/components/shared/icons/YoutubeIcon";
+import {VkIcon} from "@/components/shared/icons/social/VkIcon";
+import {YoutubeIcon} from "@/components/shared/icons/social/YoutubeIcon";
 
 export const SocialListVkYoutube: React.FC<ClassName> = ({className}) => {
 
   const CHANNEL_ID = "@InfoLaser"
-  
+
   return (
     <ul className={cn("flex gap-5", className)}>
       <li>
