@@ -42,7 +42,7 @@ const Map: React.FC<MapProps> = ({className, places, location}) => {
       if (existingScript) return;
 
       const script = document.createElement('script');
-      script.src = `https://api-maps.yandex.ru/v3/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAP_KEY}&lang=ru_RU`;
+      script.src = `https://api-maps.yandex.ru/v3/?apikey=fe6292ab-8cdd-4ccc-857f-a1446afcd4cc&lang=ru_RU`;
       script.async = true;
       script.onerror = () => console.error("Не удалось загрузить Yandex Maps API");
       document.head.appendChild(script);
@@ -60,13 +60,13 @@ const Map: React.FC<MapProps> = ({className, places, location}) => {
           setReactifiedApi(api);
         });
       } else {
-        setTimeout(waitForYmaps, 300);
+        setTimeout(waitForYmaps, 3000);
       }
     };
 
     waitForYmaps();
   }, []);
-  
+
   if (!reactifiedApi) {
     return <div className="text-center py-10 text-gray-500">Загрузка карты...</div>;
   }
