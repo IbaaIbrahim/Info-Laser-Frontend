@@ -9,7 +9,7 @@ import {MapPin} from "lucide-react";
 import type {YMapLocationRequest} from "@yandex/ymaps3-types";
 
 // 👇 Импортируем типы глобально для этого файла
-/// <reference types="@yandex/ymaps3-types/global" />
+// / <reference types="@yandex/ymaps3-types/global" />
 
 // 👇 Расширяем глобальный window тут же (локально для этого файла)
 declare global {
@@ -37,6 +37,19 @@ const Map: React.FC<MapProps> = ({className, places, location}) => {
   const [reactifiedApi, setReactifiedApi] = React.useState<ReactifiedApi | null>(null);
 
   React.useEffect(() => {
+    const addYandexMapScript = () => {
+      const existingScript = document.querySelector('script[src*="api-maps.yandex.ru"]');
+      if (existingScript) return;
+
+      const script = document.createElement('script');
+      script.src = `https://api-maps.yandex.ru/v3/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAP_KEY}&lang=ru_RU`;
+      script.async = true;
+      script.onerror = () => console.error("Не удалось загрузить Yandex Maps API");
+      document.head.appendChild(script);
+    };
+
+    addYandexMapScript();
+
     const waitForYmaps = () => {
       if (typeof window !== 'undefined' && window.ymaps3) {
         Promise.all([
@@ -53,6 +66,7 @@ const Map: React.FC<MapProps> = ({className, places, location}) => {
 
     waitForYmaps();
   }, []);
+
 
   if (!reactifiedApi) {
     return <div className="text-center py-10 text-gray-500">Загрузка карты...</div>;
