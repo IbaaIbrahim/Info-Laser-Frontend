@@ -8,10 +8,10 @@ import {ClassName} from "@/types/types";
 import {MapPin} from "lucide-react";
 import type {YMapLocationRequest} from "@yandex/ymaps3-types";
 
-// 👇 Импортируем типы глобально для этого файла
+// Импортируем типы глобально для этого файла
 // / <reference types="@yandex/ymaps3-types/global" />
 
-// 👇 Расширяем глобальный window тут же (локально для этого файла)
+// Расширяем глобальный window тут же (локально для этого файла)
 declare global {
   interface Window {
     ymaps3: typeof ymaps3;
@@ -60,7 +60,7 @@ const Map: React.FC<MapProps> = ({className, places, location}) => {
           setReactifiedApi(api);
         });
       } else {
-        setTimeout(waitForYmaps, 3000);
+        setTimeout(waitForYmaps, 300);
       }
     };
 
