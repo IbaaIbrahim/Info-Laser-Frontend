@@ -56,10 +56,10 @@ const DeliveryPage = () => {
 
   return (
     <>
-      <Script
-        src={`https://api-maps.yandex.ru/v3/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAP_KEY}&lang=ru_RU`}
-        strategy="beforeInteractive"
-      />
+      {/*<Script*/}
+      {/*  src={`https://api-maps.yandex.ru/v3/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAP_KEY}&lang=ru_RU`}*/}
+      {/*  strategy="beforeInteractive"*/}
+      {/*/>*/}
       <section>
         <DeliveryHeader/>
         <PurchaseList/>
