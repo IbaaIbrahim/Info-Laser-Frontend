@@ -3,6 +3,19 @@
   "cityPhone": "number msk (TEST) 1",
   "cityPhoneSecond": "number msk (TEST) 2",
   "address": "ADRESS MSK (TEST)",
+  "mapLocation": [
+    37.617698,
+    55.755864
+  ],
+  "mapPlaces": [
+    {
+      "id": "2",
+      "label": "г. Москва",
+      "text": "Тут текст для Москвы",
+      "longitude": 37.617698,
+      "latitude": 55.755864
+    }
+  ],
   "addName": "в Москве",
   "mainMetaTitle": "InfoLaser - поставки лазерного оборудования с ЧПУ в Санкт-Петербурге по ценам от производителя WATTSAN",
   "mainMetaDescription": "Продажа лазерного ЧПУ оборудования с гарантией от производителя ⭐ WATTSAN ⭐. Сервисное обслуживание и доставка по всей России от InfoLaser.",
