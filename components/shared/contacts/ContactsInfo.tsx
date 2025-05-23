@@ -54,7 +54,7 @@ export const ContactsInfo: React.FC<ContactsInfoProps> = ({t}) => {
                 Адрес офиса продаж и склада
               </dt>
               <dd className={"flex items-center gap-x-2 pl-2"}>
-                <MapPin className={"size-8"}/>
+                <MapPin size={30}/>
                 {t('address') || '193315, Санкт-Петербург, Дальневосточный пр-кт 100, стр.1, офис 6'}
               </dd>
             </div>
