@@ -30,7 +30,7 @@ export default async function MainPage() {
 
       <PartnersSlider/>
 
-      <UniqMachinesSlider/>
+      <UniqMachinesSlider products={products}/>
 
       <OfflineOrOnlineMain/>
 

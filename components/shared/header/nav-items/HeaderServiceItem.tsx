@@ -76,62 +76,10 @@ export const HeaderServiceItem: React.FC = () => {
                   'max-xl:w-full max-xl:justify-between max-xl:font-bold',
                   "xl:px-3 xl:py-2 xl:hover:bg-[var(--violet-dark)] xl:transition-colors xl:duration-300 xl:ease-in-out xl:rounded-3xl",
                 )}
-                href={"/clients"}
-                onClick={() => setIsSpoilerOpen(false)}
-              >
-                Диагностика электрики и механики станков
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={cn(
-                  "block transition-colors",
-                  'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-                  "xl:px-3 xl:py-2 xl:hover:bg-[var(--violet-dark)] xl:transition-colors xl:duration-300 xl:ease-in-out xl:rounded-3xl",
-                )}
                 href={"/adjustment"}
                 onClick={() => setIsSpoilerOpen(false)}
               >
                 Пусконаладка оборудования
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={cn(
-                  "block transition-colors",
-                  'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-                  "xl:px-3 xl:py-2 xl:hover:bg-[var(--violet-dark)] xl:transition-colors xl:duration-300 xl:ease-in-out xl:rounded-3xl",
-                )}
-                href={"#"}
-                onClick={() => setIsSpoilerOpen(false)}
-              >
-                Настройка ПО
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={cn(
-                  "block transition-colors",
-                  'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-                  "xl:px-3 xl:py-2 xl:hover:bg-[var(--violet-dark)] xl:transition-colors xl:duration-300 xl:ease-in-out xl:rounded-3xl",
-                )}
-                href={"#"}
-                onClick={() => setIsSpoilerOpen(false)}
-              >
-                Ремонт оборудования и комплектующих
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={cn(
-                  "block transition-colors",
-                  'max-xl:w-full max-xl:justify-between max-xl:font-bold',
-                  "xl:px-3 xl:py-2 xl:hover:bg-[var(--violet-dark)] xl:transition-colors xl:duration-300 xl:ease-in-out xl:rounded-3xl",
-                )}
-                href={"#"}
-                onClick={() => setIsSpoilerOpen(false)}
-              >
-                Замена расходных материалов
               </Link>
             </li>
           </ul>

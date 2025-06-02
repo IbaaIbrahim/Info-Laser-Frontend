@@ -57,12 +57,12 @@ export default async function LocaleLayout({children, params: paramsPromise}: Pr
 
   return (
     <html lang={locale}>
-    <body className={cn("min-h-screen", manrope.className)}>
+    <body className={cn("min-h-screen flex flex-col", manrope.className)}>
     <Toaster position="top-right"/>
     <CartProvider>
       <NextIntlClientProvider locale={locale}>
         <Header products={productsData.products}/>
-        <main>
+        <main className={"flex-1"}>
           <BreadcrumbWrapper/>
           {children}
         </main>

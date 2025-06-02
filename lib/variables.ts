@@ -21,18 +21,3 @@ export const deliveryPlaces = [
     latitude: 59.876147,
   },
 ];
-
-export const contactsLocation: YMapLocationRequest = {
-  center: [35, 57.4],
-  zoom: 6,
-};
-
-export const contactsPlaces = [
-  {
-    id: "1",
-    label: "г. Санкт-Петербург",
-    text: "Дальневосточный проспект, д. 100, корп. 49",
-    longitude: 30.491561,
-    latitude: 59.876147,
-  },
-];
