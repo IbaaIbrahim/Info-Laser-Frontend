@@ -130,9 +130,8 @@ export interface CategoriesProps extends ClassName {
 
 export interface ArticleCategoriesProps {
   id: number;
-  title: string;
+  name: string;
   slug: string;
-  articles: Article[];
 }
 
 export interface Article {
@@ -148,7 +147,7 @@ export interface Article {
 
 export interface articleCategory {
   id: number;
-  title: string;
+  name: string;
   slug: string;
 }
 

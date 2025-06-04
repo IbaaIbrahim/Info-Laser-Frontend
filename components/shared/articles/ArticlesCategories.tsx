@@ -31,7 +31,7 @@ export const ArticleCategories: React.FC<ArticlesGroupListUpd> = ({className, ca
                   >
                     <ChevronLeft size={"16"} className={"relative text-[var(--red)]"}/>
                   </div>
-                  {section.title}
+                  {section.name}
                 </div>
               ) : (
                 <Link
@@ -52,7 +52,7 @@ export const ArticleCategories: React.FC<ArticlesGroupListUpd> = ({className, ca
                       )}
                     />
                   </div>
-                  {section.title}
+                  {section.name}
                 </Link>
               )}
             </li>
