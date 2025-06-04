@@ -54,6 +54,10 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
+    .sw-app-body {
+        width: auto !important;
+    }
 }
 
 @utility text-balance {
@@ -208,5 +212,3 @@
     --gray-text: #9298AF;
     --gold: #E99826;
 }
-
-
