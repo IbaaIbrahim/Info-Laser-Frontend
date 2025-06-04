@@ -10,14 +10,14 @@ import {ChevronLeft} from "lucide-react";
 import Link from "next/link";
 
 interface ArticlePageProps extends ClassName {
-  params: Promise<{ article: string }>;
+  params: { article: string };
 }
 
 export async function generateMetadata(
   {
     params: paramsPromise,
   }: {
-    params: Promise<{ locale: string; article: string }>;
+    params: { locale: string; article: string };
   }) {
   const {locale, article} = await paramsPromise;
   const t = await getTranslations({locale});
