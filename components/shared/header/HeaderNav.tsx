@@ -18,15 +18,20 @@ export const HeaderNav: React.FC = () => {
   const navRef = useRef(null);
   const menuRef = useRef<HTMLButtonElement | null>(null);
 
-  useClickAway(navRef, (event: MouseEvent | TouchEvent) => {
-    const target = event.target as Node | null;
+  useClickAway(
+    navRef,
+    (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node | null;
 
-    if (menuRef.current && target && menuRef.current.contains(target)) {
-      return
-    }
+      if (menuRef.current && target && menuRef.current.contains(target)) {
+        return;
+      }
 
-    setIsMenuOpen(false);
-  });
+      event.preventDefault();
+      setIsMenuOpen(false);
+    },
+    ['mousedown']
+  );
 
   useEffect(() => {
     if (isMenuOpen) {
