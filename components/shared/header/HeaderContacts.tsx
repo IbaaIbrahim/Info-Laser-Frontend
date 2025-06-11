@@ -4,6 +4,7 @@ import {Phone} from "lucide-react";
 import {CallbackBtn} from "@/components/shared/btns/CallbackBtn";
 import {cn} from "@/lib/utils";
 import {ClassName} from "@/types/types";
+import {PHONE} from "@/lib/variables";
 
 export const HeaderContacts: React.FC<ClassName> = ({className}) => {
 
@@ -16,11 +17,11 @@ export const HeaderContacts: React.FC<ClassName> = ({className}) => {
       )}>
 
         <Link
-          href="tel:88002222741"
+          href={`tel:${PHONE}`}
           className="flex items-center gap-x-2 hover:text-[var(--violet)] font-semibold transition-colors"
         >
           <Phone size={18}/>
-          8 (800) 222-27-41
+          {PHONE}
         </Link>
 
         <CallbackBtn

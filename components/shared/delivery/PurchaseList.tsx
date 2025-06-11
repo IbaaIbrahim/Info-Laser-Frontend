@@ -1,15 +1,29 @@
 import React from "react";
 import {Container} from "@/components/shared/Container";
 import {CircleCheck} from "lucide-react";
+import {cn} from "@/lib/utils";
 
 export const PurchaseList: React.FC = () => {
   return (
     <section className={"mb-10"}>
       <Container className={""}>
-        <div className={"bg-[var(--gray)] rounded-3xl p-8"}>
-          <h2 className={"font-semibold text-4xl mb-5"}>Покупка</h2>
-          <ul className={"flex gap-10"}>
-            <li className={"flex gap-2"}>
+        <div className={cn(
+          "bg-[var(--gray)] rounded-3xl p-8",
+          "max-md:p-3"
+        )}>
+          <h2 className={cn(
+            "font-semibold text-4xl mb-5",
+            "max-xl:text-3xl",
+            "max-md:text-2xl",
+          )}>Покупка</h2>
+          <ul className={cn(
+            "flex gap-10",
+            "max-md:flex-col max-md:gap-5"
+          )}>
+            <li className={cn(
+              "flex gap-2",
+              "max-md:text-sm"
+            )}>
               <CircleCheck size={25} className={"text-white fill-[var(--violet)] shrink-0"}/>
               <div>
                 <p className={"font-semibold mb-2"}>Покупка со склада</p>
@@ -20,7 +34,10 @@ export const PurchaseList: React.FC = () => {
                 </p>
               </div>
             </li>
-            <li className={"flex gap-2"}>
+            <li className={cn(
+              "flex gap-2",
+              "max-md:text-sm"
+            )}>
               <CircleCheck size={25} className={"text-white fill-[var(--violet)] shrink-0"}/>
               <div>
                 <p className={"font-semibold mb-2"}>Покупка под заказ</p>

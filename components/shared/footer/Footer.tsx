@@ -7,6 +7,7 @@ import Link from "next/link";
 import {Logo} from "@/components/shared/Logo";
 import {CallbackBtn} from "@/components/shared/btns/CallbackBtn";
 import {SocialList} from "@/components/shared/social/SocialList";
+import {EMAIL, PHONE} from "@/lib/variables";
 
 export const Footer: React.FC<ClassName> = ({className}) => {
 
@@ -172,9 +173,9 @@ export const Footer: React.FC<ClassName> = ({className}) => {
                 <dd>
                   <Link
                     className="font-semibold hover:text-[var(--red)] focus:text-[var(--red)] transition-colors duration-300"
-                    href="mailto:info@infolaser.ru"
+                    href={`mailto:${EMAIL}`}
                   >
-                    info@infolaser.ru
+                    {EMAIL}
                   </Link>
                 </dd>
               </div>
@@ -189,7 +190,7 @@ export const Footer: React.FC<ClassName> = ({className}) => {
                     className="font-semibold hover:text-[var(--red)] focus:text-[var(--red)] transition-colors duration-300"
                     href="tel:88002222741"
                   >
-                    8 (800) 222-27-41
+                    {PHONE}
                   </Link>
                 </dd>
               </div>

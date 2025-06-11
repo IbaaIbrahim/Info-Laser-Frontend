@@ -60,7 +60,7 @@ const DeliveryPage = () => {
         <PurchaseList/>
         <DeliveryPickup/>
         <ProductReturn data={data}/>
-        <SocialAndOnlineMini className={"mb-15"}/>
+        <SocialAndOnlineMini className={"mb-15 max-md:mb-5"}/>
       </section>
     </>
   );
