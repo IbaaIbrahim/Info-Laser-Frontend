@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from "react";
 import {Container} from "@/components/shared/Container";
+import {cn} from "@/lib/utils";
 
 export const ReviewsWidget = () => {
   const widgetRef = useRef<HTMLDivElement>(null);
@@ -34,11 +35,23 @@ export const ReviewsWidget = () => {
     <section>
 
       <Container>
-        <h1 className="text-5xl font-semibold mb-6">Отзывы о InfoLaser</h1>
+        <h1 className={cn(
+          "text-5xl font-semibold mb-6",
+          "max-xl:text-4xl max-xl:mb-5",
+          "max-md:text-3xl max-md:mb-3",
+        )}>Отзывы о InfoLaser</h1>
         {!loaded && (
-          <div className="text-2xl text-gray-500 mb-4 text-center py-5 h-[500px]">Загрузка отзывов...</div>
+          <div className={cn(
+            "text-2xl text-gray-500 mb-4 text-center py-5 h-[500px]",
+            "max-xl:py-3"
+          )}>
+            Загрузка отзывов...
+          </div>
         )}
-        <div className={"py-5 mb-10"}>
+        <div className={cn(
+          "py-5 mb-10",
+          "max-xl:py-3 max-xl:mb-5"
+        )}>
           <div ref={widgetRef} className="sw-app" data-app="b6ba7929f64022e644378ceb1d70da07"></div>
         </div>
 
