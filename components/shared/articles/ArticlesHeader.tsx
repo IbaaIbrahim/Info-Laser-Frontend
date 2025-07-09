@@ -49,17 +49,25 @@ export const ArticlesHeader: React.FC<ArticlesHeaderProps> = ({className, produc
   }, [debouncedQuery, products]);
 
   return (
-
     <header className={cn(
       "bg-[url('/img/articles/articles-bg.jpg')] bg-cover bg-no-repeat min-h-[625px]",
+      "max-md:bg-[url('/img/articles/articles-bg-mobile.jpg')]",
       className
     )}>
       <Container>
         <div className={"grid grid-cols-12"}>
-          <div className={"col-start-1 col-end-7 py-20"}>
+          <div className={cn(
+            "col-start-1 col-end-7 py-20",
+            "max-xl:col-span-full",
+            "max-md:py-5"
+          )}>
             <div>
-              <h1 className={"text-5xl font-semibold mb-8"}>База знаний</h1>
-              <p className={"mb-5"}>
+              <h1 className={cn(
+                "text-5xl font-semibold mb-8",
+                "max-xl:text-4xl max-xl:mb-5",
+                "max-md:text-3xl max-md:mb-3",
+              )}>База знаний</h1>
+              <p className={"mb-5 max-md:text-sm max-md:mb-3"}>
                 В блог-центре Infolaser вы можете получить базовые знания о лазерной резке и гравировке, ознакомиться
                 с экспертными обзорами лазерных станков, вдохновиться идеями лазерной резки и гравировки и т. д.
                 Давайте начнем учиться прямо сейчас.
@@ -74,7 +82,7 @@ export const ArticlesHeader: React.FC<ArticlesHeaderProps> = ({className, produc
                   type="text"
                   value={query}
                   placeholder="Найти..."
-                  className="w-full bg-gray-100 border border-gray-300 px-3 pr-16 py-2 rounded-3xl outline-none focus:!border-[var(--violet)]"
+                  className="w-full bg-gray-100 border border-gray-300 px-3 pr-16 py-2 rounded-3xl outline-none focus:!border-[var(--violet)] max-md:text-sm"
                   onChange={(e) => setQuery(e.target.value)}
                 />
 
@@ -101,7 +109,7 @@ export const ArticlesHeader: React.FC<ArticlesHeaderProps> = ({className, produc
                 <div className={cn('absolute w-full rounded-lg shadow-md max-h-[30dvh] bg-white overflow-y-auto')}>
                   {filteredArticles.map((product) => (
                     <Link
-                      className="flex items-center gap-4 hover:bg-[#f2f2f2] p-2"
+                      className="flex items-center gap-4 hover:bg-[#f2f2f2] p-2 max-md:text-sm"
                       href={`/catalog/${product.categories?.[0]?.slug || "default-category"}/${product.slug}`}
                       key={product.id}
                       onClick={onItemClick}
@@ -127,7 +135,7 @@ export const ArticlesHeader: React.FC<ArticlesHeaderProps> = ({className, produc
               )}
             </div>
 
-            <ul className={"flex text-sm gap-7"}>
+            <ul className={"flex text-sm gap-7 max-md:text-xs max-md:gap-2 max-md:flex-wrap"}>
               <li className={"text-[var(--gray-text)]"}>Популярные запросы</li>
               <li className={"text-[var(--violet)]"}>
                 <Link className={"hover:text-[var(--red)] focus:text-[var(--red)] transition-colors"} href={"#"}>

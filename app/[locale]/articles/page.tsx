@@ -28,18 +28,26 @@ export default async function ArticlesPage() {
     <>
       <section>
 
-        <ArticlesHeader className={"mb-15"} products={products}/>
+        <ArticlesHeader className={"mb-15 max-xl:mb-10 max-md:mb-7"} products={products}/>
 
-        <section className={cn("mb-15")}>
+        <section className={cn("mb-15 max-md:mb-10")}>
           <Container>
 
-            <div className={"max-w-[620px] text-center mx-auto mb-10"}>
-              <h2 className={"text-4xl font-semibold"}>
+            <div className={"max-w-[620px] text-center mx-auto mb-10 max-md:mb-5"}>
+              <h2 className={cn(
+                "text-4xl font-semibold",
+                "max-xl:text-3xl",
+                "max-md:text-2xl"
+              )}>
                 Руководства, инструкции, обзоры и справочные материалы
               </h2>
             </div>
 
-            <ul className={cn("grid grid-cols-3 gap-5")}>
+            <ul className={cn(
+              "grid grid-cols-3 gap-5",
+              "max-xl:grid-cols-2",
+              "max-md:grid-cols-1"
+            )}>
               {categories.map((category) => (
                 <li className={"flex flex-col p-8 bg-[var(--gray)] rounded-4xl"} key={category.id}>
                   <Image
@@ -47,17 +55,17 @@ export default async function ArticlesPage() {
                     alt={"#"}
                     width={55}
                     height={55}
-                    className={"mb-5"}
+                    className={"mb-5 max-md:mb-3 max-md:max-w-[30px]"}
                   />
 
                   <Link
                     href={"#"}
-                    className={"text-2xl font-semibold mb-5 hover:text-[var(--violet)] focus:text-[var(--violet)] transition-colors"}
+                    className={"text-2xl font-semibold mb-5 hover:text-[var(--violet)] focus:text-[var(--violet)] transition-colors max-md:text-lg max-md:mb-3"}
                   >
                     {category.name}
                   </Link>
 
-                  <ul className={cn("flex-1 mb-3")}>
+                  <ul className={cn("flex-1 mb-3 space-y-3 max-md:space-y-1")}>
                     {category.products.slice(0, 3).map((product) => (
                       <li
                         key={product.id}
@@ -68,11 +76,11 @@ export default async function ArticlesPage() {
                           alt={"#"}
                           width={35}
                           height={35}
-                          className={"mb-5"}
+                          className={"max-md:max-w-[25px]"}
                         />
                         <Link
                           href={"#"}
-                          className={"text-sm hover:text-[var(--violet)] focus:text-[var(--violet)] transition-colors"}
+                          className={"text-sm hover:text-[var(--violet)] focus:text-[var(--violet)] transition-colors max-md:text-xs"}
                         >
                           {product.name}
                         </Link>
@@ -84,6 +92,7 @@ export default async function ArticlesPage() {
                     className={cn(
                       "self-start inline-flex items-center justify-center text-sm text-[var(--violet)] bg-[var(--violet-dark)] py-2 px-5 rounded-3xl",
                       "hover:bg-[var(--violet)] hover:text-white focus:bg-[var(--violet)] focus:text-white transition-colors",
+                      "max-md:text-xs"
                     )}
                     href={"#"}
                   >
@@ -95,9 +104,9 @@ export default async function ArticlesPage() {
           </Container>
         </section>
 
-        <IndividualRequestForm className={"mb-15"}/>
+        <IndividualRequestForm className={"mb-15 max-md:mb-7"}/>
 
-        <SocialAndOnlineMini className={"mb-15"}/>
+        <SocialAndOnlineMini className={"mb-15 max-md:mb-7"}/>
 
       </section>
     </>
