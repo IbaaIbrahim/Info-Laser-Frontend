@@ -57,7 +57,11 @@ export const ProductCard: React.FC<Product> = (
       ))}
 
       <Link
-        className="flex justify-center mb-2 overflow-hidden min-h-[220px]"
+        className={cn(
+          "flex justify-center mb-2 overflow-hidden min-h-[220px]",
+          "max-md:min-h-[200px]",
+          "max-[420px]:!min-h-[150px]",
+        )}
         href={`/catalog/${categories?.[0]?.slug ?? "default-category"}/${slug}`}
         onClick={onClick}
       >
@@ -65,7 +69,7 @@ export const ProductCard: React.FC<Product> = (
             Boolean(item && item.is_main) && (
               <Image
                 key={item.id}
-                className="hover:scale-110 transition-transform z-10"
+                className={cn("hover:scale-110 transition-transform z-10")}
                 src={item.external_url}
                 alt={item.name}
                 width={220}
@@ -75,18 +79,24 @@ export const ProductCard: React.FC<Product> = (
         )}
       </Link>
 
-      <div className="flex flex-col p-3 h-full">
+      <div className="flex flex-col p-3 h-full max-md:p-0">
         {Boolean(inStock) ?
           (
             <span
-              className="inline-flex items-center gap-x-1 place-self-start text-xs text-[var(--violet)] bg-[var(--violet-dark)] rounded-2xl p-2 mb-3 leading-none">
+              className={cn(
+                "inline-flex items-center gap-x-1 place-self-start text-xs text-[var(--violet)] bg-[var(--violet-dark)] rounded-2xl p-2 mb-3 leading-none",
+                "max-md:text-[10px] max-md:py-1 max-md:mb-2"
+              )}>
               <Check className="text-[var(--violet)]" size={12}/>
               В наличии
             </span>
           ) :
           (
             <span
-              className="inline-flex items-center gap-x-1 place-self-start text-xs text-[var(--green)] bg-[var(--green)] rounded-2xl p-2 mb-3 leading-none">
+              className={cn(
+                "inline-flex items-center gap-x-1 place-self-start text-xs text-[var(--green)] bg-[var(--green)] rounded-2xl p-2 mb-3 leading-none",
+                "max-md:text-[10px] max-md:py-1 max-md:mb-2"
+              )}>
               <Clock3 className='text-[var(--green)]' size={12}/>
               Под заказ
             </span>
@@ -94,19 +104,26 @@ export const ProductCard: React.FC<Product> = (
         }
 
         <Link
-          className="flex-auto hover:text-[var(--violet)] focus:text-[var(--violet)] text-[18px] font-semibold transition-colors leading-5 mb-3 block"
+          className={cn(
+            "flex-auto hover:text-[var(--violet)] focus:text-[var(--violet)] text-lg font-semibold transition-colors leading-5 mb-3 block",
+            "max-md:text-sm max-md:mb-2"
+          )}
           href={`/catalog/${categories?.[0]?.slug ?? "default-category"}/${slug}`}
           onClick={onClick}
         >
           <h3>{name}</h3>
         </Link>
 
-        <dl className="flex justify-between mb-3">
+        <dl className={cn(
+          "flex justify-between mb-3",
+          "max-lg:flex-col max-lg:gap-y-2",
+          "max-md:gap-y-1"
+        )}>
           {Boolean(inStock) && (
             <div>
-              <dt className={"text-xs"}>Цена без НДС</dt>
+              <dt className={"text-xs max-md:text-[10px]"}>Цена без НДС</dt>
               <dd>
-                <b className="text-[18px]">
+                <b className="text-lg max-md:text-sm">
                   {formatPrice(stockPrice)}
                   <span className="ml-1">₽</span>
                 </b>
@@ -115,30 +132,30 @@ export const ProductCard: React.FC<Product> = (
           )}
 
           <div>
-            <dt className={"text-xs"}>Под заказ без НДС</dt>
+            <dt className={"text-xs max-md:text-[10px]"}>Под заказ без НДС</dt>
             <dd>
-              <b className="text-[18px]">
+              <b className="text-lg max-md:text-sm">
                 {formatPrice(orderPrice)}
                 <span className="ml-1">₽</span>
               </b>
             </dd>
 
             {labels?.some((label) => label.slug === "in_sale") && (
-              <Fragment>
+              <>
                 <dt className="hidden">Акционная цена</dt>
-                <dd className="inline-block bg-black/7 px-2 py-1 rounded-3xl">
-                  <b className="text-[15px] font-normal line-through">
+                <dd className="inline-flex bg-black/7 px-2 py-1 rounded-3xl">
+                  <b className="text-[15px] font-normal line-through max-md:text-[10px]">
                     {formatPrice(newPrice)}
                     <span className="ml-1">₽</span>
                   </b>
                 </dd>
-              </Fragment>
+              </>
             )}
           </div>
         </dl>
 
-        <div className={"flex items-center justify-between gap-3 mb-3"}>
-          <Button asChild className='flex-1 rounded-3xl py-5'>
+        <div className={"flex items-center justify-between gap-3 mb-3 max-md:gap-1"}>
+          <Button asChild className='flex-1 rounded-3xl py-5 max-lg:text-xs max-md:py-3 max-md:px-1'>
             <Link href={`/catalog/${categories?.[0]?.slug ?? "default-category"}/${slug}`}>Узнать больше</Link>
           </Button>
 
@@ -160,7 +177,7 @@ export const ProductCard: React.FC<Product> = (
           />
         </div>
 
-        <div className={"flex items-center text-xs gap-x-5"}>
+        <div className={"flex items-center text-xs gap-x-5 max-lg:gap-x-2 max-md:text-[10px]"}>
           <span className="flex items-center justify-center gap-x-1 text-center leading-none">
             <Star className={"fill-[var(--gold)]"} strokeWidth={0} size={12}/>
             {rating}

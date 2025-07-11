@@ -10,7 +10,12 @@ interface ProductsGroupListProps extends ClassName {
 
 export const ProductsGroupList: React.FC<ProductsGroupListProps> = ({products, className}) => {
   return (
-    <ul className={cn("grid grid-cols-3 gap-5", className)}>
+    <ul className={cn(
+      "grid grid-cols-3 gap-5",
+      "max-xl:grid-cols-2",
+      "max-md:gap-2",
+      className
+    )}>
       {products.map((product) => (
         <li key={product.id}>
           <ProductCard {...product} />

@@ -106,7 +106,7 @@ export const HeaderNav: React.FC = () => {
         ref={menuRef}
         className={cn(
           "xl:hidden",
-          "max-xl:block max-xl:bg-gray-200 max-xl::hover:bg-gray-300 max-xl::transition max-xl:p-1 max-xl:rounded-md",
+          "max-xl:block max-xl:bg-gray-200 max-xl:transition max-xl:p-1 max-xl:rounded-md",
           "max-xl:absolute max-xl:right-8",
           "max-md:right-4"
         )}
