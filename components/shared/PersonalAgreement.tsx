@@ -3,9 +3,9 @@ import Link from "next/link";
 import {PERSONAL_AGREEMENT} from "@/lib/variables";
 import React, {useState} from "react";
 
-export const PersonalAgreement = () => {
+export const PersonalAgreement = ({btnName}: { btnName: string }) => {
   const [isChecked, setIsChecked] = useState(false);
-  
+
   return (
     <div className={"flex gap-5"}>
       <div className="flex items-start gap-2">
@@ -14,7 +14,7 @@ export const PersonalAgreement = () => {
           onCheckedChange={(checked) => setIsChecked(checked === true)}
         />
         <label htmlFor="agree" className="text-sm dark:text-gray-300 max-md:text-xs">
-          Нажимая на &#34;Оформить предзаказ&#34; я даю{" "}
+          Нажимая на &#34;{btnName}&#34; я даю{" "}
           <Link
             href={PERSONAL_AGREEMENT}
             className="text-[var(--violet)] underline hover:text-[var(--red)] transition-colors"

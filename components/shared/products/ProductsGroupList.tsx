@@ -3,6 +3,8 @@ import {cn} from "@/lib/utils";
 import {ProductCard} from "@/components/shared/products/ProductCard";
 import {Product} from "@/types/types";
 import {ClassName} from "@/types/types";
+import {OfflineOrOnlineMain} from "@/components/shared/banners/OfflineOrOnlineMain";
+import {CustomDelivery} from "@/components/shared/banners/CustomDelivery";
 
 interface ProductsGroupListProps extends ClassName {
   products: Product[];
@@ -16,10 +18,22 @@ export const ProductsGroupList: React.FC<ProductsGroupListProps> = ({products, c
       "max-md:gap-2",
       className
     )}>
-      {products.map((product) => (
-        <li key={product.id}>
-          <ProductCard {...product} />
-        </li>
+      {products.map((product, index) => (
+        <React.Fragment key={product.id}>
+          <li>
+            <ProductCard {...product} />
+          </li>
+          {index === 5 && (
+            <li className="col-span-full">
+              <OfflineOrOnlineMain className={"[&>div]:px-0 [&>div>div]:py-5"}/>
+            </li>
+          )}
+          {index === 11 && (
+            <li className="col-span-full">
+              <CustomDelivery className={"[&>div]:px-0"}/>
+            </li>
+          )}
+        </React.Fragment>
       ))}
     </ul>
   );

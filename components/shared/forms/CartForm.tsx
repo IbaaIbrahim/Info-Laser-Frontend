@@ -96,7 +96,7 @@ export const CartForm: React.FC<ClassName> = ({className}) => {
             <Textarea className={"rounded-3xl bg-white"} id={"comment"} placeholder="Введите комментарий"/>
           </li>
         </ul>
-        <PersonalAgreement/>
+        <PersonalAgreement btnName={"Оформить предзаказ"}/>
         <Button className={cn("rounded-3xl mb-3 w-full py-6 max-md:text-xs")}>Оформить предзаказ</Button>
       </form>
     </div>

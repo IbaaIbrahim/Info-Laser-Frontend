@@ -12,6 +12,7 @@ import React from "react";
 import {PaginationControls} from "@/components/shared/products/PaginationControls";
 import qs from "qs";
 import {getTranslations} from "next-intl/server";
+import {CircleCheck} from "lucide-react";
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -22,6 +23,33 @@ interface CategoryPageProps {
     "filter[label_id]"?: string;
   }>;
 }
+
+const test_data = {
+  data_first: [
+    {
+      id: 1,
+      text: "Промышленная: маркировка продукции в условиях промышленного производства. Нанесение на изделия даты выпуска, номера партии, штрих-кода и т. д."
+    },
+    {
+      id: 2,
+      text: "Рекламная: маркировка сувениров, табличек, номерков и канцелярских принадлежностей."
+    }
+  ],
+  data_second: [
+    {
+      id: 1,
+      text: "Бесконтактный процесс нанесения. Изделие не требует фиксации во время обработки;"
+    },
+    {
+      id: 2,
+      text: "Качественное нанесение миниатюрной информации. Обеспечивает гарантированное считывание знаков, штрих кодов, текстовой и графической информации;"
+    },
+    {
+      id: 3,
+      text: "Функция регулирования скорости перемещения луча, частоты следования импульса и мощности лазерного излучения;"
+    }
+  ],
+};
 
 export async function generateMetadata({params: paramsPromise}: {
   params: Promise<{ locale: string; category: string }>;
@@ -58,7 +86,7 @@ const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
   const order_dir = sp.order_dir === "asc" || sp.order_dir === "desc" ? sp.order_dir : undefined;
   const filterLabelId = sp["filter[label_id]"] || "";
   const page = parseInt(sp.page || "1", 10);
-  const itemsPerPage = 9;
+  const itemsPerPage = 18;
 
   const currentParams = {
     ...sp,
@@ -156,6 +184,38 @@ const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
                 basePath={`/catalog/${category}`}
                 query={queryString}
               />
+              <section>
+                <h2 className={cn(
+                  "text-4xl font-semibold mb-7",
+                  "max-xl:text-3xl max-xl:mb-5",
+                  "max-md:text-2xl",
+                )}>
+                  Особенности лазерных волоконных маркеров по металлу
+                </h2>
+
+                <p className="font-semibold mb-3">Лазерная гравировка делится на два типа:</p>
+                <ol className="space-y-3 mb-7">
+                  {test_data.data_first.map((item, index) => (
+                    <li key={item.id} className="flex items-start gap-3">
+                      <div
+                        className="min-w-[25px] min-h-[25px] flex items-center justify-center bg-[var(--violet)]/40 text-white font-bold rounded-full text-xs shrink-0">
+                        {index + 1}
+                      </div>
+                      <p className="text-sm">{item.text}</p>
+                    </li>
+                  ))}
+                </ol>
+
+                <p className="font-semibold mb-3">Преимущества лазерной гравировки металлов при помощи маркиратора:</p>
+                <ul className="space-y-3">
+                  {test_data.data_second.map((item) => (
+                    <li key={item.id} className="flex items-start gap-3">
+                      <CircleCheck size={20} className={"text-white fill-[var(--violet)]/30 shrink-0"}/>
+                      <p className={"text-sm"}>{item.text}</p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             </div>
           </div>
         </Container>

@@ -1,26 +1,15 @@
-'use client';
+"use client";
 
-import React, {useState} from "react";
-import {Button} from "@/components/ui/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/Dialog";
-import {cn} from "@/lib/utils";
-import {ClassName} from "@/types/types";
+import {DialogContent, DialogTitle} from "@/components/ui/Dialog";
 import {Input} from "@/components/ui/Input";
-import {Textarea} from "@/components/ui/Textarea";
 import PhoneInput from "react-phone-input-2";
+import {Textarea} from "@/components/ui/Textarea";
 import {PersonalAgreement} from "@/components/shared/PersonalAgreement";
+import {Button} from "@/components/ui/Button";
+import React, {useState} from "react";
+import {cn} from "@/lib/utils";
 
-type CallbackBtnProps = {
-  title: string;
-} & ClassName;
-
-export const DemoBtn: React.FC<CallbackBtnProps> = ({title, className}) => {
+export const DialogContentCallbackModal = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
@@ -29,18 +18,9 @@ export const DemoBtn: React.FC<CallbackBtnProps> = ({title, className}) => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className={cn('max-md:text-xs', className)}>
-          {title}
-        </Button>
-      </DialogTrigger>
-
-      <DialogDescription className="hidden"></DialogDescription>
-
-      <DialogContent className="max-w-[750px]">
-        <DialogTitle className={"text-3xl max-md:text-2xl"}>Заявка на сервис</DialogTitle>
-        <p className={"text-[var(--gray-text)] max-md:text-sm"}>Вы не нашли ответа на свой вопрос напишите нам</p>
+    <>
+      <DialogContent>
+        <DialogTitle className={"text-3xl max-md:text-2xl"}>Обратный звонок</DialogTitle>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-2">
@@ -101,6 +81,7 @@ export const DemoBtn: React.FC<CallbackBtnProps> = ({title, className}) => {
           </Button>
         </form>
       </DialogContent>
-    </Dialog>
+    </>
   );
 };
+

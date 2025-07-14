@@ -1,13 +1,9 @@
 import React from "react";
 import {Button} from "@/components/ui/Button";
-import {
-  Dialog,
-  DialogContent, DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/Dialog"
+import {Dialog, DialogDescription, DialogTrigger} from "@/components/ui/Dialog"
 import {cn} from "@/lib/utils";
 import {ClassName} from "@/types/types";
+import {DialogContentCallbackModal} from "@/components/shared/modals/DialogContentCallbackModal";
 
 type CallbackBtnProps = {
   title: string;
@@ -26,25 +22,7 @@ export const CallbackBtn: React.FC<CallbackBtnProps> = ({title, className}) => {
 
       <DialogDescription className="hidden"></DialogDescription>
 
-      <DialogContent>
-        <DialogTitle>Заказать обратный звонок</DialogTitle>
-
-        <form>
-          <input
-            type="text"
-            placeholder="Ваше имя"
-            className="w-full border p-2 rounded mb-3"
-          />
-          <input
-            type="tel"
-            placeholder="Ваш телефон"
-            className="w-full border p-2 rounded mb-3"
-          />
-          <Button type="submit" className="w-full">
-            Отправить
-          </Button>
-        </form>
-      </DialogContent>
+      <DialogContentCallbackModal/>
 
     </Dialog>
   );
