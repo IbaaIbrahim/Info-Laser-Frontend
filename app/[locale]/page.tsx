@@ -8,6 +8,7 @@ import {AboutMain} from "@/components/shared/about/AboutMain";
 import {ArticlesOnMain} from "@/components/shared/articles/ArticlesOnMain";
 import {getProducts} from "@/api/api";
 import {getTranslations} from "next-intl/server";
+import {HitsProductsSlider} from "@/components/shared/carousels/HitsProductsSlider";
 
 export async function generateMetadata({params: paramsPromise}: { params: Promise<{ locale: string }> }) {
   const {locale} = await paramsPromise;
@@ -35,6 +36,8 @@ export default async function MainPage() {
       <OfflineOrOnlineMain/>
 
       <SimplerTabsMain/>
+
+      <HitsProductsSlider products={products}/>
 
       <AboutMain/>
 
