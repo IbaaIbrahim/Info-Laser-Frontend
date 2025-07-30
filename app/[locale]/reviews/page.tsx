@@ -2,6 +2,7 @@ import {getTranslations} from "next-intl/server";
 import {ReviewsWidget} from "@/components/shared/reviews/ReviewsWidget";
 import {VideoReviews} from "@/components/shared/reviews/VideoReviews";
 import {SocialAndOnlineMini} from "@/components/shared/banners/SocialAndOnlineMini";
+import {LetterOfThanks} from "@/components/shared/reviews/LetterOfThanks";
 
 export async function generateMetadata({params: paramsPromise}: { params: Promise<{ locale: string }> }) {
   const {locale} = await paramsPromise;
@@ -19,6 +20,7 @@ export default function MainPage() {
     <>
       <ReviewsWidget/>
       <VideoReviews/>
+      <LetterOfThanks/>
       <SocialAndOnlineMini/>
     </>
   );
