@@ -11,7 +11,6 @@ import {useMedia} from "react-use";
 import {getCatalogData} from "@/api/api";
 import Image from "next/image";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
-import {Button} from "@/components/ui/Button";
 import {DemoBtn} from "@/components/shared/btns/DemoBtn";
 import {ProductCardHeader} from "@/components/shared/products/ProductCardHeader";
 import {UniqButtonLink} from "@/components/ui/UniqButtonLink";
