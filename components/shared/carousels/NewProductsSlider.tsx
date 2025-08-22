@@ -22,14 +22,15 @@ export const NewProductsSlider: React.FC<Props> = ({className, products}) => {
         </h2>
 
         <Carousel className={cn("max-xl:[&>div]:overflow-visible")} opts={{align: "start"}}>
-          <CarouselContent className="-ml-5">
+          <CarouselContent className="-ml-5 max-md:-ml-2">
             {newProducts.map((product) => (
               <CarouselItem
                 key={product.id}
                 className={cn(
                   "basis-1/4 pl-5",
                   "max-xl:basis-[38%]",
-                  "max-md:basis-[80%]"
+                  "max-md:basis-[80%]",
+                  "max-md:pl-2"
                 )}
               >
                 <ProductCard

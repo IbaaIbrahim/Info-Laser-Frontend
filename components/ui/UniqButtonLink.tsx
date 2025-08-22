@@ -19,7 +19,7 @@ export const UniqButtonLink: React.FC<ButtonLinkProps> = (
     className,
   }) => {
   const variants = {
-    "violet": "text-white bg-[var(--violet)] hover:cursor-pointer hover:bg-[var(--violet-hover)] hover:shadow-[0_4px_4px_var(--violet-dark-hover)] focus:bg-[var(--violet-hover)] focus:shadow-[0_4px_4px_var(--violet-dark-hover)]",
+    "violet": "text-center text-white bg-[var(--violet)] hover:cursor-pointer hover:bg-[var(--violet-hover)] hover:shadow-[0_4px_4px_var(--violet-dark-hover)] focus:bg-[var(--violet-hover)] focus:shadow-[0_4px_4px_var(--violet-dark-hover)]",
     violetDark: "text-[var(--violet)] bg-[var(--violet-dark)] hover:bg-[var(--violet-dark-hover)] hover:shadow-[0_4px_4px_var(--violet-dark)] focus:bg-[var(--violet-dark-hover)] focus:shadow-[0_4px_4px_var(--violet-dark)]",
     violetOutline: "text-[var(--violet)] bg-white border-2 !border-[var(--violet-dark)] py-1 px-3 hover:!border-[var(--violet-dark-hover)] hover:shadow-[0_1px_1px_var(--violet-dark-hover)] focus:!border-[var(--violet-dark-hover)] focus:shadow-[0_1px_1px_var(--violet-dark-hover)]",
     white: "text-[var(--violet)] bg-white hover:text-white focus:text-white hover:bg-[var(--violet)] focus:bg-[var(--violet)] hover:[&>svg]:fill-white focus:[&>svg]:fill-white"

@@ -9,6 +9,7 @@ export const ProductSystemBanner: React.FC<ClassName> = ({className}) => {
     <Link
       className={cn(
         "block overflow-hidden rounded-3xl",
+        "max-md:rounded-[10px]",
         className
       )}
       href="#"

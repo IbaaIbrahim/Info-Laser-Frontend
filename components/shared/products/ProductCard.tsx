@@ -157,7 +157,7 @@ export const ProductCard: React.FC<Product> = (
 
           <UniqButtonLink
             variant={"violet"}
-            className={"flex-1 justify-center"}
+            className={"flex-1 justify-center max-md:px-2 max-md:shrink-0"}
             href={`/catalog/${categories?.[0]?.slug ?? "default-category"}/${slug}`}
           >
             Узнать больше

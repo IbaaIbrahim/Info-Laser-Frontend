@@ -22,14 +22,21 @@ export const AddToCartBtn: React.FC<AddToCartButtonProps> = ({product, className
       className={cn(
         "relative flex items-center justify-center w-10  h-10 rounded-full bg-[var(--violet-dark)] transition-colors",
         "hover:cursor-pointer hover:bg-[var(--violet)]/30",
+        "max-md:w-7 max-md:h-7",
         className
       )}
       onClick={() => addToCart(product)}
     >
-      <ShoppingCart className="w-5 h-5 text-[var(--violet)]"/>
+      <ShoppingCart className={cn(
+        "w-5 h-5 text-[var(--violet)]",
+        "max-md:w-4 max-md:h-4"
+      )}/>
       {quantity > 0 && (
         <span
-          className="absolute top-[-5px] right-[-5px] w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full flex items-center justify-center">
+          className={cn(
+            "absolute top-[-5px] right-[-5px] w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full flex items-center justify-center",
+            "max-md:w-4 max-md:h-4"
+          )}>
           {quantity}
         </span>
       )}

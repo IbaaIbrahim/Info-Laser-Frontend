@@ -66,12 +66,14 @@ export const BannerProduct: React.FC<BannerProductProps> = ({className}) => {
 
           <CarouselPrevious
             className={cn(
-              "left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              "left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              "max-md:opacity-100"
             )}
           />
           <CarouselNext
             className={cn(
-              "right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              "right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              "max-md:opacity-100"
             )}
           />
 

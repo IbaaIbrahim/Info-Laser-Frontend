@@ -33,7 +33,10 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
   const video = images.find((img) => img.type === "video");
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [emblaMainRef, emblaMainApi] = useEmblaCarousel({loop: true});
+  const [emblaMainRef, emblaMainApi] = useEmblaCarousel({
+    loop: true,
+    align: 'start'
+  });
   const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
     containScroll: "keepSnaps",
     dragFree: true,
@@ -87,11 +90,18 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
 
   return (
     <>
-      <div className={cn("grid grid-cols-12 gap-3", className)}>
+      <div className={cn(
+        "grid grid-cols-12 gap-3",
+        "max-md:gap-0 max-md:gap-y-3",
+        className
+      )}>
         {/* Миниатюры */}
         <div
+          className={cn(
+            "max-h-[475px] overflow-y-auto col-start-1 col-end-3 justify-items-start",
+            "max-md:hidden"
+          )}
           ref={emblaThumbsRef}
-          className="max-h-[475px] overflow-y-auto col-start-1 col-end-3 justify-items-center"
         >
           <div className="flex flex-col gap-2">
             {processedImages.map((image, idx) => (
@@ -107,7 +117,13 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
         </div>
 
         {/* Основной слайдер */}
-        <div className="relative overflow-hidden col-start-3 col-end-13 h-fit" ref={emblaMainRef}>
+        <div
+          className={cn(
+            "relative overflow-hidden col-start-3 col-end-13 h-fit rounded-bl-3xl rounded-tl-3xl",
+            "max-md:col-span-full"
+          )}
+          ref={emblaMainRef}
+        >
 
           {labels && labels.map((label) => (
             (label.slug === 'hit' || label.slug === 'in_sale' || label.slug === 'new') && (
@@ -135,10 +151,16 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
           ))}
 
           <PhotoProvider>
-            <div className="flex">
+            <ul className={cn(
+              "flex",
+              "max-md:gap-x-2 max-md:px-2"
+            )}>
               {processedImages.map((image, idx) => (
-                <div
-                  className={cn("min-w-full max-h-[475px] flex justify-center bg-[var(--gray)] rounded-3xl p-3")}
+                <li
+                  className={cn(
+                    "min-w-full max-h-[475px] flex justify-center bg-[var(--gray)] rounded-3xl p-3",
+                    "max-md:min-w-0 max-md:shrink-0 max-md:grow-0 max-md:basis-[85%] max-md:rounded-[20px]",
+                  )}
                   key={idx}
                 >
                   <PhotoView src={image.url}>
@@ -150,9 +172,9 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
                       height={image.height}
                     />
                   </PhotoView>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </PhotoProvider>
 
           {/* Кнопка "влево" */}
@@ -183,9 +205,12 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
         {/* Кнопка "Видео" */}
         {video && (
           <Button
-            variant="outline"
+            variant={"violetOutline"}
             onClick={() => setIsVideoOpen(true)}
-            className="col-start-7 col-end-9 rounded-3xl py-1 px-3 border-2 !border-[var(--violet-dark)]"
+            className={cn(
+              "col-start-7 col-end-9 gap-x-2",
+              "max-md:place-self-center max-md:col-span-full",
+            )}
           >
             <Play size={16} fill="var(--violet)"/>
             Видео

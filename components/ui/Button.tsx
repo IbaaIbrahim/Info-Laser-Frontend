@@ -20,6 +20,7 @@ const buttonVariants = cva(
           "text-white bg-red-500 hover:bg-red-700 focus:bg-red-700 py-2",
         white:
           "text-[var(--violet)] bg-white hover:text-white focus:text-white hover:bg-[var(--violet)] focus:bg-[var(--violet)] hover:[&>svg]:fill-white focus:[&>svg]:fill-white",
+        none: "",
       },
       size: {
         violet: "",

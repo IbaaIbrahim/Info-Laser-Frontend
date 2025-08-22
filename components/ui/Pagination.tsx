@@ -47,7 +47,7 @@ function PaginationLink(
   {
     className,
     isActive,
-    size = "icon",
+    size = "violet",
     ...props
   }: PaginationLinkProps) {
   return (
@@ -60,6 +60,7 @@ function PaginationLink(
           variant: isActive ? "violet" : "violetDark",
           size,
         }),
+        "w-10 h-10",
         className
       )}
       {...props}
@@ -75,8 +76,8 @@ function PaginationPrevious(
   return (
     <PaginationLink
       aria-label="Go to previous page"
-      size="default"
-      className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
+      size="violet"
+      className={cn("gap-1 px-2.5 sm:pl-2.5 w-10 h-10", className)}
       {...props}
     >
       <ChevronLeftIcon/>
@@ -92,8 +93,8 @@ function PaginationNext({
   return (
     <PaginationLink
       aria-label="Go to next page"
-      size="default"
-      className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
+      size="violet"
+      className={cn("gap-1 px-2.5 sm:pr-2.5 w-10 h-10", className)}
       {...props}
     >
       {/*<span className="hidden sm:block">Next</span>*/}

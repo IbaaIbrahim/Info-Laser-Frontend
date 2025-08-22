@@ -74,6 +74,7 @@ export const ProductBenefitSpoilers: React.FC<ClassName> = ({className}) => {
               className={cn(
                 "flex items-center justify-between text-sm w-full cursor-pointer transition-colors",
                 "hover:text-[var(--violet)] focus:text-[var(--violet)]",
+                "max-md:text-xs"
               )}
               onClick={() => handleToggle(item.id)}
             >
@@ -88,6 +89,7 @@ export const ProductBenefitSpoilers: React.FC<ClassName> = ({className}) => {
             <div className={cn(
               'flex flex-col gap-2 text-sm overflow-hidden text-[var(--gray-text)] transition-all duration-300 ease-in-out',
               isOpen && item.content ? 'max-h-[5000px] opacity-100 mt-2' : 'max-h-0 opacity-0',
+              "max-md:text-xs"
             )}>
               {item.content && <p>{item.content}</p>}
               {item.content2 && <p>{item.content2}</p>}

@@ -36,7 +36,10 @@ export const NecessaryProductsList: React.FC<ClassName> = ({className}) => {
 
   return (
     <div className={cn("", className)}>
-      <p className={"font-semibold mb-3"}>
+      <p className={cn(
+        "font-semibold mb-3",
+        "max-md:text-sm"
+      )}>
         Вам может понадобиться
         <span className={"text-[var(--gray-text)] text-sm ml-2"}>{data.length}</span>
       </p>
@@ -49,7 +52,8 @@ export const NecessaryProductsList: React.FC<ClassName> = ({className}) => {
             <Link
               className={cn(
                 "flex items-center gap-3 text-sm transition-colors duration-300",
-                "hover:text-[var(--violet)] focus:text-[var(--violet)]"
+                "hover:text-[var(--violet)] focus:text-[var(--violet)]",
+                "max-md:text-xs max-md:gap-2"
               )}
               href={`/products/${item.slug}`}
             >
