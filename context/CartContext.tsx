@@ -3,6 +3,7 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import {Product} from "@/types/types";
+import {getProducts} from "@/api/api";
 
 // Тип корзины (массив товаров с количеством)
 interface CartItem extends Product {
@@ -35,7 +36,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({children}
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
-      setCart(JSON.parse(savedCart));
+      const parsedCart: CartItem[] = JSON.parse(savedCart);
+      setCart(parsedCart);
+
+      // Синхронизация с API после загрузки
+      syncCartWithServer(parsedCart);
     }
   }, []);
 
@@ -44,6 +49,35 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({children}
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // Функция для синхронизации корзины с сервером
+  const syncCartWithServer = async (localCart: CartItem[]) => {
+    try {
+      const {products: freshProducts} = await getProducts();
+
+      // Составляем словарь для быстрого поиска по id
+      const byId = new Map(freshProducts.map(p => [p.id, p]));
+
+      // Обновляем только товары, которые есть в корзине
+      const updatedCart: CartItem[] = localCart
+        .map(item => {
+          const fresh = byId.get(item.id);
+          return fresh ? {...fresh, quantity: item.quantity} : null;
+        })
+        .filter((x): x is CartItem => x !== null);
+
+      // Проверяем, были ли удалены какие-то товары
+      const removedCount = localCart.length - updatedCart.length;
+      setCart(updatedCart);
+
+      if (removedCount > 0) {
+        console.warn(`Из корзины убрано ${removedCount} товаров, которых нет на сервере`);
+        // можно ещё toast.error показать пользователю
+      }
+    } catch (e) {
+      console.error("Ошибка синхронизации корзины:", e);
+    }
+  };
+  
   // Добавить товар в корзину
   const addToCart = (product: Product) => {
     let message = "";
