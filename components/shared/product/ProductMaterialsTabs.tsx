@@ -45,21 +45,29 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
   return (
     <section className={cn("", className)}>
       <Container>
-        <h2 className="text-4xl font-bold text-center mb-10">Обрабатываемые материалы</h2>
+        <h2 className={cn(
+          "text-4xl font-bold text-center mb-10",
+          "max-xl:text-3xl",
+          "max-md:text-2xl max-md:mb-5"
+        )}>Обрабатываемые материалы</h2>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col">
           <TabsList className="rounded-3xl" asChild>
             <ul className={cn(
               "flex place-self-center gap-x-1 mb-3 h-auto rounded-3xl border border-[#ABB4D7]/10 bg-[#ABB4D7] py-1 px-2",
+              "max-xl:place-self-start max-xl:justify-start max-xl:overflow-x-auto max-xl:overflow-y-hidden max-xl:max-w-full",
+              "max-md:rounded-4xl"
             )}>
               {materials.map((material) => (
                 <li key={material.id}>
                   <TabsTrigger
                     value={String(material.id)}
                     className={cn(
-                      "rounded-3xl px-3 py-2 gap-3 hover:cursor-pointer",
+                      "rounded-3xl px-3 py-2 gap-x-3 mb-0 hover:cursor-pointer",
                       activeTab === String(material.id)
                         ? "data-[state=active]:bg-[var(--violet)]/80 data-[state=active]:text-white"
-                        : "text-black"
+                        : "text-black",
+                      "max-xl:px-2 max-xl:gap-x-2",
+                      "max-md:text-xs"
                     )}
                   >
                     <Image
@@ -67,7 +75,10 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
                       width={30}
                       height={30}
                       alt={material.name}
-                      className="rounded-full object-cover"
+                      className={cn(
+                        "rounded-full object-cover shrink-0",
+                        "max-md:max-w-5 max-md:max-h-5"
+                      )}
                     />
                     {material.name}
                   </TabsTrigger>
@@ -80,7 +91,10 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
             <TabsContent key={material.id} value={String(material.id)} asChild>
               <div className="text-center">
                 <p className="text-lg font-medium">Материал: {material.name}</p>
-                <ul className={"grid grid-cols-12 gap-5 rounded-4xl overflow-hidden"}>
+                <ul className={cn(
+                  "grid grid-cols-12 gap-5 rounded-4xl overflow-hidden",
+                  "max-md:rounded-[20px] max-md:gap-1"
+                )}>
                   {data.slice(0, 3).map((item, index) => (
                     <li
                       key={item.id}
@@ -96,7 +110,7 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
                         width={item.width}
                         height={item.height}
                         alt={item.name}
-                        className="w-full h-full object-cover"
+                        className=""
                       />
                     </li>
                   ))}

@@ -8,13 +8,13 @@ import {Check, Clock3, Star} from "lucide-react";
 import {ProductBenefitSpoilers} from "@/components/shared/product/ProductBenefitSpoilers";
 import {OfflineOrOnlineMain} from "@/components/shared/banners/OfflineOrOnlineMain";
 import {BannerProduct} from "@/components/shared/carousels/banners/BannerProduct";
-// import {ChooseLaserMachineSlider} from "@/components/shared/carousels/product/ChooseLaserMachineSlider";
-// import {PurchaseOrder} from "@/components/shared/PurchaseOrder";
-// import {ProductGeneralAccessoriesBanner} from "@/components/shared/product/ProductGeneralAccessoriesBanner";
+import {ChooseLaserMachineSlider} from "@/components/shared/carousels/product/ChooseLaserMachineSlider";
+import {PurchaseOrder} from "@/components/shared/PurchaseOrder";
+import {ProductGeneralAccessoriesBanner} from "@/components/shared/product/ProductGeneralAccessoriesBanner";
 import {ProductSystemBanner} from "@/components/shared/product/ProductSystemBanner";
-// import {ProductMarquee} from "@/components/shared/product/ProductMarquee";
-// import {ProductBenefitBanner} from "@/components/shared/product/ProductBenefitBanner";
-// import {ProductMaterialsTabs} from "@/components/shared/product/ProductMaterialsTabs";
+import {ProductMarquee} from "@/components/shared/product/ProductMarquee";
+import {ProductBenefitBanner} from "@/components/shared/product/ProductBenefitBanner";
+import {ProductMaterialsTabs} from "@/components/shared/product/ProductMaterialsTabs";
 import {ShortCharacteristics} from "@/components/shared/product/characteristics/ShortCharacteristics";
 import {ProductPrices} from "@/components/shared/product/ProductPrices";
 import {FullCharacteristics} from "@/components/shared/product/characteristics/FullCharacteristics";
@@ -189,17 +189,17 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
 
       <ImportantCharacteristics className={"mb-15 max-md:mb-5"} characteristics={product.characteristics ?? []}/>
 
-      {/*<ProductMaterialsTabs className={"mb-15"} materials={product.materials ?? []}/>*/}
+      <ProductMaterialsTabs className={"mb-15 max-md:mb-5"} materials={product.materials ?? []}/>
 
-      {/*<ChooseLaserMachineSlider className={"mb-15"}/>*/}
+      <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"}/>
 
-      {/*<ProductGeneralAccessoriesBanner className={"mb-15"}/>*/}
+      <ProductGeneralAccessoriesBanner className={"mb-15 max-md:mb-5"}/>
 
-      {/*<ProductMarquee className={"mb-25"} images={product.product_attachments ?? []}/>*/}
+      <ProductMarquee className={"mb-25 max-md:mb-10"} images={product.product_attachments ?? []}/>
 
-      {/*<PurchaseOrder className={"mb-25"}/>*/}
+      <PurchaseOrder className={"mb-25 max-md:mb-20"}/>
 
-      {/*<ProductBenefitBanner className={"mb-15"}/>*/}
+      <ProductBenefitBanner className={"mb-15 max-md:mb-5"}/>
     </>
   );
 };

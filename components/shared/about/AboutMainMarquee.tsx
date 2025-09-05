@@ -113,7 +113,7 @@ export const AboutMainMarquee: React.FC<ClassName> = ({className}) => {
 
       {/* Движущиеся изображения */}
       <div className={"overflow-x-hidden"}>
-        <div className="flex space-x-10 mb-5 animate-scroll-right">
+        <div className="flex space-x-5 mb-5 animate-scroll-right">
           {[...images.topImages, ...images.topImages].map((item, index) => (
             <div key={index} className={cn(
               "rounded-3xl max-h-[160px] max-w-[160px] min-w-[160px] overflow-hidden",
@@ -129,7 +129,7 @@ export const AboutMainMarquee: React.FC<ClassName> = ({className}) => {
           ))}
         </div>
 
-        <div className="flex space-x-10 animate-scroll-left">
+        <div className="flex space-x-5 animate-scroll-left">
           {[...images.botImages, ...images.botImages].map((item, index) => (
             <div key={index} className={cn(
               "rounded-3xl max-h-[160px] max-w-[160px] min-w-[160px] overflow-hidden",

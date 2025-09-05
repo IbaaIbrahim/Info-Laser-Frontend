@@ -98,9 +98,13 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
   }
 
   return (
-    <section className={cn("relative pt-15 pb-30", className)}>
+    <section className={cn("relative pt-15 pb-30 max-md:pb-10 max-md:pt-10", className)}>
       <Container className={"max-w-[760px] mb-10"}>
-        <h3 className={"text-center text-3xl"}>
+        <h3 className={cn(
+          "text-center text-3xl",
+          "max-xl:text-2xl max-xl:mb-3",
+          "max-md:text-xl max-md:mb-2",
+        )}>
           Машины + Передовое программное обеспечение =
           <span className={"text-[var(--violet)] ml-1"}>Творения, воплощенные в жизнь</span>
         </h3>
@@ -108,9 +112,12 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
 
       {/* Движущиеся изображения */}
       <div className={"overflow-x-hidden"}>
-        <div className="flex space-x-10 mb-5 animate-scroll-right">
+        <div className="flex space-x-5 mb-5 animate-scroll-right">
           {[...data.topImages, ...data.topImages].map((item, index) => (
-            <div key={index} className="rounded-3xl max-h-[160px] max-w-[160px] min-w-[160px] overflow-hidden">
+            <div key={index} className={cn(
+              "rounded-3xl max-h-[160px] max-w-[160px] min-w-[160px] overflow-hidden",
+              "max-md:max-h-[80px] max-md:max-w-[80px] max-md:min-w-[80px] max-md:rounded-xs"
+            )}>
               <Image
                 src={item.url}
                 alt={item.name}
@@ -121,9 +128,12 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
           ))}
         </div>
 
-        <div className="flex space-x-10 animate-scroll-left">
+        <div className="flex space-x-5 animate-scroll-left">
           {[...data.botImages, ...data.botImages].map((item, index) => (
-            <div key={index} className="rounded-3xl max-h-[160px] max-w-[160px] min-w-[160px] overflow-hidden">
+            <div key={index} className={cn(
+              "rounded-3xl max-h-[160px] max-w-[160px] min-w-[160px] overflow-hidden",
+              "max-md:max-h-[80px] max-md:max-w-[80px] max-md:min-w-[80px] max-md:rounded-xs"
+            )}>
               <Image
                 src={item.url}
                 alt={item.name}
@@ -136,7 +146,11 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
       </div>
 
       {/* Картинка по центру */}
-      <div className="absolute top-[215px] left-1/2 transform -translate-x-1/2 w-[500px] h-[430px]">
+      <div className={cn(
+        "absolute top-[215px] left-1/2 transform -translate-x-1/2 w-[500px] h-[430px]",
+        "max-md:w-[250px] max-md:h-[220px] max-md:top-[180px]",
+        "max-[470px]:!top-[190px]",
+      )}>
         {images.map((image) => {
           return (
             Boolean(image && image.is_main) && (
@@ -151,7 +165,6 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
             )
           )
         })}
-
       </div>
     </section>
   );
