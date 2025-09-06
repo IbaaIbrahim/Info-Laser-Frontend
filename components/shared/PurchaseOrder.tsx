@@ -34,7 +34,7 @@ export const PurchaseOrder: React.FC<ClassName> = ({className}) => {
                 height={465}
                 className={"w-full h-full object-cover"}
               />
-              <div className="absolute inset-0 grid place-self-end justify-self-start p-5">
+              <div className="absolute bottom-0 left-0 p-5">
                 <DemoBtn title="Записаться на демонстрацию"/>
               </div>
             </div>
@@ -52,7 +52,7 @@ export const PurchaseOrder: React.FC<ClassName> = ({className}) => {
                 height={465}
                 className={"w-full h-full object-cover"}
               />
-              <div className="absolute inset-0 grid place-self-end justify-self-start p-5">
+              <div className="absolute bottom-0 left-0 p-5">
                 <UniqButtonLink href={"/delivery"} variant={"violetDark"}>Оплата и доставка</UniqButtonLink>
               </div>
 
