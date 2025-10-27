@@ -148,9 +148,7 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
           </div>
         </Container>
       </section>
-
       <OfflineOrOnlineMain className={cn("mb-15 max-md:mb-0")}/>
-
       {/* Полное описание + полные характеристики */}
       <div className={cn("mb-15 max-md:mb-5")}>
         <Container className={cn(
@@ -186,19 +184,12 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
           <FullCharacteristics characteristics={product.characteristics ?? []}/>
         </Container>
       </div>
-
       <ImportantCharacteristics className={"mb-15 max-md:mb-5"} characteristics={product.characteristics ?? []}/>
-
       <ProductMaterialsTabs className={"mb-15 max-md:mb-5"} materials={product.materials ?? []}/>
-
       <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"}/>
-
       <ProductGeneralAccessoriesBanner className={"mb-15 max-md:mb-5"}/>
-
       <ProductMarquee className={"mb-25 max-md:mb-10"} images={product.product_attachments ?? []}/>
-
       <PurchaseOrder className={"mb-25 max-md:mb-20"}/>
-
       <ProductBenefitBanner className={"mb-15 max-md:mb-5"}/>
     </>
   );

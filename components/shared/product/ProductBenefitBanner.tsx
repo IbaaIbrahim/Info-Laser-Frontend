@@ -17,7 +17,7 @@ export const ProductBenefitBanner: React.FC<ClassName> = ({className}) => {
             <Image
               src={"/img/product/benefit.jpg"}
               alt={"Блок для преимущества оборудования с картинкой и текстом"}
-              width={1061}
+              width={1060}
               height={705}
               className={"w-full h-full object-cover rounded-3xl"}
             />
