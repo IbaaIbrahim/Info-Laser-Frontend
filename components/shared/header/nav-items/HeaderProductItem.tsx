@@ -144,13 +144,18 @@ export const HeaderProductItem: React.FC<Props> = ({className, onClick}) => {
                                   href={`/catalog/${category.slug}`}
                                   onClick={handleLinkClick}
                                 >
-                                  {category.banner_image_url && (
+                                  {category.filemanager?.url ? (
                                     <Image
-                                      src={category.banner_image_url}
+                                      src={category.filemanager?.url}
                                       alt={category.name}
                                       width={45}
                                       height={45}
                                     />
+                                  ) : (
+                                    <div
+                                      className="w-12 h-12 bg-gray-200 text-gray-400 text-xs flex items-center justify-center">
+                                      нет фото
+                                    </div>
                                   )}
                                   {category.name}
                                 </Link>

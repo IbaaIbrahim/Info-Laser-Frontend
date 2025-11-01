@@ -27,16 +27,16 @@ export const AccessoriesSimpleList: React.FC<AccessoriesProps> = async ({accesso
               )} key={category.id}>
                 <div
                   className="flex shrink-0 overflow-hidden h-[100px] w-full rounded-md mb-5 max-md:mb-2">
-                  {category.banner_image_url ? (
+                  {category.filemanager?.url ? (
                     <Image
                       className="transition-transform object-contain"
-                      src={category.banner_image_url}
+                      src={category.filemanager?.url}
                       alt={category.name}
                       width={100}
                       height={100}
                     />
                   ) : (
-                    <div className="w-full h-full bg-gray-200 text-gray-400 text-sm flex items-center justify-center">
+                    <div className="w-24 h-24 bg-gray-200 text-gray-400 text-sm flex items-center justify-center">
                       нет фото
                     </div>
                   )}

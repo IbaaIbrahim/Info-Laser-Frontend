@@ -51,13 +51,21 @@ export default async function ArticlesPage() {
             )}>
               {categories.map((category) => (
                 <li className={"flex flex-col p-8 bg-[var(--gray)] rounded-4xl"} key={category.id}>
-                  <Image
-                    src={category.banner_image_url}
-                    alt={"#"}
-                    width={55}
-                    height={55}
-                    className={"mb-5 max-md:mb-3 max-md:max-w-[30px]"}
-                  />
+                  {category.filemanager?.url ? (
+                    <Image
+                      src={category.filemanager?.url}
+                      alt={"#"}
+                      width={55}
+                      height={55}
+                      className={"mb-5 max-md:mb-3 max-md:max-w-[30px]"}
+                    />
+                  ) : (
+                    <div
+                      className="w-14 h-14 text-center bg-gray-200 text-gray-400 text-xs flex items-center justify-center">
+                      нет фото
+                    </div>
+                  )}
+
 
                   <Link
                     href={"#"}
@@ -72,13 +80,21 @@ export default async function ArticlesPage() {
                         key={product.id}
                         className={cn("flex gap-2")}
                       >
-                        <Image
-                          src={category.banner_image_url}
-                          alt={"#"}
-                          width={35}
-                          height={35}
-                          className={"max-md:max-w-[25px]"}
-                        />
+                        {category.filemanager?.url ? (
+                          <Image
+                            src={category.filemanager?.url}
+                            alt={"#"}
+                            width={35}
+                            height={35}
+                            className={"max-md:max-w-[25px]"}
+                          />
+                        ) : (
+                          <div
+                            className="w-8 h-8 text-center bg-gray-200 text-gray-400 text-xs flex items-center justify-center">
+                            нет фото
+                          </div>
+                        )}
+
                         <Link
                           href={"#"}
                           className={"text-sm hover:text-[var(--violet)] focus:text-[var(--violet)] transition-colors max-md:text-xs"}

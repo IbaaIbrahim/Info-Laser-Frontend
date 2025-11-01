@@ -40,36 +40,51 @@ export const CategoriesGoods: React.FC<CategoriesGoodsProps> = async (
                   {isActive ? (
                     <div
                       className={cn(
-                        "flex items-center h-full text-sm bg-[var(--gray)] rounded-2xl  leading-4 overflow-hidden py-1 px-3",
+                        "flex items-center h-full gap-x-1 text-sm bg-[var(--gray)] rounded-2xl  leading-4 overflow-hidden py-1 px-3",
                         "text-[var(--violet)]",
                         "border-1 !border-[var(--violet)]"
                       )}
                     >
-                      <Image
-                        src={category.banner_image_url}
-                        alt={category.name}
-                        width={80}
-                        height={80}
-                        className="max-w-[80px] mr-1 max-xl:max-w-[65px] max-md:max-w-[40px]"
-                      />
+                      {category.filemanager?.url ? (
+                        <Image
+                          src={category.filemanager?.url}
+                          alt={category.name}
+                          width={80}
+                          height={80}
+                          className="shrink-0 max-w-[80px] mr-1 max-xl:max-w-[65px] max-md:max-w-[40px]"
+                        />
+                      ) : (
+                        <div
+                          className="shrink-0 max-w-[80px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center max-xl:max-w-[65px] max-md:max-w-[40px]">
+                          нет фото
+                        </div>
+                      )}
+
                       {category.name}
                     </div>
                   ) : (
                     <Link
                       href={`/catalog/${category.slug}`}
                       className={cn(
-                        "flex items-center h-full text-sm bg-[var(--gray)] rounded-2xl  leading-4 border-1 !border-gray-100 transition-colors",
+                        "flex items-center h-full gap-x-1 text-sm bg-[var(--gray)] rounded-2xl  leading-4 border-1 !border-gray-100 transition-colors",
                         "overflow-hidden transition-colors py-1 px-3",
                         "hover:text-[var(--violet)]"
                       )}
                     >
-                      <Image
-                        src={category.banner_image_url}
-                        alt={category.name}
-                        width={80}
-                        height={80}
-                        className="max-w-[80px] mr-1 max-xl:max-w-[65px] max-md:max-w-[40px]"
-                      />
+                      {category.filemanager?.url ? (
+                        <Image
+                          src={category.filemanager?.url}
+                          alt={category.name}
+                          width={80}
+                          height={80}
+                          className="shrink-0 max-w-[80px] mr-1 max-xl:max-w-[65px] max-md:max-w-[40px]"
+                        />
+                      ) : (
+                        <div
+                          className="shrink-0 max-w-[80px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center max-xl:max-w-[65px] max-md:max-w-[40px]">
+                          нет фото
+                        </div>
+                      )}
                       {category.name}
                     </Link>
                   )}

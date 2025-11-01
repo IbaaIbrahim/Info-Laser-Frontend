@@ -2,6 +2,18 @@ export interface ClassName {
   className?: string;
 }
 
+export interface FileManager {
+  id?: string;
+  name?: string;
+  url?: string;
+  is_file?: boolean;
+  thumbnail?: string;
+  file_type?: string;
+  parent_id?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface AccessoriesCategory {
   id: number;
   name: string;
@@ -24,6 +36,8 @@ export interface Category {
   type: string;
   created_at?: string;
   updated_at?: string;
+  filemanager_id?: string;
+  filemanager?: FileManager;
   products: Product[];
   categories: AccessoriesCategory[];
 }
@@ -101,6 +115,8 @@ export interface OneProductCategory {
   type: string;
   created_at?: string;
   updated_at?: string;
+  filemanager_id?: string;
+  filemanager?: FileManager;
   pivot: {
     product_id: number;
     category_id: number;
@@ -131,6 +147,8 @@ export interface Attachments {
   type: string;
   is_main: boolean;
   order: number;
+  filemanager_id?: string;
+  place_in_page?: string;
   created_at?: string | null;
   updated_at?: string | null;
 }

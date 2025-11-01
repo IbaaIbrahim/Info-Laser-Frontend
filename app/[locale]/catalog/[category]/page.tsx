@@ -138,14 +138,19 @@ const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
             <p className={"text-sm"}>{currentCategory?.description} {t('addName')}</p>
           </div>
 
-          {currentCategory?.banner_image_url && (
+          {currentCategory?.filemanager?.url ? (
             <Image
-              src={currentCategory.banner_image_url}
+              src={currentCategory.filemanager?.url}
               alt={currentCategory.name ?? "Изображение категории"}
               width={400}
               height={250}
               className={"basis-1/2 max-w-[400px] max-md:max-w-full"}
             />
+          ) : (
+            <div
+              className="max-w-[400px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center max-md:max-w-full">
+              нет фото
+            </div>
           )}
         </Container>
       </section>
