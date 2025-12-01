@@ -35,10 +35,10 @@ export const ProductCardHeader: React.FC<ProductCardHeaderProps> = (
       onClick={onClick}
     >
       <div className="flex justify-center items-center shrink-0 overflow-hidden h-[80px] w-[80px] rounded-md bg-white">
-        {mainImage ? (
+        {mainImage?.filemanager?.url ? (
           <Image
             className="transition-transform"
-            src={mainImage.external_url}
+            src={mainImage.filemanager?.url}
             alt={mainImage.name}
             width={mainImage.width}
             height={mainImage.height}

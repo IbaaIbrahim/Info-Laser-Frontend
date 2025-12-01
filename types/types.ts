@@ -5,7 +5,7 @@ export interface ClassName {
 export interface FileManager {
   id?: string;
   name?: string;
-  url?: string;
+  url: string;
   is_file?: boolean;
   thumbnail?: string;
   file_type?: string;
@@ -57,6 +57,7 @@ export interface Product {
   created_at?: string;
   updated_at?: string;
   laser_suppliers?: Supplier;
+  fulldescription?: string;
   order?: number;
   pivot?: Pivot;
   categories: OneProductCategory[];
@@ -149,6 +150,7 @@ export interface Attachments {
   order: number;
   filemanager_id?: string;
   place_in_page?: string;
+  filemanager: FileManager;
   created_at?: string | null;
   updated_at?: string | null;
 }

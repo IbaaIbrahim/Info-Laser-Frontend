@@ -135,19 +135,33 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className
                                   </li>
                                 ))}
                             </ul>
+                            
+                            {(() => {
+                              const mainImage = product.product_attachments?.find(item => item?.is_main);
 
-                            {product.product_attachments
-                              ?.filter(a => a.is_main)
-                              .map(a => (
-                                <Image
-                                  key={a.id}
-                                  className="self-center mb-3 group-hover:opacity-0"
-                                  src={a.external_url}
-                                  alt={a.name}
-                                  width={230}
-                                  height={170}
-                                />
-                              ))}
+                              if (mainImage?.filemanager?.url) {
+                                return (
+                                  <Image
+                                    key={mainImage.id}
+                                    className="self-center mb-3 group-hover:opacity-0"
+                                    src={mainImage.filemanager.url}
+                                    alt={mainImage.name || "Фото продукта"}
+                                    width={230}
+                                    height={170}
+                                  />
+                                );
+                              }
+
+                              return (
+                                <div
+                                  className={cn(
+                                    "w-[220px] h-[220px] flex items-center justify-center bg-gray-200 text-gray-400 text-xs rounded-md mb-3 group-hover:opacity-0"
+                                  )}
+                                >
+                                  нет фото
+                                </div>
+                              );
+                            })()}
 
                             <Button
                               className="place-self-start mt-auto"

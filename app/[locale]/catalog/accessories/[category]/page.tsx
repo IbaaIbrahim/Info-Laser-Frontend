@@ -91,16 +91,16 @@ const AccessoriesCategoryPage = async ({params}: AccessoriesCategoryPageProps) =
                   "max-md:text-xs"
                 )}
               >
-                {category.product_attachments && category.product_attachments[0] ? (
+                {currentCategory?.filemanager?.url ? (
                   <Image
                     className={cn(
                       "shrink-0 transition-transform max-w-[100px] max-h-[100px]",
                       "max-md:max-w-[40px] max-md:max-h-[40px]",
                     )}
-                    src={category.product_attachments[0].external_url}
-                    alt={category.product_attachments[0].name}
-                    width={category.product_attachments[0].width}
-                    height={category.product_attachments[0].height}
+                    src={currentCategory.filemanager?.url}
+                    alt={currentCategory.name ?? "Изображение категории"}
+                    width={100}
+                    height={100}
                   />
                 ) : (
                   <div
@@ -149,7 +149,7 @@ const AccessoriesCategoryPage = async ({params}: AccessoriesCategoryPageProps) =
             ))}
           </ul>
         </section>
-        
+
       </Container>
     </section>
   );

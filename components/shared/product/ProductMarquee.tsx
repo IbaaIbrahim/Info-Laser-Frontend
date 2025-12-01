@@ -157,7 +157,7 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
               <Image
                 key={image.id}
                 className="absolute z-30 w-full h-full object-cover"
-                src={image.external_url}
+                src={image.filemanager.url}
                 alt={image.name}
                 width={700}
                 height={400}

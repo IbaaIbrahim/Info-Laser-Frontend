@@ -64,18 +64,33 @@ export const ProductCard: React.FC<Product> = (
         href={`/catalog/${categories?.[0]?.slug ?? "default-category"}/${slug}`}
         onClick={onClick}
       >
-        {product_attachments && product_attachments.map((item) =>
-            Boolean(item && item.is_main) && (
+        {(() => {
+          const mainImage = product_attachments?.find(item => item?.is_main);
+
+          if (mainImage?.filemanager?.url) {
+            return (
               <Image
-                key={item.id}
+                key={mainImage.id}
                 className={cn("hover:scale-110 transition-transform z-10")}
-                src={item.external_url}
-                alt={item.name}
+                src={mainImage.filemanager.url}
+                alt={mainImage.name || "Фото продукта"}
                 width={220}
                 height={220}
               />
-            )
-        )}
+            );
+          }
+
+          return (
+            <div
+              className={cn(
+                "w-[220px] h-[220px] flex items-center justify-center bg-gray-200 text-gray-400 text-xs rounded-md"
+              )}
+            >
+              нет фото
+            </div>
+          );
+        })()}
+
       </Link>
 
       <div className="flex flex-col p-3 h-full max-md:p-0">

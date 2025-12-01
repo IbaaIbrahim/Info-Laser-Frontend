@@ -90,18 +90,32 @@ const CartPage = () => {
                               "flex-shrink-0 overflow-hidden w-[100px] h-[90px] flex items-center justify-center",
                               "max-md:w-[60px] max-md:h-[60px]"
                             )}>
-                            {item.product_attachments && item.product_attachments.map((item) =>
-                                Boolean(item && item.is_main) && (
+                            {(() => {
+                              const mainImage = item.product_attachments?.find(item => item?.is_main);
+
+                              if (mainImage?.filemanager?.url) {
+                                return (
                                   <Image
-                                    key={item.id}
+                                    key={mainImage.id}
                                     className="hover:scale-110 transition-transform z-10 w-full h-full"
-                                    src={item.external_url}
-                                    alt={item.name}
+                                    src={mainImage.filemanager.url}
+                                    alt={mainImage.name || "Фото продукта"}
                                     width={100}
                                     height={90}
                                   />
-                                )
-                            )}
+                                );
+                              }
+
+                              return (
+                                <div
+                                  className={cn(
+                                    "w-[100px] h-[90px] flex items-center justify-center bg-gray-200 text-gray-400 text-xs rounded-md"
+                                  )}
+                                >
+                                  нет фото
+                                </div>
+                              );
+                            })()}
                           </div>
 
                           {/* В наличии/под заказ + название */}

@@ -10,7 +10,6 @@ import {Button} from "@/components/ui/Button";
 import {ChevronLeft, ChevronRight, Play, X} from "lucide-react";
 import {PhotoProvider, PhotoView} from 'react-photo-view';
 
-
 interface ProductGallerySliderProps extends ClassName {
   images: Attachments[];
   labels?: Label[];
@@ -20,8 +19,8 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
   const processedImages = images
     .filter((img) => img.type !== "video")
     .map((img) => ({
-      url: img.external_url,
-      thumbnail: img.external_url,
+      url: img.filemanager.url,
+      thumbnail: img.filemanager.url,
       alt: img.name || "Изображение товара",
       type: img.type,
       isMain: img.is_main ?? false,
@@ -30,8 +29,27 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
     }))
     .sort((a, b) => (b.isMain ? 1 : -1));
 
-  const video = images.find((img) => img.type === "video");
+  // const video = images.find((img) => img.type === "video");
 
+  // Ищем видео из бэка
+  const rawVideo = images.find((img) => img.type === "video");
+
+  // Преобразуем ссылку YouTube в embed
+  const getYoutubeEmbedUrl = (url: string) => {
+    const match = url.match(
+      /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/
+    );
+    return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : null;
+  };
+
+  // Делаем embed только если URL — реально YouTube
+  const embedUrl = rawVideo?.filemanager?.url
+    ? getYoutubeEmbedUrl(rawVideo.filemanager.url)
+    : null;
+
+  // Видео считаем видео только если embedUrl существует
+  const video = embedUrl ? rawVideo : null;
+  
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel({
     loop: true,
@@ -80,13 +98,13 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
     };
   }, [isVideoOpen]);
 
-  // Преобразуем ссылку на YouTube в embed-ссылку
-  const getYoutubeEmbedUrl = (url: string) => {
-    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
-    return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : null;
-  };
+  // // Преобразуем ссылку на YouTube в embed-ссылку
+  // const getYoutubeEmbedUrl = (url: string) => {
+  //   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
+  //   return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : null;
+  // };
 
-  const embedUrl = video?.external_url ? getYoutubeEmbedUrl(video.external_url) : null;
+  // const embedUrl = video?.filemanager.url ? getYoutubeEmbedUrl(video.filemanager.url) : null;
 
   return (
     <>
@@ -104,15 +122,22 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
           ref={emblaThumbsRef}
         >
           <div className="flex flex-col gap-2">
-            {processedImages.map((image, idx) => (
-              <ThumbBtn
-                key={idx}
-                index={idx}
-                onClick={() => onThumbClick(idx)}
-                selected={idx === selectedIndex}
-                image={{...image, url: image.thumbnail}}
-              />
-            ))}
+            {processedImages && processedImages.length > 0 ? (
+              processedImages.map((image, idx) => (
+                <ThumbBtn
+                  key={idx}
+                  index={idx}
+                  onClick={() => onThumbClick(idx)}
+                  selected={idx === selectedIndex}
+                  image={{...image, url: image.thumbnail}}
+                />
+              ))
+            ) : (
+              <div
+                className="w-[100px] h-[100px] flex items-center justify-center bg-gray-200 text-gray-400 text-xs rounded-xl">
+                нет фото
+              </div>
+            )}
           </div>
         </div>
 
@@ -151,29 +176,42 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
           ))}
 
           <PhotoProvider>
-            <ul className={cn(
-              "flex",
-              "max-md:gap-x-2 max-md:px-2"
-            )}>
-              {processedImages.map((image, idx) => (
+            <ul
+              className={cn(
+                "flex",
+                "max-md:gap-x-2 max-md:px-2"
+              )}
+            >
+              {processedImages && processedImages.length > 0 ? (
+                processedImages.map((image, idx) => (
+                  <li
+                    key={idx}
+                    className={cn(
+                      "min-w-full max-h-[475px] flex justify-center bg-[var(--gray)] rounded-3xl p-3",
+                      "max-md:min-w-0 max-md:shrink-0 max-md:grow-0 max-md:basis-[85%] max-md:rounded-[20px]"
+                    )}
+                  >
+                    <PhotoView src={image.url}>
+                      <Image
+                        className="w-full h-full object-contain cursor-zoom-in"
+                        src={image.url}
+                        alt={image.alt || "Фото продукта"}
+                        width={image.width || 800}
+                        height={image.height || 600}
+                      />
+                    </PhotoView>
+                  </li>
+                ))
+              ) : (
                 <li
                   className={cn(
-                    "min-w-full max-h-[475px] flex justify-center bg-[var(--gray)] rounded-3xl p-3",
-                    "max-md:min-w-0 max-md:shrink-0 max-md:grow-0 max-md:basis-[85%] max-md:rounded-[20px]",
+                    "min-w-full min-h-[475px] max-h-[475px] flex items-center justify-center bg-gray-200 text-gray-400 text-sm rounded-3xl p-3",
+                    "max-md:min-w-0 max-md:shrink-0 max-md:grow-0 max-md:basis-[85%] max-md:rounded-[20px]"
                   )}
-                  key={idx}
                 >
-                  <PhotoView src={image.url}>
-                    <Image
-                      className="w-full h-full object-contain cursor-zoom-in"
-                      src={image.url}
-                      alt={image.alt}
-                      width={image.width}
-                      height={image.height}
-                    />
-                  </PhotoView>
+                  нет фото
                 </li>
-              ))}
+              )}
             </ul>
           </PhotoProvider>
 

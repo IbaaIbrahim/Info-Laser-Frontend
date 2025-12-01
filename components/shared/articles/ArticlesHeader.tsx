@@ -114,21 +114,19 @@ export const ArticlesHeader: React.FC<ArticlesHeaderProps> = ({className, produc
                       key={product.id}
                       onClick={onItemClick}
                     >
-                      {product.product_attachments && product.product_attachments.map((item) =>
-                          Boolean(item && item.is_main) && (
-                            <Image
-                              key={item.id}
-                              className="size-8"
-                              src={item.external_url}
-                              alt={item.name}
-                              width={32}
-                              height={32}
-                            />
-                          )
+                      {product.product_attachments?.map(item =>
+                        item?.is_main && item?.filemanager?.url ? (
+                          <Image
+                            key={item.id}
+                            className="size-8"
+                            src={item.filemanager.url}
+                            alt={item.name}
+                            width={32}
+                            height={32}
+                          />
+                        ) : null
                       )}
-                      <span className="leading-4">
-                    {product.name}
-                  </span>
+                      <span className="leading-4">{product.name}</span>
                     </Link>
                   ))}
                 </div>

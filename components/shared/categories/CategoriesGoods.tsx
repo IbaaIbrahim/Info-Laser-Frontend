@@ -55,7 +55,7 @@ export const CategoriesGoods: React.FC<CategoriesGoodsProps> = async (
                         />
                       ) : (
                         <div
-                          className="shrink-0 max-w-[80px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center max-xl:max-w-[65px] max-md:max-w-[40px]">
+                          className="shrink-0 min-h-[60px] max-w-[80px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center max-xl:max-w-[65px] max-md:max-w-[40px]">
                           нет фото
                         </div>
                       )}
@@ -81,7 +81,7 @@ export const CategoriesGoods: React.FC<CategoriesGoodsProps> = async (
                         />
                       ) : (
                         <div
-                          className="shrink-0 max-w-[80px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center max-xl:max-w-[65px] max-md:max-w-[40px]">
+                          className="shrink-0 min-h-[60px] max-w-[80px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center max-xl:max-w-[65px] max-md:max-w-[40px]">
                           нет фото
                         </div>
                       )}
