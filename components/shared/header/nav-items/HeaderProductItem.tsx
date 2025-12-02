@@ -8,7 +8,6 @@ import {Overlay} from "@/components/shared/Overlay";
 import {ChevronDown} from "lucide-react";
 import {Category, ClassName} from "@/types/types";
 import {useMedia} from "react-use";
-import {getCatalogData} from "@/api/api";
 import Image from "next/image";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
 import {DemoBtn} from "@/components/shared/btns/DemoBtn";
@@ -37,17 +36,32 @@ export const HeaderProductItem: React.FC<Props> = ({className, onClick}) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   useEffect(() => {
-    getCatalogData()
-      .then((data) => {
+    const fetchCatalogData = async () => {
+      try {
+        const response = await fetch("/api/catalog");
+
+        if (!response.ok) {
+          throw new Error("Ошибка загрузки категорий");
+        }
+
+        const data: { product: Category[]; accessory: Category[] } = await response.json();
+
         setCategories(data);
 
         if (data.product.length > 0) {
           setActiveCategory(String(data.product[0].id));
-        } else if (data.accessory.length > 0) {
+          return;
+        }
+
+        if (data.accessory.length > 0) {
           setActiveCategory(String(data.accessory[0].id));
         }
-      })
-      .catch((error) => console.error("Ошибка при загрузке категорий:", error));
+      } catch (error) {
+        console.error("Ошибка при загрузке категорий:", error);
+      }
+    };
+
+    fetchCatalogData();
   }, []);
 
   useEffect(() => {
