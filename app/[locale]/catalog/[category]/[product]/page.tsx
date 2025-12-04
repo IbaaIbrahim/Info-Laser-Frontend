@@ -197,17 +197,17 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
       </div>
       <ImportantCharacteristics className={"mb-15 max-md:mb-5"} characteristics={product.characteristics ?? []}/>
       <ProductMaterialsTabs className={"mb-15 max-md:mb-5"} materials={product.materials ?? []}/>
+      <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"}/>
+      <ProductGeneralAccessoriesBanner className={"mb-15 max-md:mb-5"}/>
+      <ProductMarquee className={"mb-25 max-md:mb-10"} images={product.product_attachments ?? []}/>
+      <PurchaseOrder className={"mb-25 max-md:mb-20"}/>
+      <ProductBenefitBanner className={"mb-15 max-md:mb-5"}/>
       {similarProducts.length > 0 && (
         <SimilarProductsSlider
           className={"mb-15 max-md:mb-5"}
           products={similarProducts}
         />
       )}
-      <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"}/>
-      <ProductGeneralAccessoriesBanner className={"mb-15 max-md:mb-5"}/>
-      <ProductMarquee className={"mb-25 max-md:mb-10"} images={product.product_attachments ?? []}/>
-      <PurchaseOrder className={"mb-25 max-md:mb-20"}/>
-      <ProductBenefitBanner className={"mb-15 max-md:mb-5"}/>
     </>
   );
 };
