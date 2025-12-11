@@ -3,7 +3,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['img.youtube.com', 'infolaser.ru', 'example.com'],
+    domains: ['img.youtube.com', 'infolaser.ru', 'api.infolasers.ru', 'example.com'],
   }
 };
 

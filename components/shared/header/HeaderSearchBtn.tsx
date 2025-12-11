@@ -137,18 +137,26 @@ export const HeaderSearchBtn = ({products}: SearchProps) => {
                   key={product.id}
                   onClick={onItemClick}
                 >
-                  {product.product_attachments?.map(item =>
-                    item?.is_main && item?.filemanager?.url ? (
+                  {(() => {
+                    const mainImage = product.product_attachments?.find(
+                      (item) =>
+                        item?.place_in_page === "MainPage" &&
+                        item?.filemanager?.url
+                    );
+
+                    if (!mainImage?.filemanager?.url) return null;
+
+                    return (
                       <Image
-                        key={item.id}
+                        key={mainImage.id}
                         className="size-8"
-                        src={item.filemanager.url}
-                        alt={item.name}
+                        src={mainImage.filemanager.url}
+                        alt={mainImage.filemanager.name || "Изображение товара"}
                         width={32}
                         height={32}
                       />
-                    ) : null
-                  )}
+                    );
+                  })()}
                   <span className="leading-4">
                     {product.name}
                   </span>

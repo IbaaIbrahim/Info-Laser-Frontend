@@ -1,48 +1,37 @@
 'use client'
 
-import React from "react";
+import React, {useMemo} from "react";
 import {Container} from "@/components/shared/Container";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/Carousel";
 import {cn} from "@/lib/utils";
 import Image from "next/image";
 import {CarouselDots} from "@/components/shared/carousels/CarouselDots";
+import {Attachments} from "@/types/types";
 
 type ChooseLaserMachineSliderProps = {
-  className?: string
+  className?: string;
+  attachments?: Attachments[];
 };
 
-export const ChooseLaserMachineSlider: React.FC<ChooseLaserMachineSliderProps> = ({className}) => {
+export const ChooseLaserMachineSlider: React.FC<ChooseLaserMachineSliderProps> = ({className, attachments = []}) => {
 
-  const data = [
-    {
-      id: 1,
-      name: 'banner-1',
-      img_url: '/img/product/slider/choose-machine/1.jpg',
-      width: 668,
-      height: 600
-    },
-    {
-      id: 2,
-      name: 'banner-2',
-      img_url: '/img/product/slider/choose-machine/2.jpg',
-      width: 668,
-      height: 600
-    },
-    {
-      id: 3,
-      name: 'banner-3',
-      img_url: '/img/product/slider/choose-machine/3.jpg',
-      width: 668,
-      height: 600
-    },
-    {
-      id: 4,
-      name: 'banner-1',
-      img_url: '/img/product/slider/choose-machine/1.jpg',
-      width: 668,
-      height: 600
-    }
-  ]
+  const sliderImages = useMemo(() => {
+    return attachments
+      .filter((attachment) => 
+        attachment.place_in_page === "Slider" && 
+        attachment.filemanager?.url
+      )
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .map((attachment) => ({
+        id: attachment.id,
+        name: attachment.filemanager?.name || `slider-${attachment.id}`,
+        img_url: attachment.filemanager.url
+      }));
+  }, [attachments]);
+
+  if (sliderImages.length === 0) {
+    return null;
+  }
 
   return (
     <section className={cn(
@@ -60,7 +49,7 @@ export const ChooseLaserMachineSlider: React.FC<ChooseLaserMachineSliderProps> =
         </h2>
         <Carousel className={cn("[&>div]:overflow-visible")} opts={{align: "start"}}>
           <CarouselContent className="-ml-5 max-md:-ml-2">
-            {data.map((item) => (
+            {sliderImages.map((item) => (
               <CarouselItem
                 key={item.id}
                 className={cn(
@@ -72,8 +61,8 @@ export const ChooseLaserMachineSlider: React.FC<ChooseLaserMachineSliderProps> =
                 <div className="block overflow-hidden rounded-3xl">
                   <Image
                     src={item.img_url}
-                    width={item.width}
-                    height={item.height}
+                    width={668}
+                    height={600}
                     alt={item.name}
                     className="w-full h-full object-cover"
                   />
@@ -85,12 +74,14 @@ export const ChooseLaserMachineSlider: React.FC<ChooseLaserMachineSliderProps> =
             '-left-[40px]',
             "max-xl:left-[20px]",
             "max-md:left-[10px]",
+            sliderImages.length < 3 && "xl:hidden",
             className
           )}/>
           <CarouselNext className={cn(
             '-right-[40px]',
             "max-xl:right-[20px]",
             "max-md:right-[10px]",
+            sliderImages.length < 3 && "xl:hidden",
             className
           )}/>
           <CarouselDots className="absolute -bottom-13 left-0 right-0 max-md:-bottom-10"/>

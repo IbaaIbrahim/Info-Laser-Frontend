@@ -17,22 +17,26 @@ interface ProductGallerySliderProps extends ClassName {
 
 export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({images, className, labels}) => {
   const processedImages = images
-    .filter((img) => img.type !== "video" && img.filemanager && img.filemanager.url)
+    .filter(
+      (img) =>
+        img.place_in_page === "MainPage" &&
+        img.type !== "video" &&
+        img.filemanager &&
+        img.filemanager.url
+    )
     .map((img) => ({
       url: img.filemanager!.url,
       thumbnail: img.filemanager!.url,
-      alt: img.name || "Изображение товара",
+      alt: img.filemanager.name || "Изображение товара",
       type: img.type,
-      isMain: img.is_main ?? false,
       width: img.width,
       height: img.height
-    }))
-    .sort((a, b) => (b.isMain ? 1 : -1));
-
-  // const video = images.find((img) => img.type === "video");
+    }));
 
   // Ищем видео из бэка
-  const rawVideo = images.find((img) => img.type === "video");
+  const rawVideo = images.find(
+    (img) => img.type === "video" && img.place_in_page === "MainPage"
+  );
 
   // Преобразуем ссылку YouTube в embed
   const getYoutubeEmbedUrl = (url: string) => {
@@ -42,10 +46,10 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
     return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : null;
   };
 
+  const videoUrl = rawVideo?.external_url || rawVideo?.filemanager?.url || "";
+
   // Делаем embed только если URL — реально YouTube
-  const embedUrl = rawVideo?.filemanager?.url
-    ? getYoutubeEmbedUrl(rawVideo.filemanager.url)
-    : null;
+  const embedUrl = videoUrl ? getYoutubeEmbedUrl(videoUrl) : null;
 
   // Видео считаем видео только если embedUrl существует
   const video = embedUrl ? rawVideo : null;
@@ -98,14 +102,6 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
     };
   }, [isVideoOpen]);
 
-  // // Преобразуем ссылку на YouTube в embed-ссылку
-  // const getYoutubeEmbedUrl = (url: string) => {
-  //   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
-  //   return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : null;
-  // };
-
-  // const embedUrl = video?.filemanager.url ? getYoutubeEmbedUrl(video.filemanager.url) : null;
-
   return (
     <>
       <div className={cn(
@@ -144,12 +140,10 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
         {/* Основной слайдер */}
         <div
           className={cn(
-            "relative overflow-hidden col-start-3 col-end-13 h-fit rounded-bl-3xl rounded-tl-3xl",
+            "relative col-start-3 col-end-13 h-fit rounded-bl-3xl rounded-tl-3xl overflow-hidden",
             "max-md:col-span-full"
           )}
-          ref={emblaMainRef}
         >
-
           {labels && labels.map((label) => (
             (label.slug === 'hit' || label.slug === 'in_sale' || label.slug === 'new') && (
               <p
@@ -175,45 +169,50 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
             )
           ))}
 
-          <PhotoProvider>
-            <ul
-              className={cn(
-                "flex",
-                "max-md:gap-x-2 max-md:px-2"
-              )}
-            >
-              {processedImages && processedImages.length > 0 ? (
-                processedImages.map((image, idx) => (
+          <div
+            className="overflow-hidden rounded-bl-3xl rounded-tl-3xl"
+            ref={emblaMainRef}
+          >
+            <PhotoProvider>
+              <ul
+                className={cn(
+                  "flex",
+                  "max-md:gap-x-2 max-md:px-2"
+                )}
+              >
+                {processedImages && processedImages.length > 0 ? (
+                  processedImages.map((image, idx) => (
+                    <li
+                      key={idx}
+                      className={cn(
+                        "min-w-full max-h-[475px] flex justify-center bg-[var(--gray)] rounded-3xl p-3",
+                        "max-md:min-w-0 max-md:shrink-0 max-md:grow-0 max-md:basis-[85%] max-md:rounded-[20px]"
+                      )}
+                    >
+                      <PhotoView src={image.url}>
+                        <Image
+                          className="w-full h-full object-contain cursor-zoom-in"
+                          src={image.url}
+                          alt={image.alt || "Фото продукта"}
+                          width={image.width || 800}
+                          height={image.height || 600}
+                        />
+                      </PhotoView>
+                    </li>
+                  ))
+                ) : (
                   <li
-                    key={idx}
                     className={cn(
-                      "min-w-full max-h-[475px] flex justify-center bg-[var(--gray)] rounded-3xl p-3",
+                      "min-w-full min-h-[475px] max-h-[475px] flex items-center justify-center bg-gray-200 text-gray-400 text-sm rounded-3xl p-3",
                       "max-md:min-w-0 max-md:shrink-0 max-md:grow-0 max-md:basis-[85%] max-md:rounded-[20px]"
                     )}
                   >
-                    <PhotoView src={image.url}>
-                      <Image
-                        className="w-full h-full object-contain cursor-zoom-in"
-                        src={image.url}
-                        alt={image.alt || "Фото продукта"}
-                        width={image.width || 800}
-                        height={image.height || 600}
-                      />
-                    </PhotoView>
+                    нет фото
                   </li>
-                ))
-              ) : (
-                <li
-                  className={cn(
-                    "min-w-full min-h-[475px] max-h-[475px] flex items-center justify-center bg-gray-200 text-gray-400 text-sm rounded-3xl p-3",
-                    "max-md:min-w-0 max-md:shrink-0 max-md:grow-0 max-md:basis-[85%] max-md:rounded-[20px]"
-                  )}
-                >
-                  нет фото
-                </li>
-              )}
-            </ul>
-          </PhotoProvider>
+                )}
+              </ul>
+            </PhotoProvider>
+          </div>
 
           {/* Кнопка "влево" */}
           <button

@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import {Container} from "@/components/shared/Container";
 import {cn} from "@/lib/utils";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
@@ -18,29 +18,20 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
     return null;
   }
 
-  const data = [
-    {
-      id: 1,
-      name: 'banner-1',
-      img_url: '/img/product/materials/1.jpg',
-      width: 1370,
-      height: 720
-    },
-    {
-      id: 2,
-      name: 'banner-2',
-      img_url: '/img/product/materials/2.jpg',
-      width: 671,
-      height: 345
-    },
-    {
-      id: 3,
-      name: 'banner-3',
-      img_url: '/img/product/materials/3.jpg',
-      width: 671,
-      height: 345
-    }
-  ];
+  const materialsWithAssets = useMemo(() => {
+    return materials.map((material) => {
+      const iconAttachment = material.attachments?.find((attachment) => attachment.place_in_page === "Icon");
+      const mainAttachments = (material.attachments ?? [])
+        .filter((attachment) => attachment.place_in_page === "Main")
+        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+      return {
+        ...material,
+        iconUrl: iconAttachment?.filemanager?.url,
+        mainAttachments
+      };
+    });
+  }, [materials]);
 
   return (
     <section className={cn("", className)}>
@@ -57,7 +48,7 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
               "max-xl:place-self-start max-xl:justify-start max-xl:overflow-x-auto max-xl:overflow-y-hidden max-xl:max-w-full",
               "max-md:rounded-4xl"
             )}>
-              {materials.map((material) => (
+              {materialsWithAssets.map((material) => (
                 <li key={material.id}>
                   <TabsTrigger
                     value={String(material.id)}
@@ -70,32 +61,33 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
                       "max-md:text-xs"
                     )}
                   >
-                    <Image
-                      src={material.image_url}
-                      width={30}
-                      height={30}
-                      alt={material.name}
-                      className={cn(
-                        "rounded-full object-cover shrink-0",
-                        "max-md:max-w-5 max-md:max-h-5"
-                      )}
-                    />
-                    {material.name}
+                    {material.iconUrl && (
+                      <Image
+                        src={material.iconUrl}
+                        width={30}
+                        height={30}
+                        alt={material.name}
+                        className={cn(
+                          "rounded-full object-cover shrink-0",
+                          "max-md:max-w-5 max-md:max-h-5"
+                        )}
+                      />
+                    )}
+                    <span className="whitespace-nowrap">{material.name}</span>
                   </TabsTrigger>
                 </li>
               ))}
             </ul>
           </TabsList>
 
-          {materials.map((material) => (
+          {materialsWithAssets.map((material) => (
             <TabsContent key={material.id} value={String(material.id)} asChild>
               <div className="text-center">
-                <p className="text-lg font-medium">Материал: {material.name}</p>
                 <ul className={cn(
                   "grid grid-cols-12 gap-5 rounded-4xl overflow-hidden",
                   "max-md:rounded-[20px] max-md:gap-1"
                 )}>
-                  {data.slice(0, 3).map((item, index) => (
+                  {material.mainAttachments?.slice(0, 3).map((item, index) => (
                     <li
                       key={item.id}
                       className={cn(
@@ -106,11 +98,13 @@ export const ProductMaterialsTabs: React.FC<ProductMaterialsTabsProps> = ({mater
                       )}
                     >
                       <Image
-                        src={item.img_url}
-                        width={item.width}
-                        height={item.height}
-                        alt={item.name}
-                        className=""
+                        src={item.filemanager?.url ?? ""}
+                        width={item.width ?? 1200}
+                        height={item.height ?? 800}
+                        alt={item.filemanager?.name ?? ""}
+                        className={cn(
+                          "object-cover w-full h-full",
+                        )}
                       />
                     </li>
                   ))}

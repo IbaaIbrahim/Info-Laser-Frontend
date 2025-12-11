@@ -91,7 +91,11 @@ const CartPage = () => {
                               "max-md:w-[60px] max-md:h-[60px]"
                             )}>
                             {(() => {
-                              const mainImage = item.product_attachments?.find(item => item?.is_main);
+                              const mainImage = item.product_attachments?.find(
+                                (attachment) =>
+                                  attachment?.place_in_page === "MainPage" &&
+                                  attachment?.filemanager?.url
+                              );
 
                               if (mainImage?.filemanager?.url) {
                                 return (
@@ -99,7 +103,7 @@ const CartPage = () => {
                                     key={mainImage.id}
                                     className="hover:scale-110 transition-transform z-10 w-full h-full"
                                     src={mainImage.filemanager.url}
-                                    alt={mainImage.name || "Фото продукта"}
+                                    alt={mainImage.filemanager.name || "Фото продукта"}
                                     width={100}
                                     height={90}
                                   />

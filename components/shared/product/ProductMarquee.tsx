@@ -153,7 +153,10 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
       )}>
         {(() => {
           const mainImage = images.find(
-            (image) => Boolean(image && image.is_main && image.filemanager && image.filemanager.url)
+            (image) =>
+              image.place_in_page === "MainPage" &&
+              image.filemanager &&
+              image.filemanager.url
           );
 
           if (!mainImage || !mainImage.filemanager?.url) {
@@ -169,7 +172,7 @@ export const ProductMarquee: React.FC<ProductMarqueeProps> = ({className, images
               key={mainImage.id}
               className="absolute z-30 w-full h-full object-cover"
               src={mainImage.filemanager.url}
-              alt={mainImage.name}
+              alt={mainImage.filemanager.name || "Изображение товара"}
               width={700}
               height={400}
             />

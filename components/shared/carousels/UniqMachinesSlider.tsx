@@ -137,7 +137,11 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className
                             </ul>
                             
                             {(() => {
-                              const mainImage = product.product_attachments?.find(item => item?.is_main);
+                              const mainImage = product.product_attachments?.find(
+                                (item) =>
+                                  item?.place_in_page === "MainPage" &&
+                                  item?.filemanager?.url
+                              );
 
                               if (mainImage?.filemanager?.url) {
                                 return (
@@ -145,7 +149,7 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className
                                     key={mainImage.id}
                                     className="self-center mb-3 group-hover:opacity-0"
                                     src={mainImage.filemanager.url}
-                                    alt={mainImage.name || "Фото продукта"}
+                                    alt={mainImage.filemanager.name || "Фото продукта"}
                                     width={230}
                                     height={170}
                                   />

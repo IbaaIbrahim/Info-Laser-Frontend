@@ -96,6 +96,11 @@ export interface Material {
   image_url: string;
   created_at?: string;
   updated_at?: string;
+  pivot?: {
+    product_id: number;
+    material_id: number;
+  };
+  attachments?: MaterialAttachment[];
 }
 
 export interface Supplier {
@@ -151,6 +156,19 @@ export interface Attachments {
   filemanager_id?: string;
   place_in_page?: string;
   filemanager: FileManager;
+  created_at?: string | null;
+  updated_at?: string | null;
+}
+
+export interface MaterialAttachment {
+  id: number;
+  material_id: number;
+  place_in_page: "Icon" | "Main" | string;
+  order?: number;
+  filemanager_id?: string;
+  width?: number;
+  height?: number;
+  filemanager?: FileManager;
   created_at?: string | null;
   updated_at?: string | null;
 }

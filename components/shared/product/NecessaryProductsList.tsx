@@ -16,7 +16,11 @@ const getMainImageUrl = (product: Product): string => {
       return false;
     }
 
-    return Boolean(attachment.is_main) && attachment.type === "image";
+    return (
+      attachment.place_in_page === "MainPage" &&
+      attachment.type === "image" &&
+      Boolean(attachment.filemanager?.url)
+    );
   });
 
   if (mainImage?.filemanager?.url) {

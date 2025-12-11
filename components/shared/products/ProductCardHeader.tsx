@@ -19,7 +19,11 @@ export const ProductCardHeader: React.FC<ProductCardHeaderProps> = (
     onClick
   }) => {
 
-  const mainImage = product_attachments?.find((item) => item.is_main);
+  const mainImage = product_attachments?.find(
+    (item) =>
+      item.place_in_page === "MainPage" &&
+      item.filemanager?.url
+  );
   const activeCategory = categories?.find(cat => cat.slug === currentCategorySlug);
   const categorySlug = activeCategory?.slug || categories?.[0]?.slug || '';
 
@@ -39,9 +43,9 @@ export const ProductCardHeader: React.FC<ProductCardHeaderProps> = (
           <Image
             className="transition-transform"
             src={mainImage.filemanager?.url}
-            alt={mainImage.name}
-            width={mainImage.width}
-            height={mainImage.height}
+            alt={mainImage.filemanager?.name || "Изображение товара"}
+            width={mainImage.width || 80}
+            height={mainImage.height || 80}
           />
         ) : (
           <div className="w-[80px] h-[80px] bg-gray-200 text-gray-400 text-xs flex items-center justify-center">

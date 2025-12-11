@@ -65,7 +65,11 @@ export const ProductCard: React.FC<Product> = (
         onClick={onClick}
       >
         {(() => {
-          const mainImage = product_attachments?.find(item => item?.is_main);
+          const mainImage = product_attachments?.find(
+            (item) =>
+              item?.place_in_page === "MainPage" &&
+              item?.filemanager?.url
+          );
 
           if (mainImage?.filemanager?.url) {
             return (
@@ -73,7 +77,7 @@ export const ProductCard: React.FC<Product> = (
                 key={mainImage.id}
                 className={cn("hover:scale-110 transition-transform z-10")}
                 src={mainImage.filemanager.url}
-                alt={mainImage.name || "Фото продукта"}
+                alt={mainImage.filemanager.name || "Фото продукта"}
                 width={220}
                 height={220}
               />

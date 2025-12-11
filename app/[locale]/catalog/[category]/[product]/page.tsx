@@ -173,31 +173,20 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
           )}>
             <div className={"mb-5"}>
               <h2 className={"text-2xl font-semibold mb-5 max-md:text-lg max-md:mb-3"}>Описание</h2>
-              <p className={"font-semibold mb-2 max-md:text-sm"}>
-                Лазерный станок WATTSAN micro 0203 — малогабаритный настольный станок для мелкосерийного производства.
-                Предназначен для лазерной резки и гравировки неметаллических материалов, дерева до 3 мм и пластика до
-                5-6
-                мм.
-              </p>
-              <p className={"text-sm text-[var(--gray-text)] mb-3 max-md:text-xs max-md:mb-1"}>
-                Прост в работе и в обслуживании, долговечен. Станок можно использовать в производстве рекламы, штампов,
-                сувениров, персонализации продукции, деревообработке и полиграфии.
-              </p>
-              <p className={"text-sm text-[var(--gray-text)] max-md:text-xs"}>
-                Рабочий стол станка имеет размер 200×300 мм. Мощность лазерной трубки составляет 40 Ватт. Чтобы данный
-                станок прослужил вам дольше, рекомендуем сразу установить на него систему охлаждения для лазерной
-                трубки.
-                В качестве тюнинга, на станок можно установить более мощный лазерный излучатель.
-              </p>
+              <p className={"mb-2 max-md:text-sm"}>{product.fulldescription}</p>
             </div>
             <BannerProduct/>
           </section>
           <FullCharacteristics characteristics={product.characteristics ?? []}/>
         </Container>
       </div>
-      <ImportantCharacteristics className={"mb-15 max-md:mb-5"} characteristics={product.characteristics ?? []}/>
-      <ProductMaterialsTabs className={"mb-15 max-md:mb-5"} materials={product.materials ?? []}/>
-      <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"}/>
+      {product.characteristics && product.characteristics.length > 0 && (
+        <ImportantCharacteristics className={"mb-15 max-md:mb-5"} characteristics={product.characteristics} />
+      )}
+      {(product.materials && product.materials.length > 0) && (
+        <ProductMaterialsTabs className="mb-15 max-md:mb-5" materials={product.materials} />
+      )}
+      <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"} attachments={product.product_attachments}/>
       <ProductGeneralAccessoriesBanner className={"mb-15 max-md:mb-5"}/>
       <ProductMarquee className={"mb-25 max-md:mb-10"} images={product.product_attachments ?? []}/>
       <PurchaseOrder className={"mb-25 max-md:mb-20"}/>
