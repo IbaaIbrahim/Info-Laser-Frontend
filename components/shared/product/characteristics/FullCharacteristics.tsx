@@ -18,12 +18,16 @@ export const FullCharacteristics: React.FC<FullCharacteristicsProps> = (
 
   if (!characteristics) return null;
 
-  // Сортируем: сначала is_featured, затем по order
-  const sorted = [...characteristics].sort(
-    (a, b) =>
-      Number(b.is_featured ?? 0) - Number(a.is_featured ?? 0) ||
-      Number(a.order ?? 0) - Number(b.order ?? 0)
-  );
+  // Сначала выделяем избранные, затем остальные (оба списка сортируем по order)
+  const featured = characteristics
+    .filter((char) => char.is_featured === 1 || char.is_featured === true)
+    .sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
+
+  const regular = characteristics
+    .filter((char) => !char.is_featured || char.is_featured === 0)
+    .sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
+
+  const sorted = [...featured, ...regular];
 
   // Делим на 2 колонки (для desktop)
   const midpoint = Math.ceil(sorted.length / 2);
@@ -61,7 +65,7 @@ export const FullCharacteristics: React.FC<FullCharacteristicsProps> = (
                   {spec.name}
                 </dt>
                 <dd className="relative text-right z-30">
-                  {spec.value} {spec.unit}
+                  {spec.value}{spec.unit ? ` ${spec.unit}` : ""}
                 </dd>
               </div>
             ))}
@@ -83,7 +87,7 @@ export const FullCharacteristics: React.FC<FullCharacteristicsProps> = (
               {spec.name}
             </dt>
             <dd className="relative text-right z-30">
-              {spec.value} {spec.unit}
+              {spec.value}{spec.unit ? ` ${spec.unit}` : ""}
             </dd>
           </div>
         ))}
@@ -106,7 +110,7 @@ export const FullCharacteristics: React.FC<FullCharacteristicsProps> = (
                 {spec.name}
               </dt>
               <dd className="relative text-right z-30">
-                {spec.value} {spec.unit}
+                {spec.value}{spec.unit ? ` ${spec.unit}` : ""}
               </dd>
             </div>
           ))}

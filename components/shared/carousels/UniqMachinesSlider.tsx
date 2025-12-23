@@ -124,14 +124,14 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className
                               "flex flex-wrap text-xs gap-2 mb-3 group-hover:text-white",
                               "max-md:text-[10px]"
                             )}>
-                              {product.characteristics
-                                ?.filter(c => Boolean(c.is_featured))
-                                .map((c, idx) => (
+                              {product.productCharacteristics
+                                ?.filter(char => char.is_featured === 1 || char.is_featured === true)
+                                .map((char, idx) => (
                                   <li
                                     key={idx}
                                     className={cn("bg-gray-200 rounded-3xl px-3 py-1 group-hover:bg-white/20")}
                                   >
-                                    {c.name} {c.value}
+                                    {char.name} {char.value}{char.unit ? ` ${char.unit}` : ""}
                                   </li>
                                 ))}
                             </ul>

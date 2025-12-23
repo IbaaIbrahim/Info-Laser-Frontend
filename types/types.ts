@@ -64,7 +64,7 @@ export interface Product {
   materials?: Material[];
   labels?: Label[];
   product_attachments?: Attachments[];
-  characteristics?: Characteristics[];
+  productCharacteristics?: Characteristics[];
   category_ids: number[];
   onClick?: () => void,
   quantity?: number,
@@ -75,13 +75,11 @@ export interface Characteristics {
   id: number;
   order: number;
   name: string;
-  unit: string;
-  created_at?: string;
-  updated_at?: string;
+  unit: string | null;
   characteristic_id?: number;
   value?: string;
-  is_featured?: boolean;
-  laravel_through_key?: number;
+  is_featured?: number | boolean;
+  icon?: FileManager | null;
 }
 
 export interface Pivot {

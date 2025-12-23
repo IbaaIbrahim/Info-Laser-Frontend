@@ -127,7 +127,7 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
               </div>
             </div>
 
-            <ShortCharacteristics characteristics={product.characteristics ?? []}/>
+            <ShortCharacteristics characteristics={product.productCharacteristics ?? []}/>
 
             <div className={"flex justify-between items-center mb-7"}>
               <AllCharacteristicsBtn/>
@@ -177,11 +177,11 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
             </div>
             <BannerProduct/>
           </section>
-          <FullCharacteristics characteristics={product.characteristics ?? []}/>
+          <FullCharacteristics characteristics={product.productCharacteristics ?? []}/>
         </Container>
       </div>
-      {product.characteristics && product.characteristics.length > 0 && (
-        <ImportantCharacteristics className={"mb-15 max-md:mb-5"} characteristics={product.characteristics} />
+      {product.productCharacteristics && product.productCharacteristics.length > 0 && (
+        <ImportantCharacteristics className={"mb-15 max-md:mb-5"} characteristics={product.productCharacteristics} />
       )}
       {(product.materials && product.materials.length > 0) && (
         <ProductMaterialsTabs className="mb-15 max-md:mb-5" materials={product.materials} />
