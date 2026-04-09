@@ -1,13 +1,13 @@
 "use client";
 
-import React, {useState} from "react";
-import {Container} from "@/components/shared/Container";
-import {cn} from "@/lib/utils";
+import React, { useState } from "react";
+import { Container } from "@/components/shared/Container";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import {Product, OneProductCategory} from "@/types/types";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/Tabs";
+import { Product, OneProductCategory } from "@/types/types";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import Image from "next/image";
-import {Button} from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import {
   Carousel,
   CarouselContent,
@@ -15,13 +15,13 @@ import {
   CarouselNext,
   CarouselPrevious
 } from "@/components/ui/Carousel";
-import {ClassName} from "@/types/types";
+import { ClassName } from "@/types/types";
 
 interface UniqMachinesSliderProps extends ClassName {
   products: Product[];
 }
 
-export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className, products}) => {
+export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({ className, products }) => {
 
   const uniqueCategories: OneProductCategory[] = Array.from(
     new Map(
@@ -84,7 +84,7 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className
 
             return (
               <TabsContent asChild key={category.id} value={String(category.id)}>
-                <Carousel className={"max-md:[&>div]:overflow-visible"} opts={{align: "start"}}>
+                <Carousel className={"max-md:[&>div]:overflow-visible"} opts={{ align: "start" }}>
                   <CarouselContent className={cn(
                     "-ml-5",
                     "max-md:-ml-2"
@@ -135,7 +135,7 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className
                                   </li>
                                 ))}
                             </ul>
-                            
+
                             {(() => {
                               const mainImage = product.product_attachments?.find(
                                 (item) =>
@@ -200,13 +200,13 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({className
                           "max-xl:left-[20px]",
                           "max-md:left-[10px]",
                           className
-                        )}/>
+                        )} />
                       <CarouselNext className={cn(
                         "-right-[40px]",
                         "max-xl:right-[20px]",
                         "max-md:right-[10px]",
                         className
-                      )}/>
+                      )} />
                     </>
                   )}
                 </Carousel>

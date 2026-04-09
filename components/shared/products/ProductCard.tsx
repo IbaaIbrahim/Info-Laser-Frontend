@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import {cn, formatPrice} from "@/lib/utils";
-import {Check, Clock3, Star} from "lucide-react";
-import {Product} from "@/types/types";
-import {AddToCartBtn} from "@/components/shared/btns/AddToCartBtn";
-import {UniqButtonLink} from "@/components/ui/UniqButtonLink";
+import { cn, formatPrice } from "@/lib/utils";
+import { Check, Clock3, Star } from "lucide-react";
+import { Product } from "@/types/types";
+import { AddToCartBtn } from "@/components/shared/btns/AddToCartBtn";
+import { UniqButtonLink } from "@/components/ui/UniqButtonLink";
 
 export const ProductCard: React.FC<Product> = (
   {
@@ -41,17 +41,17 @@ export const ProductCard: React.FC<Product> = (
               label.slug === 'new' ? "bg-[var(--green)]" : ""
             )}
           >
-          <span
-            className={cn(
-              "absolute ",
-              label.slug === 'hit' ? "right-[21px] bottom-[6px]" : "right-[16px] bottom-[11px] font-semibold",
-              label.slug === 'new' ? "-rotate-45 right-[3px]" : "",
-            )}
-          >
-            {label.slug === 'hit' ? "хит" : ""}
-            {label.slug === 'new' ? "new" : ""}
-            {label.slug === 'in_sale' ? "%" : ""}
-          </span>
+            <span
+              className={cn(
+                "absolute ",
+                label.slug === 'hit' ? "right-[21px] bottom-[6px]" : "right-[16px] bottom-[11px] font-semibold",
+                label.slug === 'new' ? "-rotate-45 right-[3px]" : "",
+              )}
+            >
+              {label.slug === 'hit' ? "хит" : ""}
+              {label.slug === 'new' ? "new" : ""}
+              {label.slug === 'in_sale' ? "%" : ""}
+            </span>
           </p>
         )
       ))}
@@ -105,7 +105,7 @@ export const ProductCard: React.FC<Product> = (
                 "inline-flex items-center gap-x-1 place-self-start text-xs text-[var(--violet)] bg-[var(--violet-dark)] rounded-2xl p-2 mb-3 leading-none",
                 "max-md:text-[10px] max-md:py-1 max-md:mb-2"
               )}>
-              <Check className="text-[var(--violet)]" size={12}/>
+              <Check className="text-[var(--violet)]" size={12} />
               В наличии
             </span>
           ) :
@@ -115,7 +115,7 @@ export const ProductCard: React.FC<Product> = (
                 "inline-flex items-center gap-x-1 place-self-start text-xs text-[var(--green)] bg-[var(--green)] rounded-2xl p-2 mb-3 leading-none",
                 "max-md:text-[10px] max-md:py-1 max-md:mb-2"
               )}>
-              <Clock3 className='text-[var(--green)]' size={12}/>
+              <Clock3 className='text-[var(--green)]' size={12} />
               Под заказ
             </span>
           )
@@ -202,11 +202,11 @@ export const ProductCard: React.FC<Product> = (
 
         <div className={"flex items-center text-xs gap-x-5 max-lg:gap-x-2 max-md:text-[10px]"}>
           <span className="flex items-center justify-center gap-x-1 text-center leading-none">
-            <Star className={"fill-[var(--gold)]"} strokeWidth={0} size={12}/>
+            <Star className={"fill-[var(--gold)]"} strokeWidth={0} size={12} />
             {rating}
           </span>
           <p className="flex items-center justify-center gap-x-1 text-center leading-none">
-            <Check className="text-[var(--violet)]" size={12}/>
+            <Check className="text-[var(--violet)]" size={12} />
             {guaranteeContent} {guarantee} год
           </p>
         </div>

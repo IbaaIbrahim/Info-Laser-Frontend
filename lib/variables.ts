@@ -1,4 +1,4 @@
-import type {YMapLocationRequest} from "@yandex/ymaps3-types";
+import type { YMapLocationRequest } from "@yandex/ymaps3-types";
 
 export const PHONE = "8 (800) 222-27-41";
 export const EMAIL = "info@infolaser.ru";
@@ -35,3 +35,9 @@ export const deliveryPlaces = [
     latitude: 59.876147,
   },
 ];
+
+
+export const HOME_PAGE_CONTENT = {
+  id: 1,
+  heroSlider: "slider-1"
+}
