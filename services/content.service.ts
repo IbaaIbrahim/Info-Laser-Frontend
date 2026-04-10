@@ -18,8 +18,6 @@ export async function readGroupedPageContentAsJsonByFilter(filter: { page_id: st
 
     const contentResult = await contentApi.readByFilters(filterString);
 
-    console.log(contentResult);
-
     const structuredSectionsInPage: Record<string, Content[]> = {}
     const contentJsonGroupedBySectionInPage: Record<string, ContentJson[]> = {}
 
