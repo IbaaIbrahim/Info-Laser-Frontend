@@ -29,9 +29,6 @@ export default async function MainPage() {
   const { products } = await getProducts();
   const homeContent = await readGroupedPageContentAsJsonByFilter({ page_id: String(HOME_PAGE_CONTENT.id) });
 
-  console.log(homeContent);
-
-
   return (
     <>
       <BannerMain sliders={homeContent[HOME_PAGE_CONTENT.heroSlider].map(HeroSlider.fromContentJson)} />
