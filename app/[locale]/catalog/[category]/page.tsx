@@ -1,18 +1,18 @@
-import {Container} from "@/components/shared/Container";
-import {Filters} from "@/components/shared/filters/Filters";
-import {ProductsGroupList} from "@/components/shared/products/ProductsGroupList";
-import {getProducts} from "@/api/api";
-import {CategoriesGoods} from "@/components/shared/categories/CategoriesGoods";
-import {Sorting} from "@/components/shared/sorting/Sorting";
+import { Container } from "@/components/shared/Container";
+import { Filters } from "@/components/shared/filters/Filters";
+import { ProductsGroupList } from "@/components/shared/products/ProductsGroupList";
+import { getProducts } from "@/api/api";
+import { CategoriesGoods } from "@/components/shared/categories/CategoriesGoods";
+import { Sorting } from "@/components/shared/sorting/Sorting";
 import Image from "next/image";
-import {cn} from "@/lib/utils";
-import {BannerCategory} from "@/components/shared/carousels/banners/BannerCategory";
-import {sortProducts} from "@/lib/sorting";
+import { cn } from "@/lib/utils";
+import { BannerCategory } from "@/components/shared/carousels/banners/BannerCategory";
+import { sortProducts } from "@/lib/sorting";
 import React from "react";
-import {PaginationControls} from "@/components/shared/products/PaginationControls";
+import { PaginationControls } from "@/components/shared/products/PaginationControls";
 import qs from "qs";
-import {getTranslations} from "next-intl/server";
-import {CircleCheck} from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { CircleCheck } from "lucide-react";
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -21,6 +21,10 @@ interface CategoryPageProps {
     order_column?: string;
     order_dir?: "asc" | "desc";
     "filter[label_id]"?: string;
+    priceFrom?: string;
+    priceTo?: string;
+    materials?: string;
+    manufacturer?: string;
   }>;
 }
 
@@ -51,11 +55,11 @@ const test_data = {
   ],
 };
 
-export async function generateMetadata({params: paramsPromise}: {
+export async function generateMetadata({ params: paramsPromise }: {
   params: Promise<{ locale: string; category: string }>;
 }) {
-  const {locale, category} = await paramsPromise;
-  const t = await getTranslations({locale});
+  const { locale, category } = await paramsPromise;
+  const t = await getTranslations({ locale });
   const allProducts = await getProducts();
 
   const uniqueCategories = Array.from(
@@ -76,9 +80,9 @@ export async function generateMetadata({params: paramsPromise}: {
   };
 }
 
-const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
+const CategoryPage = async ({ params, searchParams }: CategoryPageProps) => {
   const allProducts = await getProducts();
-  const {category} = await params;
+  const { category } = await params;
 
   const t = await getTranslations();
   const sp = await searchParams;
@@ -92,7 +96,7 @@ const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
     ...sp,
     page: undefined,
   };
-  const queryString = qs.stringify(currentParams, {encode: false});
+  const queryString = qs.stringify(currentParams, { encode: false });
 
   const uniqueCategories = Array.from(
     new Map(
@@ -109,6 +113,65 @@ const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
       product.category_ids.includes(currentCategory.id!)
     )
     : [];
+
+  let minPrice = 0;
+  let maxPrice = 150000;
+  const materialsList: { name: string; value: string }[] = [];
+  const manufacturersList: { name: string; value: string }[] = [];
+
+  if (filteredProducts.length > 0) {
+    const prices = filteredProducts.map((p) => p.inStock && p.stockPrice > 0 ? p.stockPrice : p.orderPrice).filter(p => !isNaN(p) && p !== null);
+    if (prices.length > 0) {
+      minPrice = Math.min(...prices);
+      maxPrice = Math.max(...prices);
+      if (minPrice === maxPrice) {
+        maxPrice += 10;
+      }
+    }
+
+    const materialsMap = new Map();
+    const manufacturersMap = new Map();
+    console.log(filteredProducts);
+
+    filteredProducts.forEach((p) => {
+      p.materials?.forEach((m) => materialsMap.set(m.slug, { name: m.name, value: m.slug }));
+      if (p.laser_suppliers?.slug) {
+        manufacturersMap.set(p.laser_suppliers.slug, { name: p.laser_suppliers.name, value: p.laser_suppliers.slug });
+      }
+    });
+    materialsMap.forEach((v) => materialsList.push(v));
+    manufacturersMap.forEach((v) => manufacturersList.push(v));
+  }
+
+  const priceFromParam = parseInt(sp.priceFrom || "0", 10);
+  const priceToParam = parseInt(sp.priceTo || "999999999", 10);
+  const materialsFilter = sp.materials ? sp.materials.split(',') : [];
+  const mfgFilter = sp.manufacturer ? sp.manufacturer.split(',') : [];
+
+  filteredProducts = filteredProducts.filter((product) => {
+    let isValid = true;
+    const price = product.inStock && product.stockPrice > 0 ? product.stockPrice : product.orderPrice;
+
+    if (sp.priceFrom || sp.priceTo) {
+      if (price < priceFromParam || price > priceToParam) {
+        isValid = false;
+      }
+    }
+
+    if (materialsFilter.length > 0) {
+      if (!product.materials?.some(m => materialsFilter.includes(m.slug))) {
+        isValid = false;
+      }
+    }
+
+    if (mfgFilter.length > 0) {
+      if (!product.laser_suppliers?.slug || !mfgFilter.includes(product.laser_suppliers.slug)) {
+        isValid = false;
+      }
+    }
+
+    return isValid;
+  });
 
   filteredProducts = sortProducts(filteredProducts, order_column, order_dir, filterLabelId);
 
@@ -176,12 +239,18 @@ const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
             "max-lg:flex-col max-lg:gap-x-0 max-lg:gap-y-3"
           )}>
             <aside className={cn("flex-0 min-w-[280px]")}>
-              <Filters className="mb-3 max-md:mb-0"/>
-              <BannerCategory className={"max-lg:hidden"}/>
+              <Filters
+                className="mb-3 max-md:mb-0"
+                materials={materialsList}
+                manufacturers={manufacturersList}
+                minPrice={Math.max(0, minPrice)}
+                maxPrice={maxPrice}
+              />
+              <BannerCategory className={"max-lg:hidden"} />
             </aside>
 
             <div className="flex-1">
-              <ProductsGroupList className="mb-3" products={paginatedProducts}/>
+              <ProductsGroupList className="mb-3" products={paginatedProducts} />
 
               <PaginationControls
                 currentPage={page}
@@ -215,7 +284,7 @@ const CategoryPage = async ({params, searchParams}: CategoryPageProps) => {
                 <ul className="space-y-3">
                   {test_data.data_second.map((item) => (
                     <li key={item.id} className="flex items-start gap-3">
-                      <CircleCheck size={20} className={"text-white fill-[var(--violet)]/30 shrink-0"}/>
+                      <CircleCheck size={20} className={"text-white fill-[var(--violet)]/30 shrink-0"} />
                       <p className={"text-sm"}>{item.text}</p>
                     </li>
                   ))}
