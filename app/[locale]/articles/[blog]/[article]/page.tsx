@@ -2,7 +2,7 @@ import { Container } from "@/components/shared/Container";
 import React from "react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { cn } from "@/lib/utils";
+import { cn, decodeHtml } from "@/lib/utils";
 import { getArticleDetails, getArticles } from "@/api/api";
 import { SocialList } from "@/components/shared/social/SocialList";
 import { ChevronLeft } from "lucide-react";
@@ -13,7 +13,7 @@ import { UniqButtonLink } from "@/components/ui/UniqButtonLink";
 import { ArticleContent } from "./components/article-content";
 
 interface ArticlePageProps {
-  params: Promise<{ article: string; blog: string }>;
+  params: Promise<{ article: string; blog: string; locale: string }>;
 }
 
 export async function generateMetadata(
@@ -40,9 +40,9 @@ export async function generateMetadata(
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const { article } = await params;
+  const { article, locale } = await params;
   let oneArticle;
-  
+
   try {
     oneArticle = await getArticleDetails(article);
   } catch {
@@ -73,7 +73,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               )}>
                 Дата:
                 <time className="ml-2 text-black" dateTime={oneArticle.publishedAt}>
-                  {oneArticle.publishedAt}
+                  {new Date(oneArticle.publishedAt.replace(" ", "T")).toLocaleDateString(locale, {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
                 </time>
               </p>
               <p className={cn(
@@ -81,20 +85,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 "max-lg:col-start-5 max-lg:col-end-13 max-lg:text-xs"
               )}>
                 Автор:
-                <span className="ml-2 text-black">Алексей Тихонов</span>
+                <span className="ml-2 text-black">{oneArticle?.author}</span>
               </p>
               <p className={cn(
                 "col-start-8 col-end-13 text-sm text-[var(--gray-text)] text-right",
                 "max-lg:col-start-1 max-lg:col-end-13 max-lg:text-start max-lg:text-xs"
               )}>
                 Раздел:
-                <span className="ml-2 text-black">Инструкции</span>
+                <span className="ml-2 text-black">{oneArticle.category.name}</span>
               </p>
             </div>
-            {oneArticle.image && (
+            {oneArticle?.filemanager?.url && (
               <Image
                 className="w-full max-h-[615px] rounded-3xl"
-                src={oneArticle.image}
+                src={oneArticle?.filemanager?.url}
                 alt={oneArticle.title}
                 width={1380}
                 height={615}
@@ -108,11 +112,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               "max-lg:relative max-lg:order-3 max-lg:col-span-full max-lg:flex max-lg:gap-x-5 max-lg:items-center max-lg:py-3"
             )}>
               <p className="font-semibold mb-3 text-center max-lg:text-start max-lg:mb-0 max-md:text-sm">Соцсети</p>
-              <SocialList 
+              <SocialList
                 className={cn(
                   "flex-col items-center",
                   "max-lg:flex-row"
-                )} 
+                )}
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 socialMedia={{} as any}
               />
@@ -133,54 +137,37 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 "max-md:text-lg max-md:mb-3"
               )}>Оглавление</p>
               <ul className={"space-y-2"}>
-                <li>
-                  <Link
-                    className={cn(
-                      "flex gap-2 text-sm transition-colors",
-                      "hover:text-[var(--violet)] focus:text-[var(--violet)]",
-                      "max-md:text-xs"
-                    )}
-                    href={"#how-laser-machine-works"}
-                  >
-                    <ChevronLeft
-                      size={20}
-                      className="flex-shrink-0 relative text-[var(--violet)] rotate-180"
-                    />
-                    Как работает станок для лазерной резки металла?
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={cn(
-                      "flex gap-2 text-sm transition-colors",
-                      "hover:text-[var(--violet)] focus:text-[var(--violet)]",
-                      "max-md:text-xs"
-                    )}
-                    href={"#laser-different"}
-                  >
-                    <ChevronLeft
-                      size={20}
-                      className="flex-shrink-0 relative text-[var(--violet)] rotate-180"
-                    />
-                    Главные отличия лазерной резки от других методов резки металла
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={cn(
-                      "flex gap-2 text-sm transition-colors",
-                      "hover:text-[var(--violet)] focus:text-[var(--violet)]",
-                      "max-md:text-xs"
-                    )}
-                    href={"#which-metals-can-be-sliced"}
-                  >
-                    <ChevronLeft
-                      size={20}
-                      className="flex-shrink-0 relative text-[var(--violet)] rotate-180"
-                    />
-                    Какие металлы можно резать?
-                  </Link>
-                </li>
+                {oneArticle.content
+                  .filter((item) => {
+                    const data = item.data as { tag?: boolean | string };
+                    return data.tag === true || data.tag === "true";
+                  })
+                  .map((item) => {
+                    const data = item.data as {
+                      tag?: boolean | string;
+                      slug?: string;
+                      title?: string;
+                      text?: string
+                    };
+                    return (
+                      <li key={item.uuid}>
+                        <Link
+                          className={cn(
+                            "flex gap-2 text-sm transition-colors",
+                            "hover:text-[var(--violet)] focus:text-[var(--violet)]",
+                            "max-md:text-xs"
+                          )}
+                          href={`#${data.slug || item.uuid}`}
+                        >
+                          <ChevronLeft
+                            size={20}
+                            className="flex-shrink-0 relative text-[var(--violet)] rotate-180"
+                          />
+                          {decodeHtml(data.title || data.text || "").replace(/<[^>]*>?/gm, '')}
+                        </Link>
+                      </li>
+                    );
+                  })}
               </ul>
             </aside>
           </div>

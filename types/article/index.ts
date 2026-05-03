@@ -1,4 +1,4 @@
-import { FileManager } from "../types";
+import { Category, FileManager } from "../types";
 
 export class Article {
   id!: number;
@@ -11,6 +11,11 @@ export class Article {
   isActive!: boolean;
   createdAt!: string;
   updatedAt!: string;
+  filemanager?: {
+    url: string
+  }
+  category: Category
+  author: string
 
   constructor(data: Record<string, unknown>) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,6 +30,9 @@ export class Article {
     this.isActive = d.is_active === 1;
     this.createdAt = d.created_at;
     this.updatedAt = d.updated_at;
+    this.filemanager = d.filemanager
+    this.category = d.category
+    this.author = d.author
   }
 
   static fromJson(json: unknown): Article {
@@ -88,6 +96,7 @@ export type ArticleContentData =
 
 export class ArticleTextWithListData {
   tag: string;
+  slug: string;
   text: string;
   list: { uuid: string; text: string }[];
 
@@ -95,6 +104,7 @@ export class ArticleTextWithListData {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const d = data as any;
     this.tag = String(d.tag);
+    this.slug = d.slug || "";
     this.text = d.text;
     this.list = d.list || [];
   }
@@ -102,6 +112,7 @@ export class ArticleTextWithListData {
 
 export class ArticleEditorData {
   tag: boolean;
+  slug: string;
   text: string;
   border: { width: number; color: string };
 
@@ -109,6 +120,7 @@ export class ArticleEditorData {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const d = data as any;
     this.tag = !!d.tag;
+    this.slug = d.slug || "";
     this.text = d.text;
     this.border = d.border || { width: 0, color: "#000" };
   }
@@ -148,6 +160,7 @@ export class ArticleProductData {
 
 export class ArticleTitleImageBodyData {
   tag: boolean;
+  slug: string;
   title: string;
   body: string;
   file: FileManager;
@@ -156,6 +169,7 @@ export class ArticleTitleImageBodyData {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const d = data as any;
     this.tag = Boolean(d.tag);
+    this.slug = d.slug || "";
     this.title = d.title;
     this.body = d.body;
     this.file = d.file;
@@ -164,6 +178,7 @@ export class ArticleTitleImageBodyData {
 
 export class ArticleTitleWithListData {
   tag: boolean;
+  slug: string;
   title: string;
   body: string;
   listStyle: "checkmark" | "numbered";
@@ -173,6 +188,7 @@ export class ArticleTitleWithListData {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const d = data as any;
     this.tag = Boolean(d.tag);
+    this.slug = d.slug || "";
     this.title = d.title;
     this.body = d.body;
     this.listStyle = d.listStyle;

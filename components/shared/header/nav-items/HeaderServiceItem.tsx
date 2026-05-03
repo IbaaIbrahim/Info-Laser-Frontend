@@ -1,18 +1,18 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
-import {cn} from "@/lib/utils";
+import React, { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import {Overlay} from "@/components/shared/Overlay";
-import {ChevronDown} from "lucide-react";
-import {useMedia} from "react-use";
-import {ClassName} from "@/types/types";
+import { Overlay } from "@/components/shared/Overlay";
+import { ChevronDown } from "lucide-react";
+import { useMedia } from "react-use";
+import { ClassName } from "@/types/types";
 
 interface Props extends ClassName {
   onClick?: () => void;
 }
 
-export const HeaderServiceItem: React.FC<Props> = ({className, onClick}) => {
+export const HeaderServiceItem: React.FC<Props> = ({ className, onClick }) => {
 
   const isMobile = useMedia("(max-width: 1280px)", false);
 
@@ -37,7 +37,7 @@ export const HeaderServiceItem: React.FC<Props> = ({className, onClick}) => {
 
   return (
     <>
-      <Overlay isOpen={!isMobile && isSpoilerOpen}/>
+      <Overlay isOpen={!isMobile && isSpoilerOpen} />
 
       <li
         onMouseLeave={() => setIsSpoilerOpen(false)}

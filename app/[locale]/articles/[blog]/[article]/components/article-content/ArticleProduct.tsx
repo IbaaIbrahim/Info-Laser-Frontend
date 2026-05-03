@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from "next/image";
-import { Star, Check, ShoppingCart } from "lucide-react";
+import { Star, Check } from "lucide-react";
 import { UniqButtonLink } from "@/components/ui/UniqButtonLink";
 import { decodeHtml } from "@/lib/utils";
 
@@ -59,9 +59,9 @@ export const ArticleProduct: React.FC<ArticleProductProps> = ({ data }) => {
           >
             {decodeHtml(data.buttonText)}
           </UniqButtonLink>
-          <button className="bg-[var(--violet)]/10 text-[var(--violet)] p-3.5 rounded-[16px] hover:bg-[var(--violet)]/20 transition-colors">
+          {/* <button className="bg-[var(--violet)]/10 text-[var(--violet)] p-3.5 rounded-[16px] hover:bg-[var(--violet)]/20 transition-colors">
             <ShoppingCart size={20} />
-          </button>
+          </button> */}
         </div>
 
         {/* Trust Indicators */}

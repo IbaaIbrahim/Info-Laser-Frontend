@@ -1,8 +1,8 @@
 import React from "react";
-import {Article} from "@/types/types";
+import { Article } from "@/types/types";
 import Link from "next/link";
 import Image from "next/image";
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 export const ArticlesCardMain: React.FC<Article> = (
   {

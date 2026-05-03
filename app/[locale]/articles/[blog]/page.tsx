@@ -1,27 +1,27 @@
-import {Container} from "@/components/shared/Container";
-import {ArticleCategories} from "@/components/shared/articles/ArticlesCategories";
+import { Container } from "@/components/shared/Container";
+import { ArticleCategories } from "@/components/shared/articles/ArticlesCategories";
 import React from "react";
-import {ArticlesGroupListCategory} from "@/components/shared/articles/ArticlesGroupListCategory";
-import {PaginationControls} from "@/components/shared/products/PaginationControls";
+import { ArticlesGroupListCategory } from "@/components/shared/articles/ArticlesGroupListCategory";
+import { PaginationControls } from "@/components/shared/products/PaginationControls";
 import qs from "qs";
-import {IndividualRequestForm} from "@/components/shared/forms/IndividualRequestForm";
-import {SocialAndOnlineMini} from "@/components/shared/banners/SocialAndOnlineMini";
-import {getTranslations} from "next-intl/server";
-import {getArticles} from "@/api/api";
-import {cn} from "@/lib/utils";
+import { IndividualRequestForm } from "@/components/shared/forms/IndividualRequestForm";
+import { SocialAndOnlineMini } from "@/components/shared/banners/SocialAndOnlineMini";
+import { getTranslations } from "next-intl/server";
+import { getArticles } from "@/api/api";
+import { cn } from "@/lib/utils";
 
 interface CategoryProps {
   params: Promise<{ blog: string }>;
   searchParams: Promise<{ page?: string }>;
 }
 
-export async function generateMetadata({params: paramsPromise}: {
+export async function generateMetadata({ params: paramsPromise }: {
   params: Promise<{ locale: string; blog: string }>;
 }) {
-  const {locale, blog} = await paramsPromise;
-  const t = await getTranslations({locale});
+  const { locale, blog } = await paramsPromise;
+  const t = await getTranslations({ locale });
 
-  const {articles: allArticles} = await getArticles();
+  const { articles: allArticles } = await getArticles();
 
   const uniqueCategories = Array.from(
     new Map(
@@ -40,13 +40,13 @@ export async function generateMetadata({params: paramsPromise}: {
   };
 }
 
-const BlogPage: React.FC<CategoryProps> = async ({params, searchParams}) => {
-  const {blog} = await params;
+const BlogPage: React.FC<CategoryProps> = async ({ params, searchParams }) => {
+  const { blog } = await params;
   const sp = await searchParams;
   const page = parseInt(sp.page || "1", 10);
   const itemsPerPage = 7;
 
-  const {articles: allArticles} = await getArticles();
+  const { articles: allArticles } = await getArticles();
 
   const uniqueCategories = Array.from(
     new Map(
@@ -63,7 +63,7 @@ const BlogPage: React.FC<CategoryProps> = async ({params, searchParams}) => {
       article.articleCategory.some(cat => cat.id === currentCategory.id)
     )
     : [];
-  
+
   const totalArticles = categoryArticles.length;
   const totalPages = Math.ceil(totalArticles / itemsPerPage);
 
@@ -72,7 +72,7 @@ const BlogPage: React.FC<CategoryProps> = async ({params, searchParams}) => {
     page * itemsPerPage
   );
 
-  const queryString = qs.stringify({...sp, page: undefined}, {encode: false});
+  const queryString = qs.stringify({ ...sp, page: undefined }, { encode: false });
 
   return (
     <>
@@ -114,8 +114,8 @@ const BlogPage: React.FC<CategoryProps> = async ({params, searchParams}) => {
         </Container>
       </section>
 
-      <IndividualRequestForm className="mb-10 max-md:mb-5"/>
-      <SocialAndOnlineMini/>
+      <IndividualRequestForm className="mb-10 max-md:mb-5" />
+      <SocialAndOnlineMini />
     </>
   );
 };

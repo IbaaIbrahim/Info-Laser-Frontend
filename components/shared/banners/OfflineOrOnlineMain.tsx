@@ -8,7 +8,7 @@ import SocialOnlineOfflineBanner from "@/types/content/global/social-online-offl
 import { readContentAsJsonByFilter } from "@/services/content.service";
 import { GLOBAL_CONTENT, HOME_PAGE_CONTENT, SOCIAL_MEDIA_BANNER } from "@/lib/variables";
 
-export async function OfflineOrOnlineMain({ className, title = HOME_PAGE_CONTENT.bannerTitle }: ClassName & { title: string }) {
+export async function OfflineOrOnlineMain({ className, title = HOME_PAGE_CONTENT.bannerTitle }: ClassName & { title?: string }) {
   const meta = await readContentAsJsonByFilter({ referenceType: GLOBAL_CONTENT, section: SOCIAL_MEDIA_BANNER, title });
 
   const socialOnlineOfflineBannerJson = meta.find(content => content.title === title);

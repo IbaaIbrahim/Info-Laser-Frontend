@@ -8,9 +8,9 @@ interface ArticleTitleImageBodyProps {
   data: ArticleTitleImageBodyData;
 }
 
-export const ArticleTitleImageBody: React.FC<ArticleTitleImageBodyProps> = ({ data }) => {
+export const ArticleTitleImageBody: React.FC<ArticleTitleImageBodyProps & { id?: string }> = ({ data, id }) => {
   return (
-    <div className={"grid grid-cols-12 gap-x-5 mb-8"}>
+    <div id={id || data.slug} className={"grid grid-cols-12 gap-x-5 mb-8"}>
       <h2
         className={cn(
           "col-span-full text-[40px] leading-11 font-semibold mb-5",

@@ -8,7 +8,7 @@ import { ClassName } from "@/types/types";
 interface ISocialAndOnlineMiniProps {
   leftBannerTitle?: string;
   rightBannerTitle?: string;
-  className: ClassName
+  className?: ClassName
 }
 
 export const SocialAndOnlineMini: React.FC<ISocialAndOnlineMiniProps> = ({ className, leftBannerTitle, rightBannerTitle }) => {

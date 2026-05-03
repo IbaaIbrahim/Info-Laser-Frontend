@@ -8,9 +8,9 @@ interface ArticleTitleWithListProps {
   data: ArticleTitleWithListData;
 }
 
-export const ArticleTitleWithList: React.FC<ArticleTitleWithListProps> = ({ data }) => {
+export const ArticleTitleWithList: React.FC<ArticleTitleWithListProps & { id?: string }> = ({ data, id }) => {
   return (
-    <div className="mb-10 max-lg:mb-5">
+    <div id={id || data.slug} className="mb-10 max-lg:mb-5">
       <h2
         className={cn(
           "text-[40px] font-semibold leading-11 mb-5",

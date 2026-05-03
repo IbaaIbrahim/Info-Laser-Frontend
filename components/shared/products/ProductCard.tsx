@@ -7,7 +7,7 @@ import { Product } from "@/types/types";
 import { AddToCartBtn } from "@/components/shared/btns/AddToCartBtn";
 import { UniqButtonLink } from "@/components/ui/UniqButtonLink";
 
-export const ProductCard: React.FC<Product> = (
+export const ProductCard: React.FC<Product & { mainLabel?: string }> = (
   {
     id,
     name,
@@ -24,6 +24,7 @@ export const ProductCard: React.FC<Product> = (
     product_attachments,
     category_ids,
     className,
+    mainLabel,
     onClick
   }) => {
 
@@ -31,14 +32,14 @@ export const ProductCard: React.FC<Product> = (
     <div
       className={cn('relative flex flex-col h-full overflow-hidden bg-[var(--gray)] border border-gray-200 rounded-3xl p-2', className)}>
 
-      {labels && labels.map((label) => (
+      {labels && labels.filter(label => (mainLabel && label.slug) || true).map((label) => (
         (label.slug === 'hit' || label.slug === 'in_sale' || label.slug === 'new') && (
           <p
             key={label.id}
+            style={{ backgroundColor: label.color ? (label.color.startsWith('#') ? label.color : `#${label.color}`) : undefined }}
             className={cn(
               "absolute block w-[73px] h-[73px] text-[15px] top-[-28px] left-[-28px] rounded-full text-white uppercase z-20",
-              label.slug === 'hit' ? "bg-[var(--green)] -rotate-45" : "bg-[var(--pink)] rotate-0",
-              label.slug === 'new' ? "bg-[var(--green)]" : ""
+              label.slug === 'hit' ? "-rotate-45" : "rotate-0",
             )}
           >
             <span
@@ -48,9 +49,7 @@ export const ProductCard: React.FC<Product> = (
                 label.slug === 'new' ? "-rotate-45 right-[3px]" : "",
               )}
             >
-              {label.slug === 'hit' ? "хит" : ""}
-              {label.slug === 'new' ? "new" : ""}
-              {label.slug === 'in_sale' ? "%" : ""}
+              {label.name}
             </span>
           </p>
         )

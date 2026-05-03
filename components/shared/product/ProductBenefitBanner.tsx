@@ -1,11 +1,15 @@
 import React from "react";
-import {cn} from "@/lib/utils";
-import {Container} from "@/components/shared/Container";
-import {ClassName} from "@/types/types";
-import {DemoBtn} from "@/components/shared/btns/DemoBtn";
+import { cn } from "@/lib/utils";
+import { Container } from "@/components/shared/Container";
+import { ClassName } from "@/types/types";
+import { DemoBtn } from "@/components/shared/btns/DemoBtn";
 import Image from "next/image";
+import FeaturesBanner from "@/types/content/product/features-banner";
 
-export const ProductBenefitBanner: React.FC<ClassName> = ({className}) => {
+export const ProductBenefitBanner: React.FC<ClassName & { featuresBanner?: FeaturesBanner }> = ({ className, featuresBanner }) => {
+
+  if (!featuresBanner) return null;
+
   return (
     <div className={cn("", className)}>
       <Container>
@@ -15,8 +19,9 @@ export const ProductBenefitBanner: React.FC<ClassName> = ({className}) => {
         )}>
           <div className={cn("col-start-1 col-end-7")}>
             <Image
-              src={"/img/product/benefit.jpg"}
-              alt={"Блок для преимущества оборудования с картинкой и текстом"}
+              src={featuresBanner.image ?? "/img/product/benefit.jpg"}
+              alt={featuresBanner.title ?? "Блок для преимущества оборудования с картинкой и текстом"}
+              style={{ maxHeight: 470, objectFit: 'contain' }}
               width={1060}
               height={705}
               className={"w-full h-full object-cover rounded-3xl"}
@@ -30,18 +35,19 @@ export const ProductBenefitBanner: React.FC<ClassName> = ({className}) => {
               "text-2xl font-semibold mb-5",
               "max-md:text-xl max-md:mb-2"
             )}>
-              Блок для преимущества оборудования с картинкой и текстом
+              {featuresBanner.title}
             </p>
             <p className={cn(
               "text-sm",
               "max-md:text-xs"
             )}>
-              Легко заменяемых и общедоступных комплектующих можно всегда найти в любой стране. Это позволяет
-              значительно уменьшить простои в любой форс-мажорной ситуации. А сервисная служба Wattsan оперативно
-              подскажет в чем конкретно может быть неисправность и при необходимости направит лучших инженеров вам на
-              помощь.
+              {featuresBanner.desc}
             </p>
-            <DemoBtn title={"Написать нам"} className={cn("mt-5 max-md:mt-3")}/>
+            <DemoBtn
+              title={featuresBanner.btnText ?? "Написать нам"}
+              link={featuresBanner.btnLink}
+              className={cn("mt-5 max-md:mt-3")}
+            />
           </div>
         </div>
       </Container>

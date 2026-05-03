@@ -175,18 +175,59 @@ export const UniqMachinesSlider: React.FC<UniqMachinesSliderProps> = ({ classNam
                             </Button>
                           </div>
 
-                          <video
-                            autoPlay
-                            playsInline
-                            muted
-                            loop
-                            src="/video/ringcut-4.mp4"
-                            width={230}
-                            height={170}
-                            className={cn(
-                              "absolute top-0 left-0 w-full h-full object-cover z-[10] hidden group-hover:block pointer-events-none"
-                            )}
-                          />
+                          {
+                            (() => {
+                              const video = product.product_attachments?.find(
+                                (item) =>
+                                  item?.type === "video"
+                              );
+                              if (!video) {
+                                return null
+                              }
+
+                              const videoUrl = video.external_url ?? video?.filemanager.url;
+
+                              const getYoutubeEmbedUrl = (url: string) => {
+                                const match = url.match(
+                                  /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/
+                                );
+                                if (match) {
+                                  const videoId = match[1];
+                                  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&enablejsapi=1`;
+                                }
+                                return null;
+                              };
+
+                              const embedUrl = getYoutubeEmbedUrl(videoUrl);
+
+                              if (embedUrl) {
+                                return (
+                                  <iframe
+                                    src={embedUrl}
+                                    className={cn(
+                                      "absolute top-0 left-0 w-full h-full object-cover z-[10] hidden group-hover:block pointer-events-none border-none"
+                                    )}
+                                    allow="autoplay; encrypted-media"
+                                  />
+                                )
+                              }
+
+                              return (
+                                <video
+                                  autoPlay
+                                  playsInline
+                                  muted
+                                  loop
+                                  src={videoUrl}
+                                  width={230}
+                                  height={170}
+                                  className={cn(
+                                    "absolute top-0 left-0 w-full h-full object-cover z-[10] hidden group-hover:block pointer-events-none"
+                                  )}
+                                />
+                              )
+                            })()
+                          }
                         </Link>
                       </CarouselItem>
                     ))}

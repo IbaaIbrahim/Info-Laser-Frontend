@@ -72,16 +72,13 @@ export async function getArticles(): Promise<{ articles: ArticleList[] }> {
     description: "", // API list doesn't seem to have description
     isMain: item.is_active === 1,
     date: item.published_at,
-    image: item.image || "/img/articles/articles-main/1.jpg", // Fallback image
+    image: item?.filemanager?.url || "/img/articles/articles-main/1.jpg", // Fallback image
     articleCategory: [
       {
-        id: item.category_id,
-        name: item.category.name,
-        slug: item.category.slug,
+        ...item.category
       },
     ],
   }));
-
   return { articles };
 }
 

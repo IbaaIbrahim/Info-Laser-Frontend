@@ -148,23 +148,21 @@ export const ProductGallerySlider: React.FC<ProductGallerySliderProps> = ({image
             (label.slug === 'hit' || label.slug === 'in_sale' || label.slug === 'new') && (
               <p
                 key={label.id}
+                style={{ backgroundColor: label.color ? (label.color.startsWith('#') ? label.color : `#${label.color}`) : undefined }}
                 className={cn(
                   "absolute block w-[73px] h-[73px] text-[15px] top-[-28px] left-[-28px] rounded-full text-white uppercase z-20",
-                  label.slug === 'hit' ? "bg-[var(--green)] -rotate-45" : "bg-[var(--pink)] rotate-0",
-                  label.slug === 'new' ? "bg-[var(--green)]" : ""
+                  label.slug === 'hit' ? "-rotate-45" : "rotate-0",
                 )}
               >
-          <span
-            className={cn(
-              "absolute ",
-              label.slug === 'hit' ? "right-[21px] bottom-[6px]" : "right-[16px] bottom-[11px] font-semibold",
-              label.slug === 'new' ? "-rotate-45 right-[3px]" : "",
-            )}
-          >
-            {label.slug === 'hit' ? "хит" : ""}
-            {label.slug === 'new' ? "new" : ""}
-            {label.slug === 'in_sale' ? "%" : ""}
-          </span>
+                <span
+                  className={cn(
+                    "absolute ",
+                    label.slug === 'hit' ? "right-[21px] bottom-[6px]" : "right-[16px] bottom-[11px] font-semibold",
+                    label.slug === 'new' ? "-rotate-45 right-[3px]" : "",
+                  )}
+                >
+                  {label.slug}
+                </span>
               </p>
             )
           ))}

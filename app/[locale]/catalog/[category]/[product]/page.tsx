@@ -1,27 +1,30 @@
 import React from "react";
-import {Container} from "@/components/shared/Container";
-import {getOneProductBySlug, getProducts} from "@/api/api";
-import {cn} from "@/lib/utils";
-import {ProductGallerySlider} from "@/components/shared/carousels/product/ProductGallerySlider";
-import {AllCharacteristicsBtn} from "@/components/shared/btns/AllCharacteristicsBtnProduct";
-import {Check, Clock3, Star} from "lucide-react";
-import {ProductBenefitSpoilers} from "@/components/shared/product/ProductBenefitSpoilers";
-import {OfflineOrOnlineMain} from "@/components/shared/banners/OfflineOrOnlineMain";
-import {BannerProduct} from "@/components/shared/carousels/banners/BannerProduct";
-import {ChooseLaserMachineSlider} from "@/components/shared/carousels/product/ChooseLaserMachineSlider";
-import {PurchaseOrder} from "@/components/shared/PurchaseOrder";
-import {ProductGeneralAccessoriesBanner} from "@/components/shared/product/ProductGeneralAccessoriesBanner";
-import {ProductSystemBanner} from "@/components/shared/product/ProductSystemBanner";
-import {ProductMarquee} from "@/components/shared/product/ProductMarquee";
-import {ProductBenefitBanner} from "@/components/shared/product/ProductBenefitBanner";
-import {ProductMaterialsTabs} from "@/components/shared/product/ProductMaterialsTabs";
-import {ShortCharacteristics} from "@/components/shared/product/characteristics/ShortCharacteristics";
-import {ProductPrices} from "@/components/shared/product/ProductPrices";
-import {FullCharacteristics} from "@/components/shared/product/characteristics/FullCharacteristics";
-import {ImportantCharacteristics} from "@/components/shared/product/characteristics/ImportantCharacteristics";
-import {NecessaryProductsList} from "@/components/shared/product/NecessaryProductsList";
-import {getTranslations} from "next-intl/server";
-import {SimilarProductsSlider} from "@/components/shared/carousels/SimilarProductsSlider";
+import { Container } from "@/components/shared/Container";
+import { getOneProductBySlug, getProducts } from "@/api/api";
+import { cn } from "@/lib/utils";
+import { ProductGallerySlider } from "@/components/shared/carousels/product/ProductGallerySlider";
+import { AllCharacteristicsBtn } from "@/components/shared/btns/AllCharacteristicsBtnProduct";
+import { Check, Clock3, Star } from "lucide-react";
+import { ProductBenefitSpoilers } from "@/components/shared/product/ProductBenefitSpoilers";
+import { OfflineOrOnlineMain } from "@/components/shared/banners/OfflineOrOnlineMain";
+import { BannerProduct } from "@/components/shared/carousels/banners/BannerProduct";
+import { ChooseLaserMachineSlider } from "@/components/shared/carousels/product/ChooseLaserMachineSlider";
+import { PurchaseOrder } from "@/components/shared/PurchaseOrder";
+import { ProductGeneralAccessoriesBanner } from "@/components/shared/product/ProductGeneralAccessoriesBanner";
+import { ProductSystemBanner } from "@/components/shared/product/ProductSystemBanner";
+import { ProductMarquee } from "@/components/shared/product/ProductMarquee";
+import { ProductBenefitBanner } from "@/components/shared/product/ProductBenefitBanner";
+import { ProductMaterialsTabs } from "@/components/shared/product/ProductMaterialsTabs";
+import { ShortCharacteristics } from "@/components/shared/product/characteristics/ShortCharacteristics";
+import { ProductPrices } from "@/components/shared/product/ProductPrices";
+import { FullCharacteristics } from "@/components/shared/product/characteristics/FullCharacteristics";
+import { ImportantCharacteristics } from "@/components/shared/product/characteristics/ImportantCharacteristics";
+import { NecessaryProductsList } from "@/components/shared/product/NecessaryProductsList";
+import { getTranslations } from "next-intl/server";
+import { SimilarProductsSlider } from "@/components/shared/carousels/SimilarProductsSlider";
+import { readContentAsJsonByFilter } from "@/services/content.service";
+import FeaturesBanner from "@/types/content/product/features-banner";
+import { PRODUCT_PAGE_CONTENT } from "@/lib/variables";
 
 interface PageProps {
   params: Promise<{ product: string; category: string }>;
@@ -33,8 +36,8 @@ export async function generateMetadata(
   }: {
     params: Promise<{ locale: string; product: string }>;
   }) {
-  const {locale, product} = await paramsPromise;
-  const t = await getTranslations({locale});
+  const { locale, product } = await paramsPromise;
+  const t = await getTranslations({ locale });
 
   const oneProduct = await getOneProductBySlug(product);
 
@@ -46,10 +49,10 @@ export async function generateMetadata(
   };
 }
 
-const ProductPage: React.FC<PageProps> = async ({params}) => {
-  const {product: productSlug, category} = await params;
+const ProductPage: React.FC<PageProps> = async ({ params }) => {
+  const { product: productSlug, category } = await params;
   const product = await getOneProductBySlug(productSlug);
-  const {products} = await getProducts();
+  const { products } = await getProducts();
 
   if (!product) {
     return (
@@ -57,6 +60,18 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
         <p>Продукт не найден</p>
       </Container>
     );
+  }
+
+
+  const meta = await readContentAsJsonByFilter({
+    referenceType: PRODUCT_PAGE_CONTENT.featuresBannerReferenceType,
+    referenceId: `${product.id}`,
+    section: PRODUCT_PAGE_CONTENT.featuresBannerSectionName
+  });
+  const contentJson = meta.find((content) => content.referenceId === product.id)
+  let featuresBanner: FeaturesBanner | undefined = undefined;
+  if (contentJson) {
+    featuresBanner = FeaturesBanner.fromContentJson(contentJson);
   }
 
   const similarProducts = products
@@ -109,7 +124,7 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
                         "inline-flex items-center shrink-0 gap-x-1 place-self-start text-xs text-[var(--violet)] bg-[var(--violet-dark)] rounded-2xl p-2 mb-3 leading-none",
                         "max-md:text-[10px] max-md:py-1 max-md:mb-2"
                       )}>
-                      <Check className="text-[var(--violet)]" size={12}/>
+                      <Check className="text-[var(--violet)]" size={12} />
                       В наличии
                     </span>
                   ) :
@@ -119,7 +134,7 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
                         "inline-flex items-center shrink-0 gap-x-1 place-self-start text-xs text-[var(--green)] bg-[var(--green)] rounded-2xl p-2 mb-3 leading-none",
                         "max-md:text-[10px] max-md:py-1 max-md:mb-2"
                       )}>
-                      <Clock3 className='text-[var(--green)]' size={12}/>
+                      <Clock3 className='text-[var(--green)]' size={12} />
                       Под заказ
                     </span>
                   )
@@ -127,12 +142,12 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
               </div>
             </div>
 
-            <ShortCharacteristics characteristics={product.productCharacteristics ?? []}/>
+            <ShortCharacteristics characteristics={product.productCharacteristics ?? []} />
 
             <div className={"flex justify-between items-center mb-7"}>
-              <AllCharacteristicsBtn/>
+              <AllCharacteristicsBtn />
               <span className={cn("text-sm flex items-center gap-0.5 max-md:text-xs")}>
-                {Array.from({length: 5}).map((_, index) => (
+                {Array.from({ length: 5 }).map((_, index) => (
                   <Star
                     key={index}
                     className="fill-[var(--gold)] last:mr-2"
@@ -144,7 +159,7 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
               </span>
             </div>
 
-            <ProductPrices product={product}/>
+            <ProductPrices product={product} />
 
             <NecessaryProductsList
               className={"mb-7 max-md:mb-5"}
@@ -153,13 +168,13 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
               products={products}
             />
 
-            <ProductSystemBanner className={"mb-7 max-md:mb-5"}/>
+            <ProductSystemBanner className={"mb-7 max-md:mb-5"} />
 
-            <ProductBenefitSpoilers/>
+            <ProductBenefitSpoilers />
           </div>
         </Container>
       </section>
-      <OfflineOrOnlineMain className={cn("mb-15 max-md:mb-0")}/>
+      <OfflineOrOnlineMain className={cn("mb-15 max-md:mb-0")} />
       {/* Полное описание + полные характеристики */}
       <div className={cn("mb-15 max-md:mb-5")}>
         <Container className={cn(
@@ -175,9 +190,9 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
               <h2 className={"text-2xl font-semibold mb-5 max-md:text-lg max-md:mb-3"}>Описание</h2>
               <p className={"mb-2 max-md:text-sm"}>{product.fulldescription}</p>
             </div>
-            <BannerProduct/>
+            <BannerProduct />
           </section>
-          <FullCharacteristics characteristics={product.productCharacteristics ?? []}/>
+          <FullCharacteristics characteristics={product.productCharacteristics ?? []} />
         </Container>
       </div>
       {product.productCharacteristics && product.productCharacteristics.length > 0 && (
@@ -186,11 +201,11 @@ const ProductPage: React.FC<PageProps> = async ({params}) => {
       {(product.materials && product.materials.length > 0) && (
         <ProductMaterialsTabs className="mb-15 max-md:mb-5" materials={product.materials} />
       )}
-      <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"} attachments={product.product_attachments}/>
-      <ProductGeneralAccessoriesBanner className={"mb-15 max-md:mb-5"}/>
-      <ProductMarquee className={"mb-25 max-md:mb-10"} images={product.product_attachments ?? []}/>
-      <PurchaseOrder className={"mb-25 max-md:mb-20"}/>
-      <ProductBenefitBanner className={"mb-15 max-md:mb-5"}/>
+      <ChooseLaserMachineSlider className={"mb-15 max-md:mb-5"} attachments={product.product_attachments} />
+      <ProductGeneralAccessoriesBanner className={"mb-15 max-md:mb-5"} />
+      <ProductMarquee className={"mb-25 max-md:mb-10"} images={product.product_attachments ?? []} />
+      <PurchaseOrder className={"mb-25 max-md:mb-20"} />
+      <ProductBenefitBanner featuresBanner={featuresBanner} className={"mb-15 max-md:mb-5"} />
       {similarProducts.length > 0 && (
         <SimilarProductsSlider
           className={"mb-15 max-md:mb-5"}

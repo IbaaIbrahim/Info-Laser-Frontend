@@ -60,3 +60,8 @@ export const DELIVERY_PAGE_CONTENT = {
   socialBannerLeft: 'delivery_left',
   socialBannerRight: 'delivery_right'
 }
+
+export const PRODUCT_PAGE_CONTENT = {
+  featuresBannerSectionName: 'lower_banner',
+  featuresBannerReferenceType: 'product'
+}

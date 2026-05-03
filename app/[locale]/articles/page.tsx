@@ -97,10 +97,10 @@ export default async function ArticlesPage() {
                       >
                         {article.image ? (
                           <Image
-                            src={article.image}
+                            src={"/img/articles/file.png"}
                             alt={article.name}
-                            width={35}
-                            height={35}
+                            width={15}
+                            height={10}
                             className={"max-md:max-w-[25px] rounded-sm object-cover"}
                           />
                         ) : (

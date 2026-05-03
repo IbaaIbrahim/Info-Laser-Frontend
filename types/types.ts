@@ -191,6 +191,9 @@ export interface Article extends ClassName {
   isMain: boolean;
   date: string;
   image: string;
+  filemanager: {
+    url: string
+  }
   articleCategory: articleCategory[];
 }
 
@@ -201,11 +204,17 @@ export interface ArticleListVM {
   is_active: number;
   published_at: string;
   image: string;
+  filemanager: {
+    url: string
+  }
   category_id: number;
   category: {
     id: number;
     name: string;
     slug: string;
+    filemanager: {
+      url: string
+    }
   }
 }
 

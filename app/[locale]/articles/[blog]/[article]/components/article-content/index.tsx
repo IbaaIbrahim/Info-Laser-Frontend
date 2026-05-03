@@ -27,17 +27,18 @@ export const ArticleContent: React.FC<ArticleContentProps> = ({ content }) => {
   return (
     <>
       {content.map((item) => {
+        const id = (item.data as { slug?: string }).slug || item.uuid;
         switch (item.type) {
           case 'editor':
-            return <ArticleEditor key={item.uuid} data={item.data as ArticleEditorData} />;
+            return <ArticleEditor key={item.uuid} id={id} data={item.data as ArticleEditorData} />;
           case 'editor-with-background':
             return <ArticleEditorWithBackground key={item.uuid} data={item.data as ArticleEditorWithBackgroundData} />;
           case 'text-with-list':
-            return <ArticleTextWithList key={item.uuid} data={item.data as ArticleTextWithListData} />;
+            return <ArticleTextWithList key={item.uuid} id={id} data={item.data as ArticleTextWithListData} />;
           case 'title-image-body':
-            return <ArticleTitleImageBody key={item.uuid} data={item.data as ArticleTitleImageBodyData} />;
+            return <ArticleTitleImageBody key={item.uuid} id={id} data={item.data as ArticleTitleImageBodyData} />;
           case 'title-with-list':
-            return <ArticleTitleWithList key={item.uuid} data={item.data as ArticleTitleWithListData} />;
+            return <ArticleTitleWithList key={item.uuid} id={id} data={item.data as ArticleTitleWithListData} />;
           case 'image':
             return <ArticleImage key={item.uuid} data={item.data as ArticleImageData} />;
           case 'table':

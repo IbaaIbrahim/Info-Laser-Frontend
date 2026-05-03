@@ -8,9 +8,9 @@ interface ArticleTextWithListProps {
   data: ArticleTextWithListData;
 }
 
-export const ArticleTextWithList: React.FC<ArticleTextWithListProps> = ({ data }) => {
+export const ArticleTextWithList: React.FC<ArticleTextWithListProps & { id?: string }> = ({ data, id }) => {
   return (
-    <div className="mb-8">
+    <div id={id || data.slug} className="mb-8">
       <div
         className="font-semibold mb-3 max-md:text-sm"
         dangerouslySetInnerHTML={{ __html: decodeHtml(data.text).replace(/^"|"$/g, '').replace(/\\n/g, '') }}

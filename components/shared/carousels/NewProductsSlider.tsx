@@ -1,15 +1,15 @@
 import React from "react";
-import {Container} from "@/components/shared/Container";
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/Carousel";
-import {cn} from "@/lib/utils";
-import {ProductCard} from "@/components/shared/products/ProductCard";
-import {ClassName, Product} from "@/types/types";
+import { Container } from "@/components/shared/Container";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/Carousel";
+import { cn } from "@/lib/utils";
+import { ProductCard } from "@/components/shared/products/ProductCard";
+import { ClassName, Product } from "@/types/types";
 
 type Props = ClassName & {
   products: Product[];
 };
 
-export const NewProductsSlider: React.FC<Props> = ({className, products}) => {
+export const NewProductsSlider: React.FC<Props> = ({ className, products }) => {
   const newProducts = products.filter(product =>
     product.labels?.some(label => label.slug === "new")
   );
@@ -21,7 +21,7 @@ export const NewProductsSlider: React.FC<Props> = ({className, products}) => {
           Новинки оборудования InfoLaser
         </h2>
 
-        <Carousel className={cn("max-xl:[&>div]:overflow-visible")} opts={{align: "start"}}>
+        <Carousel className={cn("max-xl:[&>div]:overflow-visible")} opts={{ align: "start" }}>
           <CarouselContent className="-ml-5 max-md:-ml-2">
             {newProducts.map((product) => (
               <CarouselItem
@@ -36,6 +36,7 @@ export const NewProductsSlider: React.FC<Props> = ({className, products}) => {
                 <ProductCard
                   {...product}
                   inStock={Boolean(product.inStock)}
+                  mainLabel="new"
                 />
               </CarouselItem>
             ))}
@@ -48,13 +49,13 @@ export const NewProductsSlider: React.FC<Props> = ({className, products}) => {
                 "max-xl:left-[20px]",
                 "max-md:left-[10px]",
                 className
-              )}/>
+              )} />
               <CarouselNext className={cn(
                 "-right-[30px]",
                 "max-xl:right-[20px]",
                 "max-md:right-[10px]",
                 className
-              )}/>
+              )} />
             </>
           )}
         </Carousel>
