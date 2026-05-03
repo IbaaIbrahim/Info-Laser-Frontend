@@ -68,7 +68,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             )}>{oneArticle.title}</h1>
             <div className="grid grid-cols-12 gap-5 mb-5 max-md:gap-3">
               <p className={cn(
-                "col-start-1 col-end-2 text-sm text-[var(--gray-text)]",
+                "col-start-1 col-end-3 text-sm text-[var(--gray-text)] whitespace-nowrap",
                 "max-lg:col-start-1 max-lg:col-end-5 max-lg:text-xs",
               )}>
                 Дата:
@@ -81,7 +81,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 </time>
               </p>
               <p className={cn(
-                "col-start-2 col-end-5 text-sm text-[var(--gray-text)] text-center",
+                "col-start-3 col-end-6 text-sm text-[var(--gray-text)] text-center",
                 "max-lg:col-start-5 max-lg:col-end-13 max-lg:text-xs"
               )}>
                 Автор:
